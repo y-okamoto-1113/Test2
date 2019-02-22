@@ -378,7 +378,7 @@ $(document).ready(function(){
 //  モーダルウィンドウのYESを押した時に入力値をリセットする処理
 document.addEventListener("turbolinks:load", function() {
     $("#submitButton").on('click',function(){
-        window.location.href = '/create';  // resetボタンがバグってるから、画面更新にする。
+        // window.location.href = "/";  // resetボタンがバグってるから、画面更新にする。
         // $('form').find("textarea, input, select ").val("").end().find(":checked").prop("checked", false);
         // $('form').find("")
         // $('.form-signin')[0].reset();   これ動かん。何でか分からん。

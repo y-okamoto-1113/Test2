@@ -27,7 +27,7 @@ class HomeController < ApplicationController
     @type_career = User.new(type_career: params[:type_career])
     @type_career.save
 
-    redirect_to("/new")
+    redirect_to("/")
   end
 
 

@@ -42,7 +42,7 @@ html, body {
 }
 
 /* モーダルボタンの大きさ       高さ変えられへん！！！！      */
-#submit,#closeModal{
+#submitButton,#closeModal{
     width:70px;
     font-size:70px;    /* heightで高さ変えられへんかったから、文字大きくして無理やり高くした。 */
 }
