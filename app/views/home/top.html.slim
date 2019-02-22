@@ -1,0 +1,198 @@
+html
+  head
+    meta[charset="utf-8"]
+    - # Railsに組み込む場合は「stylesheet_link_tag」
+    = stylesheet_link_tag "top", media: "all"
+    = stylesheet_link_tag "modal", media: "all"
+    script[type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"]
+    script[src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"]
+    - # Railsに組み込む場合は「javascript_include_tag」
+    = javascript_include_tag "buttons"
+  body
+    .right-box
+      h2
+        | 仕様
+      ul
+        li
+          | 1)名前、メアド、性別、最終学歴は必須
+        li
+          | 2)電話番号：000-0000-0000 or 00000000000の形式の場合、チェックOK
+        li
+          | 3)メアドは一般的なメアド形式のチェックを行う
+        li
+          | 4)生年月日は、「月」選択時に、「日」の項目を正しい日にちの書き換える。 
+          br
+          | 　※３０日、うるう年を考慮
+        li
+          | 5)最終学歴は、選んだ学歴のプルダウンを表示。 
+          br
+          | 　また、school.jsonからAJAXにて学歴のデータを取得し値を変更する。
+        li
+          | 6)エラーチェックはリアルタイムにて行う
+        li
+          | 7)項目の下にエラーメッセージを表示
+        li
+          | 8)登録ボタン押下時、エラーがなければ入力した値をモーダルウィンドゥにて表示
+        li
+          | 9)ソースは別ファイルにすること
+    = form_tag("/create") do
+      .left-box
+        form.form-signin[name="form_signin"]
+          h2
+            | 個人情報登録
+          p
+            span[style="color:red;"]
+              | *
+            | は必須項目です。
+          table
+            tr
+              th
+                | 名前
+                span[style="color:red;"]
+                  | *
+              td
+                input#name[type="text" name="name" placeholder="例）岡本　太郎"]
+                br
+                span#nameError
+                  | ＊名前を入力してください
+            tr
+              th
+                | ふりがな
+              td
+                input#furigana[type="text" name="furigana" placeholder="例）おかもと　たろう"]
+            tr
+              th
+                | 電話番号
+              td
+                input#tel[type="tel" name="tel" autocomplete="tel" placeholder="例）090-1234-5678"]
+                br
+                span#telError
+                  | ＊正しい電話番号を入力してください。
+            tr
+              th
+                | メールアドレス
+                span[style="color:red;"]
+                  | *
+              td
+                input#mail[type="email" name="mail" autocomplete="email" placeholder="例）info@datora.jp"]
+                span#mailError
+                  | ＊必須項目です
+            tr
+              th
+                | 性別
+                span[style="color:red;"]
+                  | *
+              td
+                input#man.sex[type="radio" name="type_sex"]
+                label[for="man"]
+                  | 男性
+                input#woman.sex[type="radio" name="type_sex"]
+                label[for="woman"]
+                  | 女性
+                span#sexError
+                  | ＊必須項目です
+            tr
+              th
+                | 生年月日
+              td
+                select#year.w100[name="year"]
+                  option[value="0"]
+                    | --西暦--
+                select#month.w80[name="month"]
+                  option[value="0"]
+                    | -月-
+                  option[value="1"]
+                    | 1月
+                  option[value="2"]
+                    | 2月
+                  option[value="3"]
+                    | 3月
+                  option[value="4"]
+                    | 4月
+                  option[value="5"]
+                    | 5月
+                  option[value="6"]
+                    | 6月
+                  option[value="7"]
+                    | 7月
+                  option[value="8"]
+                    | 8月
+                  option[value="9"]
+                    | 9月
+                  option[value="10"]
+                    | 10月
+                  option[value="11"]
+                    | 11月
+                  option[value="12"]
+                    | 12月
+                select#day.w80[name="day"]
+                  option[value="0"]
+                    | -日-
+            tr
+              th
+                | 最終学歴
+                span[style="color:red;"]
+                  | *
+              td
+                input#junior.career[type="radio" name="type_career" value="0"]
+                label[for="junior"]
+                  | 中学
+                input#high-school.career[type="radio" name="type_career" value="1"]
+                label[for="high-school"]
+                  | 高校
+                input#university.career[type="radio" name="type_career" value="2"]
+                label[for="university"]
+                  | 大学
+                input#no-career.career[type="radio" name="type_career" value="3"]
+                label[for="no-career"]
+                  | 行ってない
+                br
+                |  学校名： 
+                select#school.w250
+                  option[value="0"]
+                    | -選択-
+                br
+                span#careerError
+                  | ＊必須項目です
+            tr.aaa
+              th
+                | 家族構成
+                span[style="color:red;"]
+                  | *
+                br
+                |  <button type="button" id="addFamilyRelation" value="+"\> 
+                font[size="5" color="black"]
+                  | +
+                br
+                br
+                nobr
+                  span#frError[style="font-size:11px;"]
+                    | *1人以上記入してください。
+              td.bbb
+                |  続柄：
+                input#family_relation.family.zokugara[type="text" placeholder="例）父"]
+                br
+                |  名前：
+                input#family_name.family.name_zoku[type="text" placeholder="例）岡本　太郎"]
+          button#finalCheck[type="button" value="登録"]
+            font[size="2" color="black"]
+              | 登録
+            br
+    #modalBaseLayer.modalBaseLayer
+      #modal.modal
+        h3
+          | [登録情報]
+        span#check_name
+        span#check_furigana
+        span#check_tel
+        span#check_mail
+        span#check_sex
+        span#check_birthday
+        span#check_school
+        span#check_fr
+        span.multipleFR
+        br
+        |  以上の内容でよろしいですか？ 
+        br
+        input#submit[type="button" value="Yes"]
+        input#closeModal[type="button" value="No"]

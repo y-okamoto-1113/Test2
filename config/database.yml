@@ -7,16 +7,18 @@
 default: &default
   adapter: mysql2
   encodeing: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  username: <%= ENV.fetch("MYSQL_USER", "from40_dev") %>
-  password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
-  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
-  port: <%= ENV.fetch("MYSQL_PORT", "3306") %>
+  pool: 5
+  # username: <%= ENV.fetch("MYSQL_USER", "from40_dev") %>
+  username: root
+  password: password
+  # password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
+  host: db
+  port: 3306
 
 development:
   <<: *default
-  database: <%= ENV.fetch("MYSQL_DATABASE", "from40_development") %>
+  database: test_development
+  # database: <%= ENV.fetch("MYSQL_DATABASE", "from40_development") %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
