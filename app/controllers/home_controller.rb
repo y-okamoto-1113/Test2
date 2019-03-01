@@ -3,8 +3,12 @@ class HomeController < ApplicationController
     @user = User.new
   end
 
-  def index
-    @users = User.all.order(created_at: :desc)
+  def login 
+
+  end
+
+  def register
+
   end
 
   # ユーザー新規登録画面で入力したデータをデータベースに反映するため
