@@ -10,22 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_22_085334) do
+ActiveRecord::Schema.define(version: 2019_02_25_050450) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "furigana"
-    t.integer "tel"
-    t.string "mail"
-    t.integer "type_sex"
+    t.string "tel"
+    t.string "mail", null: false
+    t.string "type_sex", null: false
     t.integer "year"
     t.integer "month"
     t.integer "day"
-    t.integer "type_career"
+    t.string "type_career", null: false
+    t.string "school_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "familyRelation"
-    t.string "familyRelationName"
+    t.string "familyRelation", null: false
+    t.string "familyRelationName", null: false
+    t.string "familyRelation2"
+    t.string "familyRelationName2"
+    t.string "familyRelation3"
+    t.string "familyRelationName3"
   end
 
 end

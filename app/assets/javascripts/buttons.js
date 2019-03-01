@@ -8,13 +8,13 @@ let nameCheck = function(){
     const name_value2 = name_value.trim();
     if(name_value2 === ""){
         $("#nameError").show();
-        return false;
+        return false;                             //「nameCheck()」という関数に、true, falseをリターンする。
     }else{
         $("#nameError").fadeOut();
         return true;
     }
 };
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $("#name").blur(function(){
         nameCheck();
     });
@@ -37,7 +37,7 @@ const telCheck = function(){
         return true;
     }
 };
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $("#tel").blur(function(){
         telCheck();
     });
@@ -56,7 +56,7 @@ const mailCheck = function(){
         return true;
     }
 };
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $("#mail").blur(function(){
         mailCheck();
     });
@@ -74,7 +74,7 @@ const sexCheck = function(){
         return true;
     }
 };
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $(".sex").blur(function(){
         sexCheck();
     });
@@ -90,7 +90,6 @@ $(function(){
         $("#year").get(0).add(new Option(i.toString() +"年", i.toString() ));
     }
 });
-
 
 
 // 閏年チェック.       １００年で割れる年は、閏年ちゃう。でも、400年で割れる年は、閏年。
@@ -136,7 +135,7 @@ const monthCheck = function(){
         }
     }
 };
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $("#year,#month").change(function(){
         monthCheck();
     });
@@ -155,9 +154,9 @@ function schoolSelect(value) {
     }
 
     // ラジオボタンのvalueで条件分岐
-    switch(parseInt(value, 10)) {      // parseInt()は第２引数で、進数を決める。この場合は10なので、10進数。
-        case 0: //中学
-            $.getJSON("school.json",{name:"chara"} , function(data) {
+    switch(value) {      // inputタグで選択式の場合、設定したvalueが代入されてる。
+        case "中卒": //中学
+            $.getJSON("school.json",{name:"school_name"} , function(data) {
                 // {name:"chara"}       入力提出さえたデータは相手側のデータサーバーに送られる。データを検索しやすくする為のタグ付をしている！！！
                 // $.getJSONで、データを読み込んだら、その後の処理を、「function」で決められる。
                 var list = data.juniorhighschool;
@@ -169,8 +168,8 @@ function schoolSelect(value) {
             break;
 
             //  オブジェクトを配列のように使うには、「Object.values(オブジェクトデータ)」か「for i in オブジェクトデータ」
-        case 1: //高校
-            $.getJSON("school.json", {name: "chara"}, function(data) {
+        case "高卒": //高校
+            $.getJSON("school.json", {name: "school_name"}, function(data) {
                 var list = data.highschool;
                 var values = Object.values(list);       //  jsonのデータは配列ではなくオブジェクト！！！！！
                 for(var i=1; i< values.length; i++ ) {
@@ -185,8 +184,8 @@ function schoolSelect(value) {
             break;
 
             //  オブジェクトを配列のように使うには、「Object.values(オブジェクトデータ)」か「for i in オブジェクトデータ」
-        case 2: //大学
-            $.getJSON("school.json", {name: "chara"}, function(data) {
+        case "大卒": //大学
+            $.getJSON("school.json", {name: "school_name"}, function(data) {
                 var list = data.university;
                 for(var i in data.university){  //  「for in」もオブジェクトを配列のように使える。
                     $("#school").get(0).options[i] = new Option(list[i], list[i]);
@@ -199,15 +198,16 @@ function schoolSelect(value) {
             break;
 
 
-        case 3: //
+        case "学歴無し": //
         // これ入れな、「Expected a 'break' statement before 'default'. (W086)」ってwarnning出る。
         /* falls through */
         default: break;
     }
 }
-$(document).ready(function(){
+// これも、turbolinkのせいで、ready動かんかったから書き換えた
+document.addEventListener("turbolinks:load", function() {
     $(".career").change(function(){
-        var careerNum = $('input[name="type_career"]:checked').val();      // nameで同じ属性をもつラジオボタンの中から、チェックされてるボタンのvalueを取得！！！
+        var careerNum = $('input[class="career"]:checked').val();      // class=careerのラジオボタンの中から、チェックされてるボタンのvalueを取得！！！
         schoolSelect(careerNum);
     });
 });
@@ -233,7 +233,7 @@ const careerCheck = function(){
             return true;
         }
 };
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $("#school").blur(function(){
         careerCheck();
     });
@@ -241,31 +241,31 @@ $(document).ready(function(){
 
 
 
-//　追加された続柄の値を取得
+//  追加された続柄の値を取得
 //  値は入ってなくてもOK。もし両方セットで記入されていたら使うけど、片方だけだったら無視
-//   登録ボタンを押した時に、最終確認モーダルでのみ出現すべき
-//   2個目以降の入力値が変更されても更新されない！！！！！！！
+//  登録ボタンを押した時に、最終確認モーダルでのみ出現すべき
+//  2個目以降の入力値が変更されても更新されない！！！！！！！
 var zoku;
 var zokuname;
 var y = $(".bbb").get(0);     // 「removeAddedFR」でもこれ使うからグローバル変数にしてる。
 
-const checkChildFR = function(){
-  var k = 0;
-  var fff = $(".bbb").children('family');
-  for(var i=2; i<fff.length; i=i+2){
-    var j = i+1;
-    zoku = fff.get(i).value.trim();
-    zokuname = fff.get(j).value.trim();
-    if(zoku=="" || zokuname==""){
-      // 何もしない   「return false」としてしまうとそこで関数が終了してしまう。forループも止まる。
-    }else{
-      // 最初はget()の中が0じゃないとあかん
-      $(".multipleFR").get(k).innerHTML = "　　　 　　続柄:" + zoku + "　名前:" + zokuname +
-      "<br>"+ "<span class='multipleFR' ></span>" ;
-      k++;
-    }
-  }
-};
+// const checkChildFR = function(){
+//   var k = 0;
+//   var fff = $(".bbb").children('family');
+//   for(var i=2; i<fff.length; i=i+2){
+//     var j = i+1;
+//     zoku = fff.get(i).value.trim();
+//     zokuname = fff.get(j).value.trim();
+//     if(zoku=="" || zokuname==""){
+//       // 何もしない   「return false」としてしまうとそこで関数が終了してしまう。forループも止まる。
+//     }else{
+//       // 最初はget()の中が0じゃないとあかん
+//       $(".multipleFR").get(k).innerHTML = "　　　　　続柄:" + zoku + "　名前:" + zokuname +
+//       "<br>"+ "<span class='multipleFR' ></span>" ;
+//       k++;
+//     }
+//   }
+// };
 
 
 
@@ -274,7 +274,7 @@ const checkChildFR = function(){
 // 最終チェックのモーダルウィンドウ
 function valueCheck() {
 
-    //初期状態からいきなり登録した場合の対処
+    //初期状態からいきなり登録した場合にエラーを出す為に、まずは必須項目の内容チェック関数を呼び出す
     nameCheck();
     mailCheck();
     sexCheck();
@@ -305,35 +305,62 @@ function valueCheck() {
 
     // 1つ目の家族構成
     var fr = $("#family_relation").get(0).value;
-    var fn =$("#family_name").get(0).value;
+    var fn = $("#family_name").get(0).value;
+
+    // 2つ目の家族構成
+    var fr2 = $("#family_relation2").get(0).value;
+    var fn2 = $("#family_name2").get(0).value;
+
+    // 3つ目の家族構成
+    var fr3 = $("#family_relation3").get(0).value;
+    var fn3 = $("#family_name3").get(0).value;
 
     // 入力値を代入したさっきの変数を使って、モーダルウィンドウに表示する
     $("#check_name").get(0).innerHTML = '名前<span style="color: #FF0000;">*</span>：' + name + "<br>";
     $("#check_furigana").get(0).innerHTML = "ふりがな：" + furigana + "<br>";
-    $("#check_tel").get(0).innerHTML = "電話番号：" + tel + "<br>";
+    $("#check_tel").get(0).innerHTML = "電話番号<span style='color: #FF0000;'>*</span>：" + tel + "<br>";
     $("#check_mail").get(0).innerHTML = 'メールアドレス<span style="color: #FF0000;">*</span>：' +mail+ "<br>";
     $("#check_sex").get(0).innerHTML = '性別<span style="color: #FF0000;">*</span>：' + sex + "<br>";
     $("#check_birthday").get(0).innerHTML = "生年月日：" + year + "年" + month + "月" + day + "日" + "<br>";
     $("#check_school").get(0).innerHTML = '最終学歴<span style="color: #FF0000;">*</span>：' + school + "<br>";
-    $("#check_fr").get(0).innerHTML = '家族構成<span style="color: #FF0000;">*</span>：' +'続柄:'+ fr + '　名前:' +fn+ "<br>";
+    $("#check_fr").get(0).innerHTML = '家族構成1<span style="color: #FF0000;">*</span>：' +'続柄:'+ fr + '　名前:' +fn+ "<br>";
+    
+    // 家族構成2、3人目を記入していた場合
+    // 「&&」やと続柄・名前の片方が記入されてるだけで保存されるから「||」を否定（!）する形にしてる。
+    // このままやと、最終確認モーダルに表示されないだけで、データベースには保存される。
+    if ( !(fr2=="" || fn2=="") ){
+        $("#check_fr2").get(0).innerHTML = '家族構成2： ' +'続柄:'+ fr2 + '　名前:' +fn2+ "<br>";
+        $("#check_fr2").show();
+    }else{
+        $("#check_fr2").get(0).style.display = "none";
+    }
+    if ( !(fr3=="" || fn3=="") ){
+        $("#check_fr3").get(0).innerHTML = '家族構成3： ' +'続柄:'+ fr3 + '　名前:' +fn3+ "<br>";
+        $("#check_fr3").show();
+    }else{
+        $("#check_fr3").get(0).style.display = "none";
+    }
 
-    $("#check_name").get(0).style.display = "inline";
-    $("#check_furigana").get(0).style.display = "inline";
-    $("#check_tel").get(0).style.display = "inline";
-    $("#check_mail").get(0).style.display = "inline";
-    $("#check_sex").get(0).style.display = "inline";
-    $("#check_birthday").get(0).style.display = "inline";
-    $("#check_school").get(0).style.display = "inline";
-    $("#check_fr").get(0).style.display = "inline";
-    $(".multipleFR").get(0).style.display = "inline";     // get(0)やと5個全部でーへんかも。get(i)のようにしたい。
+    // spanタグはデフォルトがinlineやからいらん
+    // $("#check_name").get(0).style.display = "inline";
+    // $("#check_furigana").get(0).style.display = "inline";
+    // $("#check_tel").get(0).style.display = "inline";
+    // $("#check_mail").get(0).style.display = "inline";
+    // $("#check_sex").get(0).style.display = "inline";
+    // $("#check_birthday").get(0).style.display = "inline";
+    // $("#check_school").get(0).style.display = "inline";
+    // $("#check_fr").get(0).style.display = "inline";
+    // $("#check_fr2").get(0).style.display = "inline";
+    // $("#check_fr3").get(0).style.display = "inline";
+    // $(".multipleFR").get(0).style.display = "inline";     // get(0)やと5個全部でーへんかも。get(i)のようにしたい。
 
     // 必須項目じゃない入力フォームに、誤りのある入力値or未記入なら、モーダルウィンドウの最終確認画面には出さない。
     if(furigana == "") {
         $("#check_furigana").get(0).style.display = "none";
     }
-    if(!tel.match(/^(\d{3}-\d{4}-\d{4}|\d{11})$/)) {
-        $("#check_tel").get(0).style.display = "none";
-    }
+    // if(!tel.match(/^(\d{3}-\d{4}-\d{4}|\d{11})$/)) {
+    //     $("#check_tel").get(0).style.display = "none";
+    // }
     if((year == "0") || (month == "0") || (day == "0") || (day == "" )) {
         // dayはremoveChild()使ってるからvalueが「""」にもなる。
         $("#check_birthday").get(0).style.display = "none";
@@ -341,7 +368,7 @@ function valueCheck() {
 
     //すべての必須項目でエラーなしならモーダルウィンドウを表示
     if(nameCheck()==true && mailCheck()==true && sexCheck()==true &&
-      careerCheck()==true && frCheck() == true) {
+      careerCheck()==true && frCheck() == true && telCheck()==true ) {
         var baseLayer    = $('#modalBaseLayer').get(0); //モーダルウィンドウ
         var submitButton       = $('#submitButton').get(0); //はい
         var closeTrigger = $('#closeModal').get(0); //いいえ
@@ -366,9 +393,9 @@ function valueCheck() {
 
 
 }
-$(document).ready(function(){
+document.addEventListener("turbolinks:load", function(){
     $("#finalCheck").click(function(){
-      checkChildFR();     //  この関数をValueCheck()より先に実行して、zoku,zokunameに値を代入しとく。
+    //   checkChildFR();     //  この関数をValueCheck()より先に実行して、zoku,zokunameに値を代入しとく。
       valueCheck();
     });
 });
@@ -376,16 +403,17 @@ $(document).ready(function(){
 
 
 //  モーダルウィンドウのYESを押した時に入力値をリセットする処理
-document.addEventListener("turbolinks:load", function() {
-    $("#submitButton").on('click',function(){
-        // window.location.href = "/";  // resetボタンがバグってるから、画面更新にする。
-        // $('form').find("textarea, input, select ").val("").end().find(":checked").prop("checked", false);
-        // $('form').find("")
-        // $('.form-signin')[0].reset();   これ動かん。何でか分からん。
-        // removeAddedFR();
-        // $("#telError").fadeOut();
-    });
-});
+// turbolinkがあると、ready使えなから、以下の様に書く
+// document.addEventListener("turbolinks:load", function() {
+//     $("#submitButton").on('click',function(){
+//         // window.location.href = "/";  // resetボタンがバグってるから、画面更新にする。
+//         // $('form').find("textarea, input, select ").val("").end().find(":checked").prop("checked", false);
+//         // $('form').find("")
+//         // $('.form-signin')[0].reset();   これ動かん。何でか分からん。
+//         // removeAddedFR();
+//         // $("#telError").fadeOut();
+//     });
+// });
 
 
 
@@ -409,8 +437,8 @@ const frCheck = function(){
   }
 
 };
-$(document).ready(function(){
-  $(".family").blur(function(){
+document.addEventListener("turbolinks:load", function(){
+  $("#family_name").blur(function(){
     frCheck();
   });
 });
@@ -420,14 +448,22 @@ $(document).ready(function(){
 //  続柄の記入欄を追加
 // children()は、注目しているタグやクラスの1つ下の階層に、子要素が何個あるかを教えてくれる。
 // append()は、注目しているタグやクラスに、（）内の要素を、子要素として追加
-$(document).ready(function(){
+var countNumber = 0;
+document.addEventListener("turbolinks:load", function(){
   $("#addFamilyRelation").click(function(){
-    if ($('.bbb').children().length < 10 ) {
-      // 今回は「td」に2個inputが入ってるから、子要素は２個単位で追加される。4つ付け足したいなら、既存の２個＋8個で、10を上限にする。
-      // クリックできる回数は子要素が１０個未満の時のみ。４回追加すると、子要素が１０個になるのでOK。
-      $('.bbb').append("続柄：<input type='text' placeholder='例）父' class='family2 zokugara' > ");
-      $(".bbb").append('名前：<input type="text" placeholder="例）岡本　太郎" class="family2 name_zoku" > ');
-    }
+       if (countNumber==1){
+        $(".fr3").show();
+       }else{
+        $(".fr2").show();
+        countNumber=1;
+       }
+
+    // if ($('.bbb').children().length < 10 ) {
+    //   // 今回は「td」に2個inputが入ってるから、子要素は２個単位で追加される。4つ付け足したいなら、既存の２個＋8個で、10を上限にする。
+    //   // クリックできる回数は子要素が１０個未満の時のみ。４回追加すると、子要素が１０個になるのでOK。
+    //   $('.bbb').append("<br>続柄：<input type='text' name='familyRelation2' placeholder='例）父' class='family family2 zokugara input' > ");
+    //   $(".bbb").append('<br>名前：<input type="text" name="familyRelationName2" placeholder="例）岡本　太郎" class="family family2 name_zoku input" > ');
+    // }
   });
 });
 
@@ -437,13 +473,77 @@ $(document).ready(function(){
 
 
 
+// 「redirect_to()」で戻るからいらんくなった！！！
+// //  追加された家族構成を、最終確認モーダルのYESをクリックした時に、reset()と同時に発動。最初の二つ以外削除。
+// const removeAddedFR = function(){
+//   var y = $(".bbb").get(0); 
+//   if (y.hasChildNodes()) {
+//     while (y.childNodes.length > 4) {            //なぜ４かは分からん。
+//         y.removeChild(y.lastChild);
+//     }
+//   }
+// };
 
-//  追加された家族構成を、最終確認モーダルのYESをクリックした時に、reset()と同時に発動。最初の二つ以外削除。
-const removeAddedFR = function(){
-  var y = $(".bbb").get(0); 
-  if (y.hasChildNodes()) {
-    while (y.childNodes.length > 4) {            //なぜ４かは分からん。
-        y.removeChild(y.lastChild);
-    }
-  }
-};
+
+
+
+// 入力フォームで、Enterキー押されたら、勝手に送信されるから。Enterキー無効化
+document.onkeypress = enter;
+function enter(){
+  if( window.event.keyCode == 13 ){
+    return false;
+  }
+}
+// でも「登録ボタン」押した時だけ有効にして、valueCheckを走らせたい
+// function enter(){
+//         if( window.event.keyCode == 13 ){
+//           valueCheck();
+//         }
+//       }
+
+
+// flashボタン消す
+document.addEventListener("turbolinks:load", function(){
+  $(".close").click(function(){
+    $(".alert").get(0).style.display = "none";
+  });
+});
+
+// finalCheck押した時に、select要素のデータ取得して、selectに突っ込む。
+// リクエストが通ったらデータ更新されるから大丈夫
+document.addEventListener("turbolinks:load", function(){
+    $("#finalCheck").click(function(){
+        var year = $("#year").get(0).value;
+        var month = $("#month").get(0).value;
+        var day = $("#day").get(0).value;
+        var career = $(".career").get(0).value;
+        var school = $("#school").get(0).value;
+        
+        $("#year").get(0).value = year;
+        $("#month").get(0).value = month;
+        $("#day").get(0).value = day;
+        $(".career").get(0).value = career
+        $("#school").get(0).value = school;
+
+
+        document.getElementById("junior")
+
+
+
+
+    });
+  });
+
+
+
+if ( !(gon.year == "0" || gon.month == "0" || gon.day == "0" ) ){
+    $("#year").val(gon.year);
+    $("#month").val(gon.month);
+    $("#day").val(gon.day);
+}
+
+if (gon.school_name == "0" ){
+    $(".type_career").val(gon.type_career);
+    $("#school").val(gon.school_name);
+}
+

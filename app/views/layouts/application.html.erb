@@ -5,12 +5,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
   
+     <%= include_gon %>
+     <%= Gon::Base.render_data %>
+
      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
     
   </head>
 
   <body>
+    <% if notice %>
+      <div class="alert alert-info"><%= notice %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    <% elsif alert %>
+      <div class="alert alert-danger"><%= alert %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,14 +1,14 @@
 <html>
     <head>
     <meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="./bootstrap/css/bootstrap-responsive.css"> -->
+        <%# <link rel="stylesheet" href="./bootstrap/css/bootstrap.css"> %>
+        <%# <link rel="stylesheet" href="./bootstrap/css/bootstrap-responsive.css"> %>
         <%# Railsに組み込む場合は「stylesheet_link_tag」 %>
-        <%= stylesheet_link_tag "top", media: "all" %>
+        <%= stylesheet_link_tag "new", media: "all" %>
         <%= stylesheet_link_tag "modal", media: "all" %>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
-        <!-- <script src="/bootstrap/js/bootstrap.js"></script> -->
+        <%# <script src="/bootstrap/js/bootstrap.js"></script> %>
 
         <%# Railsに組み込む場合は「javascript_include_tag」 %>
         <%= javascript_include_tag "buttons" %>
@@ -32,17 +32,20 @@
             </ul>
         </div>
 
-
-        <%= form_tag("/create") do %>
+            <%# <%= form_tag("/create", method: :post, class:"form-signin", name:"form_signin") do %> 
+            <%= form_with model: @user,method: :post, url: "/create", local: true, class:"form-signin", name:"form_signin" do |f|  %>
+            <!-- form_withのメソッドは「form_for」と同じ！！！ -->
+            <%# <%= binding.pry %> 
+            <%# <form action="/create" method="post" class="form-signin" name="form_signin"> %>
             <div class="left-box">
-            <form class="form-signin" name="form_signin" >
                 <h2>個人情報登録</h2>
                 <p> <span style="color:red;">*</span>は必須項目です。</p>
                 <table>
                     <tr>
                         <th>名前<span style="color:red;">*</span> </th>
                         <td>
-                            <input type="text" name="name" id="name" placeholder="例）岡本　太郎" >
+                            <%= f.text_field :name, {id:"name", placeholder:"例）岡本　太郎", class:"input", name:"name"} %> <!--「:name」の様に既存のカラム名を指定する -->
+                            <%# <input type="text" name="name" id="name" placeholder="例）岡本　太郎" class="input" > %>
                             <br>
                             <span id="nameError" >＊名前を入力してください</span>
                         </td>
@@ -52,14 +55,16 @@
                     <tr>
                         <th>ふりがな</th>
                         <td>
-                            <input type="text" name="furigana" id="furigana" placeholder="例）おかもと　たろう" >
+                            <%= f.text_field :furigana, {id:"furigana", placeholder:"例）おかもと　たろう", class:"input", name:"furigana"} %> 
+                            <%# <input type="text" name="furigana" id="furigana" placeholder="例）おかもと　たろう" class="input"> %>
                         </td>
                         <!-- valueやと、テキストボックスに（例）が入る。placeholderやと消えてくれる。 -->
                     </tr>
                     <tr>
-                        <th>電話番号</th>
+                        <th>電話番号<span style="color:red;">*</span> </th>
                         <td>
-                            <input type="tel" name="tel" id="tel" autocomplete="tel" placeholder="例）090-1234-5678"  >
+                            <%= f.telephone_field :tel, {id:"tel", placeholder:"例）090-1234-5678", class:"input", autocomplete: "tel", name:"tel"} %>
+                            <%# <input type="tel" name="tel" id="tel" autocomplete="tel" placeholder="例）090-1234-5678" class="input" > %>
                             <br>
                             <span id="telError">＊正しい電話番号を入力してください。</span>
                         </td>
@@ -67,26 +72,45 @@
                     <tr>
                         <th>メールアドレス<span style="color:red;">*</span></th>
                         <td>
-                            <input type="email" name="mail" id="mail" autocomplete="email" placeholder="例）info@datora.jp"  >
+                            <%= f.email_field :mail, {id:"mail", placeholder:"例）info@datora.jp", class:"input", autocomplete: "email", name:"mail"} %>
+                            <%# <input type="email" name="mail" id="mail" autocomplete="email" placeholder="例）info@datora.jp" class="input" > %>
                             <span id="mailError">＊必須項目です</span>
                         </td>
                     </tr>
                     <tr>
                         <th>性別<span style="color:red;">*</span></th>
                         <td>
-                            <input type="radio" name="type_sex" class="sex" id="man" > <label for="man">男性</label>
+                            <label> <%= f.radio_button :type_sex, "男", {class:"sex", id:"man", name:"type_sex"} %>男性</label>
+                            <%# <input type="radio" name="type_sex" class="sex" id="man" value="男" > <label for="man">男性</label> %>
                             <!-- idとlabel forを一緒にすると、ラジオボタンの横の文字をクリックしてもラジオボタンを押せる。 -->
-                            <input type="radio" name="type_sex" class="sex" id="woman" > <label for="woman">女性</label>
+                            <label> <%= f.radio_button :type_sex, "女", {class:"sex", id:"woman", name:"type_sex"} %>女性</label>
+                            <%# <input type="radio" name="type_sex" class="sex" id="woman" value="女" > <label for="woman">女性</label> %>
                             <span id="sexError">＊必須項目です</span>
                         </td>
                     </tr>
                     <tr>
                         <th>生年月日</th>
                         <td>
-                            <select name="year" id="year" class="w100" >
+                        <!-- html系のオプション（id, classとかは第４引数やから、第３引数は空白！） -->
+                            <%= f.select :year, [["--西暦--", "0"]], {}, {id: "year", class: "w100", name:"year"} %> 
+                            <%# <select name="year" id="year" class="w100" >
                                     <option value="0">--西暦--</option>
-                            </select>
-                            <select name="month" id="month" class="w80" >
+                            </select> %>
+                            <%= f.select :month, [["-月-",0],
+                                                 ["1月",1],
+                                                 ["2月",2],
+                                                 ["3月",3],
+                                                 ["4月",4],
+                                                 ["5月",5],
+                                                 ["6月",6],
+                                                 ["7月",7],
+                                                 ["8月",8],
+                                                 ["9月",9],
+                                                 ["10月",10],
+                                                 ["11月",11],
+                                                 ["12月",12]], {}, {id: "month", class: "w80", name:"month"} %>
+                            
+                            <%# <select name="month" id="month" class="w80" >
                                 <!-- onchangeは、値が変更された時にイベントを起こす。2月になった時に、閏年かどうかをチェックして、29日を選択肢に追加するかを決めれる。 -->
                                 <option value="0">-月-</option>
                                 <option value="1">1月</option>
@@ -101,32 +125,36 @@
                                 <option value="10">10月</option>
                                 <option value="11">11月</option>
                                 <option value="12">12月</option>
-                            </select>
+                            </select> %>
 
-                            <select name="day" id="day" class="w80" >
+                            <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %> 
+                            <%# <select name="day" id="day" class="w80" >
                                 <option value="0">-日-</option>
-                            </select>
+                            </select> %>
                         </td>
                     </tr>
 
                     <tr>
                         <th>最終学歴<span style="color:red;">*</span></th>
                         <td>
-                            <input type="radio" name="type_career" class="career" id="junior" value="0" ><label for="junior">中学</label>
-                            <input type="radio" name="type_career" class="career" id="high-school" value="1" ><label for="high-school">高校</label>
-                            <input type="radio" name="type_career" class="career" id="university" value="2" ><label for="university">大学</label>
-                            <input type="radio" name="type_career" class="career" id="no-career" value="3" ><label for="no-career">行ってない</label>
+                            <label> <%= f.radio_button :type_career, "中卒", {class:"career", id:"junior", name:"type_career"} %>中学</label>
+                            <%# <input type="radio" name="type_career" class="career" id="junior" value="中卒" ><label for="junior">中学</label> %>
+                            <label> <%= f.radio_button :type_career, "高卒", {class:"career", id:"high-school", name:"type_career"} %>高校</label>
+                            <%# <input type="radio" name="type_career" class="career" id="high-school" value="高卒" ><label for="high-school">高校</label> %>
+                            <label> <%= f.radio_button :type_career, "大卒", {class:"career", id:"university", name:"type_career"} %>大学</label>
+                            <%# <input type="radio" name="type_career" class="career" id="university" value="大卒" ><label for="university">大学</label> %>
+                            <label> <%= f.radio_button :type_career, "学歴無し", {class:"career", id:"no-career", name:"type_career"} %>行ってない</label>
+                            <%# <input type="radio" name="type_career" class="career" id="no-career" value="学歴無し" ><label for="no-career">行ってない</label> %>
                             <br>
                             学校名：
-                            <select id="school" class="w250" >
+                            <%= f.select :school_name, [["-選択-", "0"]], {}, {id: "school", class: "w250", name:"school_name"} %> 
+                            <%# <select id="school" class="w250" name="school_name" >
                                 <option value="0" >-選択-</option>
-                            </select>
+                            </select> %>
                             <br>
                             <span id="careerError">＊必須項目です</span>
                         </td>
                     </tr>
-
-
 
 
                     <tr class="aaa"> <!-- margin-bottomを調整したいからとりあえずクラス作成した -->
@@ -134,7 +162,7 @@
                             <br>
                             <!-- 「input type=button」はMacのChromeではheight調整できない。
                             だから「button」タグを使う。これはvalueの代わりに、「font」タグで文字を囲む -->
-                            <button type="button" id="addFamilyRelation" value="+"\>  <font size="5" color="black">+</font>
+                            <button type="button" id="addFamilyRelation" >  <font size="5" color="black">+</font>
                             <br>
                             <br>
                             <!-- buttonタグがよー分からん。そのせいでエラー文が変に改行されたり、ボタンと被る。
@@ -142,15 +170,40 @@
                             <nobr><span id="frError" style="font-size:11px;" >*1人以上記入してください。</span></nobr>
                         </th>
                         <td class="bbb">
-                            続柄：<input type="text" placeholder="例）父" class="family zokugara" id="family_relation" >
+                          <div>
+                            続柄：<%= f.text_field :familyRelation, {id:"family_relation", placeholder:"例）父", class:"family zokugara input", name:"familyRelation"} %>
+                            <%# <input type="text" name="familyRelation" placeholder="例）父" class="family zokugara input" id="family_relation"  > %>
+                            <br class="kai">
+                            名前：<%= f.text_field :familyRelationName, {id:"family_name", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName"} %>
+                            <%# <input type="text" name="familyRelationName" placeholder="例）岡本　太郎" class="family name_zoku input" id="family_name" > %>
                             <br>
-                            名前：<input type="text" placeholder="例）岡本　太郎" class="family name_zoku" id="family_name" >
+                          </div>
+
+                          <div class="fr2" >
+                            続柄：<%= f.text_field :familyRelation2, {id:"family_relation2", placeholder:"例）父", class:"family zokugara input", name:"familyRelation2"} %>
+                            <%# <input type="text" name="familyRelation2" placeholder="例）父" class="family zokugara input" id="family_relation2"  > %>
+                            <br>
+                            名前：<%= f.text_field :familyRelationName2, {id:"family_name2", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName2"} %>
+                            <%# <input type="text" name="familyRelationName2" placeholder="例）岡本　太郎" class="family name_zoku input" id="family_name2" > %>
+                            <br>
+                          </div>
+
+                          <div class="fr3" >
+                            続柄：<%= f.text_field :familyRelation3, {id:"family_relation3", placeholder:"例）父", class:"family zokugara input", name:"familyRelation3"} %>
+                            <%# <input type="text" name="familyRelation3" placeholder="例）父" class="family zokugara input" id="family_relation3"  > %>
+                            <br>
+                            名前：<%= f.text_field :familyRelationName3, {id:"family_name3", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelation3"} %>
+                            <%# <input type="text" name="familyRelationName3" placeholder="例）岡本　太郎" class="family name_zoku input" id="family_name3" > %>
+                            <br>
+                          </div>
+
                         </td>
                     </tr>
                 </table>
 
 
-                <button type="button" id="finalCheck" value="登録" >  <font size="2" color="black">登録</font>
+                
+                <button type="button" id="finalCheck" value="登録" >  <font size="3" color="black">登録</font> 
                 <!-- onclickを使えば、登録ボタンを押した時にエラーチェックをしてくれるが、リアルタイムでやるには「onblur」 -->
                 <br>
 
@@ -163,14 +216,13 @@
 
                 <!-- <input type="button" value="名前チェック" onclick= "fuck()" > -->
 
-
-            </form>
             </div>
             
 
 
 
-        
+        <%# http://maeharin.hatenablog.com/entry/20120811/p1 %>
+        <%# <%= form_tag("/create" ,class:"form-signin", name:"form_signin") do %>
             <!-- 最終チェック用のモーダルウィンドウ -->
             <!-- さっきは「<div class="left-box"></div>」の中にモーダルウィンドウを入れていたからcssが上手く機能しなかった。 -->
             <div class="modalBaseLayer" id="modalBaseLayer" >
@@ -184,7 +236,9 @@
                         <span id="check_birthday"></span>
                         <span id="check_school" ></span>
                         <span id="check_fr" ></span>
-                        <span class="multipleFR" ></span>
+                        <span id="check_fr2" ></span>
+                        <span id="check_fr3" ></span>
+                        <%# <span class="multipleFR" ></span> %>
                         <br>
                         以上の内容でよろしいですか？
                         <br>
@@ -194,7 +248,9 @@
                         <input type="button" value="No" id="closeModal" >
                     </div>
             </div>
-        <% end %>
+        <%# </form> %>
+
+        <% end %> 
     </body>
 
 

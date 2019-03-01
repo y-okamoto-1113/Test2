@@ -58,7 +58,7 @@ body{
   margin-bottom:10px;   /* 個人情報登録〜登録ボタンまでが「form」タグの「form-signin」クラスの中身。この内容の下には10pxのスペースを作ることで見栄えがバランスよくなる */
 }
 
-.form-signin input{
+.form-signin, .input{
   font-size:16px; /* inputを選択しているので、テキスト内部の文字の大きさを設定している。 */
   color:black; /* 入力した文字が黒くなる。 */
   margin-bottom: 15px; /* こいつのせいで各項目間のスペースが変。 */
@@ -150,7 +150,7 @@ padding-bottom:35px;
 
 #finalCheck{
 width:60px;
-height:30px;
+height:40px;
 margin-top:30px;
 }
 
@@ -161,3 +161,57 @@ width:80px;
 .name_zoku{
 width:160px;
 }
+
+.fr2{
+  display:none;
+}
+.fr3{
+  display:none;
+}
+/* 
+.flash {
+  padding: 10px 0;
+  color: white;
+  background: rgb(251, 170, 88);
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  border-radius: 0 0 2px 2px;
+  font-size: 14px;
+} */
+
+
+
+
+.alert {
+  text-align: center;
+  padding: 10px 0;
+}
+.alert-info {
+  padding: 10px 0;
+  color: white;
+  background: rgb(251, 170, 88);
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  border-radius: 0 0 2px 2px;
+  font-size: 14px;
+}
+ 
+.alert-danger {
+  padding: 10px 0;
+  color: white;
+  background: rgb(240, 54, 54);
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  border-radius: 0 0 2px 2px;
+  font-size: 14px;
+}
+

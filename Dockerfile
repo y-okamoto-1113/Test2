@@ -8,10 +8,12 @@ ENV BUILD_PACKAGES="curl-dev ruby-dev build-base bash" \
 
 RUN apk update && \
     apk upgrade && \
+    apk add less && \
     apk add --update\
     $BUILD_PACKAGES \
     $DEV_PACKAGES \
     $RUBY_PACKAGES && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     rm -rf /var/cache/apk/* && \
     mkdir -p $APP_ROOT
 
