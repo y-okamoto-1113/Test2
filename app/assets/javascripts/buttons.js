@@ -509,41 +509,16 @@ document.addEventListener("turbolinks:load", function(){
   });
 });
 
-// finalCheck押した時に、select要素のデータ取得して、selectに突っ込む。
-// リクエストが通ったらデータ更新されるから大丈夫
-document.addEventListener("turbolinks:load", function(){
-    $("#finalCheck").click(function(){
-        var year = $("#year").get(0).value;
-        var month = $("#month").get(0).value;
-        var day = $("#day").get(0).value;
-        var career = $(".career").get(0).value;
-        var school = $("#school").get(0).value;
-        
-        $("#year").get(0).value = year;
-        $("#month").get(0).value = month;
-        $("#day").get(0).value = day;
-        $(".career").get(0).value = career
-        $("#school").get(0).value = school;
-
-
-        document.getElementById("junior")
 
 
 
 
-    });
-  });
+
+// $(function(){
+//     if ($("#year") == "0"){
+//         monthCheck();   
+//     }
+// });
 
 
-
-if ( !(gon.year == "0" || gon.month == "0" || gon.day == "0" ) ){
-    $("#year").val(gon.year);
-    $("#month").val(gon.month);
-    $("#day").val(gon.day);
-}
-
-if (gon.school_name == "0" ){
-    $(".type_career").val(gon.type_career);
-    $("#school").val(gon.school_name);
-}
 

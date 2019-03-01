@@ -66,11 +66,11 @@ class HomeController < ApplicationController
       # binding.pry
       flash.now[:alert] = "電話番号またはメールアドレスが既に使われています！"
       
-      gon.year = @user.year
-      gon.month = @user.month
-      gon.day = @user.day
-      gon.type_career = @user.type_career
-      gon.school_name = @user.school_name
+      @year = @user.year
+      @month = @user.month
+      @day = @user.day
+      @type_career = @user.type_career
+      @school_name = @user.school_name
 
 
       render action: :new
