@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  # get "/" => "home#index"
-  # get 'new' => "home#new"
   
+  # ファイルで分けた場合
+  Dir.glob(File.expand_path("#{Rails.root}/config/routes/admin.rb", __FILE__)).each do |file|
+    instance_eval(File.read(file))
+  end
+
   get '/' => "home#new"
-  get 'login' => "home#login"
-  get "register" => "home#register"
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   post "create" => "home#create"
+
+  # devise_for :admins, :class_name => 'Admin'      # class_nameはモデルの名前を引数にとる
 
 end

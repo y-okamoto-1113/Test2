@@ -3,13 +3,6 @@ class HomeController < ApplicationController
     @user = User.new
   end
 
-  def login 
-
-  end
-
-  def register
-
-  end
 
   # ユーザー新規登録画面で入力したデータをデータベースに反映するため
   def create
@@ -61,14 +54,14 @@ class HomeController < ApplicationController
     
     # binding.pry
     if @user.save
-      flash[:notice] = "ユーザー登録が完了しました"
+      flash[:success] = "ユーザー登録が完了しました"
       # binding.pry
 
       redirect_to("/")
       return
     else
       # binding.pry
-      flash.now[:alert] = "電話番号またはメールアドレスが既に使われています！"
+      flash.now[:errors] = "電話番号またはメールアドレスが既に使われています！"
       
       @year = @user.year
       @month = @user.month

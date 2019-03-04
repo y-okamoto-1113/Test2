@@ -15,6 +15,16 @@
     </head>
     <body>
 
+    <% if notice %>
+      <div class="alert alert-info"><%= notice %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    <% elsif alert %>
+      <div class="alert alert-danger"><%= alert %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    <% end %>
+
         <div class="right-box">
             <h2>仕様</h2>
             <ul>
@@ -130,7 +140,7 @@
                                 <option value="11">11月</option>
                                 <option value="12">12月</option>
                             </select> %>
-                            <% if @day %>
+                            <% if @day %>  
                                 <%= f.select :day, [["#{@day}日", "#{@day}"]], {}, {id: "day", class: "w80", name:"day"} %>
                             <% else  %>
                                 <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %> 
