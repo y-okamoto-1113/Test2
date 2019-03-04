@@ -63,7 +63,7 @@ class HomeController < ApplicationController
       # binding.pry
       flash.now[:errors] = "電話番号またはメールアドレスが既に使われています！"
       
-      @year = @user.year
+      @year = @user.year                 # renderで値を保持するには、変数に格納しとかなアカン 
       @month = @user.month
       @day = @user.day
       @type_career = @user.type_career

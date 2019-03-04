@@ -2,6 +2,7 @@
 
 class Admins::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  # before_action :authenticate_admi!
 
   def login_form
     @admin = Admin.new
@@ -10,16 +11,31 @@ class Admins::SessionsController < Devise::SessionsController
 
   def signup
     # binding.pry
+    # super
     @admin = Admin.find_by(email: params[:email],
-                           encrypted_password: params[:encrypted_password])
+                           encrypted_password: params[:encrypted_password]) # passwordがnilになってる
+    # binding.pry
+
     if @admin
+      # binding.pry
+
       flash[:notice] = "ログインに成功しました"
       # binding.pry
-      redirect_to("admin_index")
+      redirect_to("/admin_index")
     else
+      # binding.pry
+
       flash[:login_fail] = "メールアドレスまたは電話番号が間違っています！"
-      render("devise/sessions/login_form")
+      @admin = Admin.new
+      @admin.email = params[:email]
+      # @admin.encrypted_password = params[:encrypted_password]   # パスワードは消えてるほうがいい
+      # binding.pry
+
+      render("admins/sessions/login_form") #@admin のデータ
+      return
     end
+    # binding.pry
+
   end
 
 
@@ -35,12 +51,17 @@ class Admins::SessionsController < Devise::SessionsController
   def register
 
   end
-  # GET /resource/sign_in
+  
+  def fly
+    redirect_to("/admin_login") #renderしてもURLはsignupのまんま。そのまま更新されたり、signupに直でアクセスされたらエラー出るから、login_formに飛ばしたる。
+  end
+
+  # GET /admin/sign_in
   # def new
   #   super
   # end
 
-  # POST /resource/sign_in
+  # POST /admin/sign_in
   # def create
   #   super
   # end

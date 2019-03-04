@@ -18,6 +18,8 @@ Rails.application.config.assets.precompile += %w( buttons.js )
 Rails.application.config.assets.precompile += %w( new.css )
 Rails.application.config.assets.precompile += %w( modal.css )
 # inspinia
+Rails.application.config.assets.precompile += %w( inspinia/style.css )
+Rails.application.config.assets.precompile += %w( inspinia/animate.css )
 Rails.application.config.assets.precompile += %w( inspinia/bootstrap.min.css )
 Rails.application.config.assets.precompile += %w( inspinia/font-awesome.css )
 Rails.application.config.assets.precompile += %w( inspinia/jquery-3.1.1.min.js )
