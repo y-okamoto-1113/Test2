@@ -1,54 +1,69 @@
-
-<table>
-  <tr>
-    <td>ID　</td>
-    <td>名前　　</td>
-    <td>ふりがな　　</td>
-    <td>電話番号　　</td>
-    <td>メールアドレス　　</td>
-    <td>性別　　</td>
-    <td>生年月日　　</td>
-    <td>最終学歴　　</td>
-    <td>学校名　　</td>
-    <td>続柄　　　</td>
-    <td>家族名　　</td>
-    <td>続柄2　　</td>
-    <td>家族名2　　</td>
-    <td>続柄3　　</td>
-    <td>家族名3　　</td>
-    <td>登録日　　　　　　</td>
-    <td>更新日</td>
-
-  </tr>
-
-<!-- クリックで詳細 -->
-  <% @users.each do |user| %>
-    <%= link_to ("/users/#{user.id}")  do %>
-      <tr >
-        <td> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </a> </td>
-        <!-- &nbsp; -->
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
-        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
+<div id="users">
+  <table>
+    <thead>
+      <tr>
+        <th class="sort" data-sort="idid">ID</th>
+        <th class="sort" data-sort="name">名前</th>
+        <th class="sort" data-sort="furigana">ふりがな</th>
+        <th class="sort" data-sort="tel">電話番号</th>
+        <th class="sort" data-sort="mail">メールアドレス</th>
+        <th class="sort" data-sort="sex">性別</th>
+        <th class="sort" data-sort="birthday">生年月日</th>
+        <th class="sort" data-sort="career">最終学歴</th>
+        <th class="sort" data-sort="school">学校名</th>
+        <th class="sort" data-sort="familyRelation">続柄</th>
+        <th class="sort" data-sort="familyRelationName">家族名</th>
+        <th class="sort" data-sort="familyRelation">続柄2</th>
+        <th class="sort" data-sort="familyRelationName2">家族名2</th>
+        <th class="sort" data-sort="familyRelation">続柄3</th>
+        <th class="sort" data-sort="familyRelationName3">家族名3</th>
+        <th class="sort" data-sort="created_at">登録日</th>
+        <th class="sort" data-sort="updated_at">更新日</th>
       </tr>
+    </thead>
+    <!-- IMPORTANT, class="list" have to be at tbody -->
+    <tbody class="list">
+      <% @users.each do |user| %>
+        <tr >
+          <td class="idid"> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </a> </td>
+          <td class="name"> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
+          <td class="furigana"> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
+          <td class="tel"> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
+          <td class="mail"> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
+          <td class="sex"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
+          <td class="birthday"> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %> </a> </td>
+          <td class="career"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
+          <td class="school"> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
+          <td class="familyRelation"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
+          <td class="familyRelationName"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
+          <td class="familyRelation2"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
+          <td class="familyRelationName2"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
+          <td class="familyRelation3"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
+          <td class="familyRelationName3"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
+          <td class="created_at"> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
+          <td class="updated_at"> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
+        </tr>
     <%end%>
-  <%end%>
+    </tbody>
+  </table>
+</div>
 
-</table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script>
+var options = {
+  valueNames: [ 'idid','name', 'furigana', 'tel', 'mail', 'sex', 'birthday', 'career', 'school', 'familyRelation',
+                'familyRelationName', 'familyRelation2', 'familyRelationName2', 'familyRelation3', 'familyRelationName3', 'created_at', 'updated_at' ]
+              };
 
-<div class="row">
-    <%= link_to '新規作成', new_user_path, class:'btn btn-primary margin-top-5per' %>
-  </div>
+var userList = new List('users', options);
+userList.sort( 'idid', {order : 'asc' });
+</script>
+
+<style>
+.sort.desc:after {
+  content:"▼";
+}
+.sort.asc:after {
+  content:"▲";
+}
+</style>

@@ -15,11 +15,13 @@
 //= require bootstrap-sprockets
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+//= javascript_include_tag 'application'
+//= require 'jquery.turbolinks'
 
 
+// require_tree .
 // require jquery/jquery-3.1.1.min.js
 // require pace/pace.min.js
 // require slimscroll/jquery.slimscroll.min.js
 // require metisMenu/jquery.metisMenu.js
-// require rails-ujs
+//= require rails-ujs
