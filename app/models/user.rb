@@ -1,7 +1,5 @@
 class User < ApplicationRecord
-before_validation do
-  
-end
+
 
   validates :name, presence: true # ,length:{minimum: 2}
   validates :tel, presence: true, uniqueness: true, format:{with: (/0[5789]0[\d{8}]/) } #ハイフンはcreateアクションで削除してる
@@ -12,4 +10,5 @@ end
   validates :familyRelation, {presence: true}
   validates :familyRelationName, {presence: true}
   # year, month, day も選択式やから大丈夫やけど、コンソールからやと格納できるデータは自由やから制限かけたい
+
 end

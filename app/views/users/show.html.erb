@@ -1,0 +1,51 @@
+
+
+
+<table>
+  <tr>
+    <td>ID　</td>
+    <td>名前　　</td>
+    <td>ふりがな　　</td>
+    <td>電話番号　　</td>
+    <td>メールアドレス　　</td>
+    <td>性別　　</td>
+    <td>生年月日　　</td>
+    <td>最終学歴　　</td>
+    <td>学校名　　</td>
+    <td>続柄　　　</td>
+    <td>家族名　　</td>
+    <td>続柄2　　</td>
+    <td>家族名2　　</td>
+    <td>続柄3　　</td>
+    <td>家族名3　　</td>
+    <td>登録日　　　　　　</td>
+    <td>更新日</td>
+
+  </tr>
+
+      <tr>
+        <td><%= @user.id %></td>
+        &nbsp;<!-- なんでか効いてない -->
+        <td><%= @user.name %></td>
+        <td><%= @user.furigana %></td>
+        <td><%= @user.tel %></td>
+        <td><%= @user.mail %></td>
+        <td><%= @user.type_sex %></td>
+        <td><%= @user.year %></td>
+        <td><%= @user.type_career%></td>
+        <td><%= @user.school_name %></td>
+        <td><%= @user.familyRelation %></td>
+        <td><%= @user.familyRelationName %></td>
+        <td><%= @user.familyRelation2 %></td>
+        <td><%= @user.familyRelationName2 %></td>
+        <td><%= @user.familyRelation3 %></td>
+        <td><%= @user.familyRelationName3 %></td>
+        <td><%= @user.created_at.strftime('%Y年%m月%d日') %></td>
+        <td><%= @user.updated_at.strftime('%Y年%m月%d日') %></td>
+      </tr>
+
+</table>
+
+
+<%= link_to '編集', edit_user_path(@user), class:'btn btn-primary edit-btn-position' %>
+<%= link_to '削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %>

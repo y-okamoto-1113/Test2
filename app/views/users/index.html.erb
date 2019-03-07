@@ -1,0 +1,54 @@
+
+<table>
+  <tr>
+    <td>ID　</td>
+    <td>名前　　</td>
+    <td>ふりがな　　</td>
+    <td>電話番号　　</td>
+    <td>メールアドレス　　</td>
+    <td>性別　　</td>
+    <td>生年月日　　</td>
+    <td>最終学歴　　</td>
+    <td>学校名　　</td>
+    <td>続柄　　　</td>
+    <td>家族名　　</td>
+    <td>続柄2　　</td>
+    <td>家族名2　　</td>
+    <td>続柄3　　</td>
+    <td>家族名3　　</td>
+    <td>登録日　　　　　　</td>
+    <td>更新日</td>
+
+  </tr>
+
+<!-- クリックで詳細 -->
+  <% @users.each do |user| %>
+    <%= link_to ("/users/#{user.id}")  do %>
+      <tr >
+        <td> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </a> </td>
+        <!-- &nbsp; -->
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
+        <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
+      </tr>
+    <%end%>
+  <%end%>
+
+</table>
+
+<div class="row">
+    <%= link_to '新規作成', new_user_path, class:'btn btn-primary margin-top-5per' %>
+  </div>

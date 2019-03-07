@@ -1,0 +1,36 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <!-- <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" method="post" action="/">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search" />
+                </div>
+            </form>
+        </div> -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <% if admin_signed_in? %>
+            <a class="navbar-brand" href="/"><%= current_admin.name %>でログイン中</a>
+          <%else%>
+            <a class="navbar-brand" href="/">IN+</a>
+          <%end%>
+        </div>
+
+
+        <ul class="nav navbar-top-links navbar-right">
+              <% if admin_signed_in? %>
+                <li> <%= link_to '新規作成', new_user_path , style:'margin-right:10px'%> </li>
+                <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %> </li>
+              <%else%>
+                <li> <%= link_to 'ユーザー登録', new_admin_registration_path %> </li>
+                <li> <%= link_to 'ログイン', new_admin_session_path %> </li>
+            <%end%>
+
+        </ul>
+    </nav>
+</div>

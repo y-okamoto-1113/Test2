@@ -1,20 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Test</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-  
-     <%# <%= include_gon %>
-     <%# <%= Gon::Base.render_data %> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- タイトルが左上に出てない！！！！！！！！！！！！！！！！！！ -->
+    <title>INSPINIA</title>
+　　<!-- タイトルが左上に出てない！！！！！！！！！！！！！！！！！！ -->
 
-     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
-    
+
+    <!-- Main css styles -->
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "new", media: "all" %>
+    <%= stylesheet_link_tag "modal", media: "all" %>
+    <!-- Main javascript files -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
 
-    <%= yield %>
+      <!-- Wrapper-->
+      <div id="wrapper">
+
+          <!-- Navigation -->
+          <%= render 'layouts/navigation' %>
+
+          <!-- Page wraper -->
+          <div id="page-wrapper" class="gray-bg">
+
+              <!-- Page wrapper -->
+              <%= render 'layouts/topnavbar' %>
+
+              <!-- Main view  -->
+              <!-- 部分レイアウト（パーシャル）を表示！ layoutフォルダ内に「_header.html.erb」を置く！ -->
+
+
+              <% if notice %>
+                <div class="alert alert-info"><%= notice %>
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+              <% elsif alert %>
+                <div class="alert alert-danger"><%= alert %>
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+              <% end %>
+
+
+              <p class="notice"><%= notice %></p>
+              <p class="alert"><%= alert %></p>
+              <%= yield %>
+
+              <!-- Footer -->
+              <%= render 'layouts/footer' %>
+
+          </div>
+          <!-- End page wrapper-->
+
+      </div>
+      <!-- End wrapper-->
+
   </body>
-</html>
+  </html>
