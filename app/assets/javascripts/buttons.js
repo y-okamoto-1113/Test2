@@ -149,7 +149,7 @@ function schoolSelect(value) {
     // ラジオボタンのvalueで条件分岐
     switch(value) {      // inputタグで選択式の場合、設定したvalueが代入されてる。
         case "中卒": //中学
-            $.getJSON("/app/assets/javascripts/school.json",{name:"school_name"} , function(data) {
+            $.getJSON("/school.json",{name:"school_name"} , function(data) {
                 // {name:"chara"}       入力提出さえたデータは相手側のデータサーバーに送られる。データを検索しやすくする為のタグ付をしている！！！
                 // $.getJSONで、データを読み込んだら、その後の処理を、「function」で決められる。
                 var list = data.juniorhighschool;
@@ -162,7 +162,7 @@ function schoolSelect(value) {
 
             //  オブジェクトを配列のように使うには、「Object.values(オブジェクトデータ)」か「for i in オブジェクトデータ」
         case "高卒": //高校
-            $.getJSON("school.json", {name: "school_name"}, function(data) {
+            $.getJSON("/school.json", {name: "school_name"}, function(data) {
                 var list = data.highschool;
                 var values = Object.values(list);       //  jsonのデータは配列ではなくオブジェクト！！！！！
                 for(var i=1; i< values.length; i++ ) {
@@ -178,7 +178,7 @@ function schoolSelect(value) {
 
             //  オブジェクトを配列のように使うには、「Object.values(オブジェクトデータ)」か「for i in オブジェクトデータ」
         case "大卒": //大学
-            $.getJSON("school.json", {name: "school_name"}, function(data) {
+            $.getJSON("/school.json", {name: "school_name"}, function(data) {
                 var list = data.university;
                 for(var i in data.university){  //  「for in」もオブジェクトを配列のように使える。
                     $("#school").get(0).options[i] = new Option(list[i], list[i]);
@@ -263,7 +263,6 @@ var y = $(".bbb").get(0);     // 「removeAddedFR」でもこれ使うからグ�
 
 
 
-
 // 最終チェックのモーダルウィンドウ
 function valueCheck() {
 
@@ -308,6 +307,7 @@ function valueCheck() {
     var fr3 = $("#family_relation3").get(0).value;
     var fn3 = $("#family_name3").get(0).value;
 
+    
     // 入力値を代入したさっきの変数を使って、モーダルウィンドウに表示する
     $("#check_name").get(0).innerHTML = '名前<span style="color: #FF0000;">*</span>：' + name + "<br>";
     $("#check_furigana").get(0).innerHTML = "ふりがな：" + furigana + "<br>";
@@ -362,15 +362,17 @@ function valueCheck() {
     //すべての必須項目でエラーなしならモーダルウィンドウを表示
     if(nameCheck()==true && mailCheck()==true && sexCheck()==true &&
       careerCheck()==true && frCheck() == true && telCheck()==true ) {
-        var baseLayer    = $('#modalBaseLayer').get(0); //モーダルウィンドウ
-        var submitButton       = $('#submitButton').get(0); //はい
-        var closeTrigger = $('#closeModal').get(0); //いいえ
+        console.log('no_check_error');
+        var baseLayer    = $('#modal1BaseLayer').get(0); //モーダルウィンドウ
+        var submitButton = $('#submitButton').get(0); //はい
+        var closeTrigger = $('#closeModal1').get(0); //いいえ
 
         // モーダルを表示
         baseLayer.style.visibility = 'visible';
 
         // id=submitButtonは、モーダルウィンドウの「はい」のボタン
         submitButton.addEventListener('click', function() {
+            console.log('aaa');
             // このボタンを押した時（"click"した時）にモーダルを非表示にする。
             // 「addEventListener(イベントのタイプ,function(){},false)」で、クリックした時に起こる動作を作れる。
             baseLayer.style.visibility = 'hidden';
@@ -378,18 +380,19 @@ function valueCheck() {
 
         //いいえを押したとき
         closeTrigger.addEventListener('click', function(event) {
+            console.log('bbb');
             // モーダルを非表示
             baseLayer.style.visibility = 'hidden';
         }, false);             ////////// なんでfalseあんの？？？？？？？？？？？？？
     }
 
 
-
 }
+
 document.addEventListener("turbolinks:load", function(){
-    $("#finalCheck").click(function(){
-    //   checkChildFR();     //  この関数をValueCheck()より先に実行して、zoku,zokunameに値を代入しとく。
-      valueCheck();
+    $('#finalCheck').click(function(){
+        console.log('first');
+        valueCheck();
     });
 });
 

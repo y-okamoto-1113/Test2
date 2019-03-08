@@ -7,7 +7,7 @@ html, body {
 }
 
 /* モーダルウィンドウ下層のベースレイヤー */
-.modalBaseLayer {
+.modal1BaseLayer {
     visibility: hidden; /* visibilityプロパティ値を操作することで、モーダルウィンドウを表示・非表示することができます */
     position: absolute; /* .modalBaseLayer を、画面ぴったりに縦横100%指定するために必要 */
     z-index: 10;        /* #contentsより上のレイヤーに表示するために必要 */
@@ -21,9 +21,8 @@ html, body {
 }
 
 /* モーダルウィンドウ */
-.modal {
+.modal1 {
     position: absolute; /* .modalBaseLayer を、基準要素として絶対配置 */
-    z-index: 15; 
     top: 20%;          /* モーダルウィンドウの上余白 */
     left: 30%;         /* モーダルウィンドウの左余白 */
     right: 30%;        /* モーダルウィンドウの右余白 */
@@ -35,7 +34,7 @@ html, body {
 
 /* marginには論理プロパティと行って、「top,bottom,left.right」以外にも「start,before,end,after」がある */
 /* https://kojika17.com/2012/08/margin-of-css.html  ここ見れば分かる！！！*/
-.modal h3{ 
+.modal1 h3{ 
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0.5em;
     -webkit-margin-start: 0px;
@@ -43,10 +42,6 @@ html, body {
 }
 
 /* モーダルボタンの大きさ       高さ変えられへん！！！！      */
-#submitButton,#closeModal{
-    width:70px;
-    font-size:70px;    /* heightで高さ変えられへんかったから、文字大きくして無理やり高くした。 */
-}
 
 
 

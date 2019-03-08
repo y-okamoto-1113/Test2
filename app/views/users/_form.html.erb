@@ -27,7 +27,7 @@
 
 
 
-<%= form_with model: @user,method: :post, url: "/create", local: true, class:"form-signin", name:"form_signin" do |f|  %>
+<%= form_with model: @user,method: :post, url: "/users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
 <div class="left-box" style="margin-bottom:100px">
     <h2>個人情報登録</h2>
     <p> <span style="color:red;">*</span>は必須項目です。</p>
@@ -166,10 +166,10 @@
 
 
 <!-- 最終確認モーダル -->
-<div class="modalBaseLayer" id="modalBaseLayer" >
-  <div class="modal" id="modal" >
+<div class="modal1BaseLayer" id="modal1BaseLayer" >
+  <div class="modal1" id="modal1" >
     <h3>[登録情報]</h3>
-    <span id="check_name" ></span>
+    <span id="check_name" >heehaa</span>
     <span id="check_furigana" ></span>
     <span id="check_tel" ></span>
     <span id="check_mail"></span>
@@ -183,7 +183,7 @@
     以上の内容でよろしいですか？
     <br>
     <input type="submit" value="Yes" id="submitButton" >
-    <input type="button" value="No" id="closeModal" >
+    <input type="button" value="No" id="closeModal1" >
   </div>
 </div>
 <% end %>

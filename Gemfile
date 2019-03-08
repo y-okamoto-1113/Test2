@@ -34,6 +34,9 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'slim-rails'
 gem "rails-ujs"
+gem "pry-rails"
+gem "pry-nav"
+gem "pry"
 gem "devise"
 
 
