@@ -362,7 +362,6 @@ function valueCheck() {
     //すべての必須項目でエラーなしならモーダルウィンドウを表示
     if(nameCheck()==true && mailCheck()==true && sexCheck()==true &&
       careerCheck()==true && frCheck() == true && telCheck()==true ) {
-        console.log('no_check_error');
         var baseLayer    = $('#modal1BaseLayer').get(0); //モーダルウィンドウ
         var submitButton = $('#submitButton').get(0); //はい
         var closeTrigger = $('#closeModal1').get(0); //いいえ
@@ -372,7 +371,6 @@ function valueCheck() {
 
         // id=submitButtonは、モーダルウィンドウの「はい」のボタン
         submitButton.addEventListener('click', function() {
-            console.log('aaa');
             // このボタンを押した時（"click"した時）にモーダルを非表示にする。
             // 「addEventListener(イベントのタイプ,function(){},false)」で、クリックした時に起こる動作を作れる。
             baseLayer.style.visibility = 'hidden';
@@ -380,7 +378,6 @@ function valueCheck() {
 
         //いいえを押したとき
         closeTrigger.addEventListener('click', function(event) {
-            console.log('bbb');
             // モーダルを非表示
             baseLayer.style.visibility = 'hidden';
         }, false);             ////////// なんでfalseあんの？？？？？？？？？？？？？
@@ -391,7 +388,6 @@ function valueCheck() {
 
 document.addEventListener("turbolinks:load", function(){
     $('#finalCheck').click(function(){
-        console.log('first');
         valueCheck();
     });
 });
