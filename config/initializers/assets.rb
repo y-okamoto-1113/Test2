@@ -15,6 +15,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # js,css読み込む為のコード
 Rails.application.config.assets.precompile += %w( buttons.js )
+Rails.application.config.assets.precompile += %w( jquery.quicksearch.js )
 Rails.application.config.assets.precompile += %w( new.css )
 Rails.application.config.assets.precompile += %w( modal.css )
 # inspinia

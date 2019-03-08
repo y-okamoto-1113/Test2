@@ -15,7 +15,6 @@
 //= require bootstrap-sprockets
 //= require activestorage
 //= require turbolinks
-//= javascript_include_tag 'application'
 //= require 'jquery.turbolinks'
 
 

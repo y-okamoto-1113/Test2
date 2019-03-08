@@ -1,3 +1,13 @@
+<script>
+  $(document).on('turbolinks:load', function() {
+  $('input#search').quicksearch('table tbody tr');
+});
+
+document.addEventListener("turbolinks:load", function(){
+  $('input#search').quicksearch('table tbody tr');
+});
+</script>
+
 <div id="users">
   <table>
     <thead>
@@ -48,7 +58,7 @@
   </table>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
 <script>
 var options = {
   valueNames: [ 'idid','name', 'furigana', 'tel', 'mail', 'sex', 'birthday', 'career', 'school', 'familyRelation',

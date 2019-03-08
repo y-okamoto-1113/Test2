@@ -17,6 +17,8 @@ RUN apk update && \
     rm -rf /var/cache/apk/* && \
     mkdir -p $APP_ROOT
 
+RUN gem install bundler -v 2.0.1
+
 WORKDIR /tmp
 ADD Gemfile Gemfile
 # ADD Gemfile.lock Gemfile.lock

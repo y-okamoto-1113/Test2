@@ -23,6 +23,7 @@ html, body {
 /* モーダルウィンドウ */
 .modal {
     position: absolute; /* .modalBaseLayer を、基準要素として絶対配置 */
+    z-index: 15; 
     top: 20%;          /* モーダルウィンドウの上余白 */
     left: 30%;         /* モーダルウィンドウの左余白 */
     right: 30%;        /* モーダルウィンドウの右余白 */

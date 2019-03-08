@@ -135,53 +135,53 @@ video {
   margin-bottom: 0;
 }
 
-/* MODAL */
-.modal-content {
-  background-clip: padding-box;
-  background-color: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  outline: 0 none;
-  position: relative;
-}
+// /* MODAL */
+// .modal-content {
+//   background-clip: padding-box;
+//   background-color: #FFFFFF;
+//   border: 1px solid rgba(0, 0, 0, 0);
+//   border-radius: 4px;
+//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+//   outline: 0 none;
+//   position: relative;
+// }
 
-.modal-dialog {
-  z-index: 2200;
-}
+// .modal-dialog {
+//   z-index: 2200;
+// }
 
-.modal-body {
-  padding: 20px 30px 30px 30px;
-}
+// .modal-body {
+//   padding: 20px 30px 30px 30px;
+// }
 
-.inmodal .modal-body {
-  background: #f8fafb;
-}
+// .inmodal .modal-body {
+//   background: #f8fafb;
+// }
 
-.inmodal .modal-header {
-  padding: 30px 15px;
-  text-align: center;
-}
+// .inmodal .modal-header {
+//   padding: 30px 15px;
+//   text-align: center;
+// }
 
-.animated.modal.fade .modal-dialog {
-  -webkit-transform: none;
-  -ms-transform: none;
-  -o-transform: none;
-  transform: none;
-}
+// .animated.modal.fade .modal-dialog {
+//   -webkit-transform: none;
+//   -ms-transform: none;
+//   -o-transform: none;
+//   transform: none;
+// }
 
-.inmodal .modal-title {
-  font-size: 26px;
-}
+// .inmodal .modal-title {
+//   font-size: 26px;
+// }
 
-.inmodal .modal-icon {
-  font-size: 84px;
-  color: #e2e3e3;
-}
+// .inmodal .modal-icon {
+//   font-size: 84px;
+//   color: #e2e3e3;
+// }
 
-.modal-footer {
-  margin-top: 0;
-}
+// .modal-footer {
+//   margin-top: 0;
+// }
 
 /* WRAPPERS */
 
@@ -921,9 +921,9 @@ a.close-canvas-menu:hover {
   z-index: 2040 !important;
 }
 
-.modal {
-  z-index: 2050 !important;
-}
+// .modal {
+//   z-index: 2050 !important;
+// }
 
 .spiner-example {
   height: 200px;
@@ -1387,28 +1387,28 @@ body.fullscreen-ibox-mode {
 
 // Bootstrap issue in 3.3.0 with modal https://github.com/twbs/bootstrap/issues/9855
 // Fix
-body.modal-open {
-  padding-right: inherit !important;
-}
+// body.modal-open {
+//   padding-right: inherit !important;
+// }
 
 
-// Fix modal in Safari browser
-body.modal-open .wrapper-content.animated {
-  -webkit-animation: none;
-  -ms-animation-nam: none;
-  animation: none;
-}
+// // Fix modal in Safari browser
+// body.modal-open .wrapper-content.animated {
+//   -webkit-animation: none;
+//   -ms-animation-nam: none;
+//   animation: none;
+// }
 
-// Fix for modal backdrop with animate.css
-body.modal-open .animated {
-  animation-fill-mode: initial;
-  z-index: inherit
-}
+// // Fix for modal backdrop with animate.css
+// body.modal-open .animated {
+//   animation-fill-mode: initial;
+//   z-index: inherit
+// }
 
 /* Show profile dropdown on fixed sidebar */
-body.mini-navbar.fixed-sidebar .profile-element, .block {
-  display: block !important;
-}
+// body.mini-navbar.fixed-sidebar .profile-element, .block {
+//   display: block !important;
+// }
 
 body.mini-navbar.fixed-sidebar .nav-header {
   padding: 33px 25px;
