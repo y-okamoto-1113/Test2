@@ -18,6 +18,7 @@ Rails.application.config.assets.precompile += %w( buttons.js )
 Rails.application.config.assets.precompile += %w( jquery.quicksearch.js )
 Rails.application.config.assets.precompile += %w( new.css )
 Rails.application.config.assets.precompile += %w( modal.css )
+Rails.application.config.assets.precompile += %w( school.json )
 # inspinia
 # Rails.application.config.assets.precompile += %w( inspinia/style.css )
 # Rails.application.config.assets.precompile += %w( inspinia/animate.css )

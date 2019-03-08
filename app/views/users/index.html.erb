@@ -1,12 +1,24 @@
+<head>
+  <meta charset="utf-8">
+  <%= javascript_include_tag 'jquery.quicksearch.js', 'data-turbolinks-track': 'reload' %>
+  <!-- application.html.erbで読み込んでるのに、なぜか、ここで読み込まなエラーでる！ -->
+  <title>jQuery</title>
+  </head>
 <script>
   $(document).on('turbolinks:load', function() {
-  $('input#search').quicksearch('table tbody tr');
-});
+    $('input#search').quicksearch('table tbody tr');
+  });
 
-document.addEventListener("turbolinks:load", function(){
-  $('input#search').quicksearch('table tbody tr');
-});
+  document.addEventListener("turbolinks:load", function(){
+    $('input#search').quicksearch('table tbody tr');
+  });
 </script>
+
+<form action="#">
+  <input type="text" name="search" placeholder="ユーザーを検索" id="search" />
+</form>
+
+
 
 <div id="users">
   <table>
