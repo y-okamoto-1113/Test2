@@ -77,8 +77,8 @@
         <tr>
           <th>生年月日</th>
           <td>
-          <% if @year %>
-            <%= f.select :year, [["#{@year}年", "#{@year}"]], {}, {id: "year", class: "w100", name:"year"} %>
+          <% if @user.year %>
+            <%= f.select :year, [["#{@user.year}年", "#{@user.year}"]], {}, {id: "year", class: "w100", name:"year"} %>
           <% else  %>
             <%= f.select :year, [["--西暦--", "0"]], {}, {id: "year", class: "w100", name:"year"} %>
           <% end  %>
@@ -96,8 +96,8 @@
                                    ["11月",11],
                                    ["12月",12]], {}, {id: "month", class: "w80", name:"month"} %>
 
-          <% if @day %>
-            <%= f.select :day, [["#{@day}日", "#{@day}"]], {}, {id: "day", class: "w80", name:"day"} %>
+          <% if @user.day %>
+            <%= f.select :day, [["#{@user.day}日", "#{@user.day}"]], {}, {id: "day", class: "w80", name:"day"} %>
           <% else  %>
             <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %>
           <% end  %>
@@ -114,8 +114,8 @@
             <br>
 
             学校名：
-            <% if @school_name %>
-              <%= f.select :school_name, [["#{@school_name}", "#{@school_name}"]], {}, {id: "school", class: "w250", name:"school_name"}  %>
+            <% if @user.school_name %>
+              <%= f.select :school_name, [["#{@user.school_name}", "#{@user.school_name}"]], {}, {id: "school", class: "w250", name:"school_name"}  %>
             <% else %>
               <%= f.select :school_name, [["-選択-", "0"]], {}, {id: "school", class: "w250", name:"school_name"} %>
             <% end %>
