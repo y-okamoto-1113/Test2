@@ -149,7 +149,7 @@ function schoolSelect(value) {
     // ラジオボタンのvalueで条件分岐
     switch(value) {      // inputタグで選択式の場合、設定したvalueが代入されてる。
         case "中卒": //中学
-            $.getJSON("/javascripts/school.json",{name:"school_name"} , function(data) {
+            $.getJSON("/school.json",{name:"school_name"} , function(data) {
                 // {name:"chara"}       入力提出さえたデータは相手側のデータサーバーに送られる。データを検索しやすくする為のタグ付をしている！！！
                 // $.getJSONで、データを読み込んだら、その後の処理を、「function」で決められる。
                 var list = data.juniorhighschool;
@@ -162,7 +162,7 @@ function schoolSelect(value) {
 
             //  オブジェクトを配列のように使うには、「Object.values(オブジェクトデータ)」か「for i in オブジェクトデータ」
         case "高卒": //高校
-            $.getJSON("../javascripts/school.json", {name: "school_name"}, function(data) {
+            $.getJSON("/school.json", {name: "school_name"}, function(data) {
                 var list = data.highschool;
                 var values = Object.values(list);       //  jsonのデータは配列ではなくオブジェクト！！！！！
                 for(var i=1; i< values.length; i++ ) {
@@ -484,9 +484,11 @@ function enter(){
 //       }
 
 
+
+
 // flashボタン消す
 document.addEventListener("turbolinks:load", function(){
   $(".close").click(function(){
-    $(".alert").get(0).style.display = "none";
+    $(".alerttt").get(0).style.display = "none";
   });
 });

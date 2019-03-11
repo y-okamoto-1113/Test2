@@ -185,11 +185,11 @@ width:160px;
 
 
 
-.alert {
+.alerttt {
   text-align: center;
   padding: 10px 0;
 }
-.alert-info {
+.alerttt-info {
   padding: 10px 0;
   color: white;
   background: rgb(251, 170, 88);
@@ -202,7 +202,7 @@ width:160px;
   font-size: 14px;
 }
  
-.alert-danger {
+.alerttt-danger {
   padding: 10px 0;
   color: white;
   background: rgb(240, 54, 54);
