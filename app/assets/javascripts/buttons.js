@@ -102,7 +102,7 @@ const monthCheck = function(){
 
 
     // .option「s」じゃないとアカン。select要素内の選択肢（option要素）のコレクションを指す。lengthで長さ測るには、リストと見なさなアカンから、コレクションじゃないとアカン。
-    if(  ((year_value%4==0 && year_value%100!=0) || year_value%400==0) && month_value　== 2 ){                   //29
+    if(  ((year_value%4==0 && year_value%100!=0) || year_value%400==0) && month_value== 2 ){                   //29
             for(var i=1; i<30; i++){
                 $("#day").get(0).options[i] = new Option(i+"日", i);
                 //「new Option(text,value,defaultSelected,selected)」の順番で、optionタグを追加。
@@ -149,7 +149,7 @@ function schoolSelect(value) {
     // ラジオボタンのvalueで条件分岐
     switch(value) {      // inputタグで選択式の場合、設定したvalueが代入されてる。
         case "中卒": //中学
-            $.getJSON("/school.json",{name:"school_name"} , function(data) {
+            $.getJSON("/javascripts/school.json",{name:"school_name"} , function(data) {
                 // {name:"chara"}       入力提出さえたデータは相手側のデータサーバーに送られる。データを検索しやすくする為のタグ付をしている！！！
                 // $.getJSONで、データを読み込んだら、その後の処理を、「function」で決められる。
                 var list = data.juniorhighschool;
@@ -162,7 +162,7 @@ function schoolSelect(value) {
 
             //  オブジェクトを配列のように使うには、「Object.values(オブジェクトデータ)」か「for i in オブジェクトデータ」
         case "高卒": //高校
-            $.getJSON("/school.json", {name: "school_name"}, function(data) {
+            $.getJSON("../javascripts/school.json", {name: "school_name"}, function(data) {
                 var list = data.highschool;
                 var values = Object.values(list);       //  jsonのデータは配列ではなくオブジェクト！！！！！
                 for(var i=1; i< values.length; i++ ) {

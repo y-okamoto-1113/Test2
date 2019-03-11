@@ -34,10 +34,11 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'slim-rails'
 gem "rails-ujs"
-gem "pry-rails"
+gem "pry-rails",'0.3.9'
 gem "pry-nav"
-gem "pry"
+gem "pry", '>= 0.10.4'
 gem "devise"
+gem "method_source",'~> 0.8.1'
 
 
 # Use ActiveStorage variant

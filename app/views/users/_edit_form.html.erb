@@ -27,7 +27,7 @@
 
 
 <%# <%= form_with model: @user,method: :post, url: '/users/create', local: true, class:"form-signin", name:"form_signin" do |f|  %> 
-<%= form_with model: @user,method: :post, :action=>"create", :controller=>"users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
+<%= form_with model: @user,method: :patch, :action=>"update", :controller=>"users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
 <div class="left-box" style="margin-bottom:100px">
     <h2>個人情報登録</h2>
     <p> <span style="color:red;">*</span>は必須項目です。</p>
@@ -158,7 +158,7 @@
       </tr>
     </table>
 
-    <button type="button" id="finalCheck" value="登録" >  <font size="3" color="black">登録</font>
+    <button type="button" id="finalCheck" value="更新" >  <font size="3" color="black">更新</font>
     <br>
   </div>
 

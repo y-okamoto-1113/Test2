@@ -88,4 +88,54 @@ class UsersController < ApplicationController
   end
 
 
+
+
+  
+  def user_params
+   @user = User.new(name: params[:name],
+                     furigana: params[:furigana],
+                     tel: params[:tel],
+                     mail: params[:mail],
+                     type_sex: params[:type_sex],    #下のところで「男」「女」以外を除去
+                     type_career: params[:type_career],   #下のところで、「大卒」「高卒」「中卒」「学歴無し」以外はデータを取らんようにしてる。
+                     school_name: params[:school_name],
+
+                     familyRelation: params[:familyRelation],
+                     familyRelationName: params[:familyRelationName]
+
+                     )
+
+    if !( params[:year]=="0" || params[:month]=="0" || params[:day]=="0" )
+     @user.year = params[:year]
+     @user.month = params[:month]
+     @user.day = params[:day]
+    end
+
+    if !(params[:familyRelation2]=="" || params[:familyRelationName2]=="" )
+     @user.familyRelation2 =  params[:familyRelation2]
+     @user.familyRelationName2 = params[:familyRelationName2]
+    end
+
+    if !(params[:familyRelation3]=="" || params[:familyRelationName3]=="" )
+     @user.familyRelation3 = params[:familyRelation3]
+     @user.familyRelationName3 = params[:familyRelationName3]
+    end
+
+    @tel = @user.tel
+    @tel.delete!('-')
+
+    if @user.save
+      redirect_to @user, notice:'ユーザーを作成できました'
+    else
+
+      @year = @user.year
+      @month = @user.month
+      @day = @user.day
+      @type_career = @user.type_career
+      @school_name = @user.school_name
+      render :new, alert: 'ユーザーを作成できませんでした'
+    end
+
+  end
+
 end

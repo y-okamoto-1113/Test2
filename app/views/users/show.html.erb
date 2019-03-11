@@ -3,22 +3,22 @@
 
 <table>
   <tr>
-    <td>ID　</td>
-    <td>名前　　</td>
-    <td>ふりがな　　</td>
-    <td>電話番号　　</td>
-    <td>メールアドレス　　</td>
-    <td>性別　　</td>
-    <td>生年月日　　</td>
-    <td>最終学歴　　</td>
-    <td>学校名　　</td>
-    <td>続柄　　　</td>
-    <td>家族名　　</td>
-    <td>続柄2　　</td>
-    <td>家族名2　　</td>
-    <td>続柄3　　</td>
-    <td>家族名3　　</td>
-    <td>登録日　　　　　　</td>
+    <td>ID</td>
+    <td>名前</td>
+    <td>ふりがな</td>
+    <td>電話番号</td>
+    <td>メールアドレス</td>
+    <td>性別</td>
+    <td>生年月日</td>
+    <td>最終学歴</td>
+    <td>学校名</td>
+    <td>続柄</td>
+    <td>家族名</td>
+    <td>続柄2</td>
+    <td>家族名2</td>
+    <td>続柄3</td>
+    <td>家族名3</td>
+    <td>登録日</td>
     <td>更新日</td>
 
   </tr>
@@ -46,6 +46,7 @@
 
 </table>
 
-
-<%= link_to '編集', edit_user_path(@user), class:'btn btn-primary edit-btn-position' %>
-<%= link_to '削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %>
+<div data-turbolinks="false">
+  <%= link_to '編集', edit_user_path(@user), class:'btn btn-primary edit-btn-position' %>
+  <%= link_to '削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %>
+</div>
