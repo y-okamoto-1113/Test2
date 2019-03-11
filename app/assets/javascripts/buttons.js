@@ -489,6 +489,7 @@ function enter(){
 // flashボタン消す
 document.addEventListener("turbolinks:load", function(){
   $(".close").click(function(){
-    $(".alerttt").get(0).style.display = "none";
+    // $(".notice").get(0).style.display = "none";
+    $(".notice").style.visibility = 'hidden';
   });
 });

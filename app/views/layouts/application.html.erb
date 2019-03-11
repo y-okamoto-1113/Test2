@@ -41,28 +41,17 @@
               <!-- Main view  -->
               <!-- 部分レイアウト（パーシャル）を表示！ layoutフォルダ内に「_header.html.erb」を置く！ -->
 
-
-              <% if notice %>
-              aaa
-                <div class="alerttt alerttt-info">
-                bbb
-                  <%= notice %>
-                  ccc
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  ddd
-                </div>
-                eee
-              <% elsif alert %>
-                <div class="alerttt alerttt-danger">
-                  <%= alert %>
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                </div>
-              <% end %>
-
-
-              <p class="notice"><%= notice %></p>
-              <p class="alert"><%= alert %></p>
-              
+            <div data-turbolinks="false">
+            <% if notice %>
+              <div class="notice notice-info">
+                <p><%= notice %><button type="button" class="close" data-dismiss="alert">&times;</button></p>
+              </div>
+            <% elsif alert %>
+              <div class="notice notice-danger">
+                <p><%= alert %><button type="button" class="close" data-dismiss="notice">&times;</button></p>
+              </div>
+            <% end %>
+            </div>
               <%= yield %>
 
               <!-- Footer -->

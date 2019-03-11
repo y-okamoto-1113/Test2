@@ -20,27 +20,27 @@
 
 
 
-<div id="users">
+
   <table>
     <thead>
       <tr>
-        <th class="sort" data-sort="idid">ID</th>
-        <th class="sort" data-sort="name">名前</th>
-        <th class="sort" data-sort="furigana">ふりがな</th>
-        <th class="sort" data-sort="tel">電話番号</th>
-        <th class="sort" data-sort="mail">メールアドレス</th>
-        <th class="sort" data-sort="sex">性別</th>
-        <th class="sort" data-sort="birthday">生年月日</th>
-        <th class="sort" data-sort="career">最終学歴</th>
-        <th class="sort" data-sort="school">学校名</th>
-        <th class="sort" data-sort="familyRelation">続柄</th>
-        <th class="sort" data-sort="familyRelationName">家族名</th>
-        <th class="sort" data-sort="familyRelation">続柄2</th>
-        <th class="sort" data-sort="familyRelationName2">家族名2</th>
-        <th class="sort" data-sort="familyRelation">続柄3</th>
-        <th class="sort" data-sort="familyRelationName3">家族名3</th>
-        <th class="sort" data-sort="created_at">登録日</th>
-        <th class="sort" data-sort="updated_at">更新日</th>
+        <th><%= sortable 'id', "ID" %></th>
+        <th><%= sortable "name", "名前" %></th>
+        <th><%= sortable "furigana", "ふりがな" %></th>
+        <th><%= sortable "tel", "電話番号" %></th>
+        <th><%= sortable "mail", "メースアドレス" %></th>
+        <th><%= sortable "type_sex", "性別" %></th>
+        <th><%= sortable "year", "生年月日" %></th>
+        <th><%= sortable "type_career", "最終学歴" %></th>
+        <th><%= sortable "school_name", "学校名" %></th>
+        <th><%= sortable "familyRelation", "続柄" %></th>
+        <th><%= sortable "familyRelationName", "家族名" %></th>
+        <th><%= sortable "familyRelation2", "続柄2" %></th>
+        <th><%= sortable "familyRelationName2", "家族名2" %></th>
+        <th><%= sortable "familyRelation3", "続柄3" %></th>
+        <th><%= sortable "familyRelationName3", "家族名" %></th>
+        <th><%= sortable "created_at", "登録日" %></th>
+        <th><%= sortable "updated_at", "更新日" %></th>
       </tr>
     </thead>
     <!-- IMPORTANT, class="list" have to be at tbody -->
@@ -53,7 +53,7 @@
           <td class="tel"> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
           <td class="mail"> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
           <td class="sex"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
-          <td class="birthday"> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %> </a> </td>
+          <td class="birthday"> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %>/<%= user.month %>/<%= user.day %> </a> </td>
           <td class="career"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
           <td class="school"> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
           <td class="familyRelation"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
@@ -68,24 +68,3 @@
     <%end%>
     </tbody>
   </table>
-</div>
-
-
-<script>
-var options = {
-  valueNames: [ 'idid','name', 'furigana', 'tel', 'mail', 'sex', 'birthday', 'career', 'school', 'familyRelation',
-                'familyRelationName', 'familyRelation2', 'familyRelationName2', 'familyRelation3', 'familyRelationName3', 'created_at', 'updated_at' ]
-              };
-
-var userList = new List('users', options);
-userList.sort( 'idid', {order : 'asc' });
-</script>
-
-<style>
-.sort.desc:after {
-  content:"▼";
-}
-.sort.asc:after {
-  content:"▲";
-}
-</style>

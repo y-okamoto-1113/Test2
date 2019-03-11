@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :authenticate_admin!
   before_action :find_user, only:[:show, :edit, :update, :destroy]
   # before_action :validate_user, only:[:show, :edit, :update, :destroy]  今回は使わん
 
   def index
-    @users = User.order(created_at: :desc)
+    @users = User.all.order(sort_column + ' ' + sort_direction)
   end
 
   def show
@@ -107,11 +108,27 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   private
   def find_user
     @user = User.find(params[:id])
   end
 
+  # 並べ替え順（asc、desc）と並べ替え元となるカラム名のデフォルト値を返し、また値が正常であるかを確認するためのメソッドを定義
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+
+  def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  # Strong Parameters
+  # def user_params
+  #   params.require(:user).permit(:name, :furigana, :tel, :mail, :type_sex, :birthday, :type_career, :school_name,
+  #                                :familyRelation, :familyRelationName, :familyRelation2, , :familyRelationName2, :familyRelation3, :familyRelationName3)
+  # end
 
 
 end

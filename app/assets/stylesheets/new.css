@@ -185,33 +185,35 @@ width:160px;
 
 
 
-.alerttt {
+.notice {
   text-align: center;
-  padding: 10px 0;
+  /* padding: 100px 0; */
 }
-.alerttt-info {
-  padding: 10px 0;
+.notice-info {
+  /* padding: 10px 0; */
+  /* padding: 10px; */
   color: white;
   background: rgb(251, 170, 88);
   text-align: center;
-  position: absolute;
-  top: 0px;
+  /* position: absolute; */
+  /* top: 20px; */
   z-index: 10;
   width: 100%;
   border-radius: 0 0 2px 2px;
   font-size: 14px;
 }
  
-.alerttt-danger {
+.notice-danger {
   padding: 10px 0;
   color: white;
   background: rgb(240, 54, 54);
   text-align: center;
   position: absolute;
-  top: 0px;
+  top: 30px;
   z-index: 10;
   width: 100%;
   border-radius: 0 0 2px 2px;
   font-size: 14px;
 }
+
 

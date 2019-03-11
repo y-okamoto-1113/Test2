@@ -11,6 +11,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li> <%= link_to 'ユーザー一覧', root_path, method: :get %> </li>
                         <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %> </li>
                     </ul>
                 </div>
