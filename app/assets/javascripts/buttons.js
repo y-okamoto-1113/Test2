@@ -500,4 +500,4 @@ function enter(){
 
 const closeBtn = function(){
     $(".notice").get(0).style.display = "none";
-}
+};
