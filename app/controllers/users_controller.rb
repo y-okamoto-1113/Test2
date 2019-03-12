@@ -117,6 +117,7 @@ class UsersController < ApplicationController
 
   # 並べ替え順（asc、desc）と並べ替え元となるカラム名のデフォルト値を返し、また値が正常であるかを確認するためのメソッドを定義
   def sort_direction
+    # binding.pry
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 

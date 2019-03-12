@@ -487,9 +487,17 @@ function enter(){
 
 
 // flashボタン消す
-document.addEventListener("turbolinks:load", function(){
-  $(".close").click(function(){
-    // $(".notice").get(0).style.display = "none";
-    $(".notice").style.visibility = 'hidden';
-  });
-});
+// document.addEventListener("turbolinks:load", function(){
+//     console.log("first");
+// //   $(".close").click(function
+//     $('.close').get(0).addEventListener('click', function() {
+//       console.log("aaa");
+//     // $(".notice").get(0).style.display = "none";
+//     $(".notice").style.visibility = 'hidden';
+//   });
+// });
+
+
+const closeBtn = function(){
+    $(".notice").get(0).style.display = "none";
+}

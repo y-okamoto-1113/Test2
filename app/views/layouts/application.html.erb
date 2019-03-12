@@ -44,7 +44,7 @@
             <div data-turbolinks="false">
             <% if notice %>
               <div class="notice notice-info">
-                <p><%= notice %><button type="button" class="close" data-dismiss="alert">&times;</button></p>
+                <p><%= notice %><button type="button" class="close" data-dismiss="alert" onclick='closeBtn()'>&times;</button></p>
               </div>
             <% elsif alert %>
               <div class="notice notice-danger">
