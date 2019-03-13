@@ -1,6 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'development'
+ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -20,7 +20,8 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+require 'devise'
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -58,4 +59,49 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+
+  config.include FactoryBot::Syntax::Methods
+  # 通常FactoryBotをつけないと、メソッドを呼べない
+  # user = FactoryBot.create(:user)
+  # 上の設定を追加することで、FactoryBotの記述が省略できる。
+  # user = create(:user)
+
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  
+  config.extend AuthenticationMacros
+  # authentication_macros.rbファイルを読み込んでる
+  # extendすることで、このファイル内で定義したメソッドを使える。
+  config.include Devise::TestHelpers, type: :controller
+
+
+
+
+
+  [:controller, :view, :request].each do |type|
+    config.include ::Rails::Controller::Testing::TestProcess, type: type
+    config.include ::Rails::Controller::Testing::TemplateAssertions, type: type
+    config.include ::Rails::Controller::Testing::Integration, type: type
+  end
+
+
+
+  # テスト用にで作られたデータを、テスト終了後に削除してくれる
+  # config.before(:suite) do
+  #   DatabaseCleaner.strategy = :truncation
+  # end
+  # config.before(:each) do
+  #   DatabaseCleaner.start
+  # end
+  # config.after(:each) do
+  #   DatabaseCleaner.clean
+  # end
+  # config.before(:all) do
+  #   DatabaseCleaner.start
+  # end
+  # config.after(:all) do
+  #   DatabaseCleaner.clean
+  # end
+
 end
