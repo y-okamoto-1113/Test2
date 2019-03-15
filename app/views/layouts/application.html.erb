@@ -5,7 +5,7 @@
     <%# <meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"> %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>INSPINIA</title>
+    <title>Panopticon</title>
 
 
     <!-- Main css styles -->
@@ -31,10 +31,17 @@
       <div id="wrapper">
 
           <!-- Navigation -->
-          <%= render 'layouts/navigation' %>
+          <% if admin_signed_in?%>
+            <%= render 'layouts/navigation' %>
+          <% end %>
 
           <!-- Page wraper -->
-          <div id="page-wrapper" class="gray-bg">
+          <!-- ログインしてへんかったら左のバー消す -->
+          <% if admin_signed_in? %>
+            <div id="page-wrapper" class="gray-bg">
+          <% else %>
+            <div id="page-wrapper" class="gray-bg" style="margin:0!important;">
+          <% end %>
 
               <!-- Page wrapper -->
               <%= render 'layouts/topnavbar' %>
