@@ -11,8 +11,6 @@
           </button>
           <% if admin_signed_in? %>
             <a class="navbar-brand" href="/"><%= current_admin.name %>でログイン中</a>
-          <%else%>
-            <a class="navbar-brand" href="/">IN+</a>
           <%end%>
         </div>
 
@@ -22,7 +20,7 @@
                 <li> <%= link_to '新規作成', new_user_path , style:'margin-right:10px'%> </li>
                 <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %> </li>
               <%else%>
-                <li> <%= link_to 'ユーザー登録', new_admin_registration_path %> </li>
+                <li> <%= link_to '管理者登録', new_admin_registration_path %> </li>
                 <li> <%= link_to 'ログイン', new_admin_session_path %> </li>
             <%end%>
 

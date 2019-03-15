@@ -204,12 +204,12 @@ width:160px;
 }
  
 .notice-danger {
-  padding: 10px 0;
+  /* padding: 10px 0; */
   color: white;
   background: rgb(240, 54, 54);
   text-align: center;
-  position: absolute;
-  top: 30px;
+  /* position: absolute; */
+  /* top: 30px; */
   z-index: 10;
   width: 100%;
   border-radius: 0 0 2px 2px;

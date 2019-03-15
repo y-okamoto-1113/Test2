@@ -16,7 +16,7 @@ class Admins::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     super
-    redirect_to new_admin_session_path
+    redirect_to new_admin_session_path, alert:'ログアウトしました'
   end
 
   # protected

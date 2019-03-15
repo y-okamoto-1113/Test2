@@ -39,8 +39,13 @@ gem "pry-nav"
 gem "pry", '>= 0.10.4'
 gem "devise"
 gem "method_source",'~> 0.8.1'
-
-
+gem 'rspec-rails'
+gem 'factory_bot_rails'
+gem 'faker'
+gem 'rails-controller-testing' # 今は非推奨
+gem "spring-commands-rspec" 
+gem "rspec-core"
+gem 'database_cleaner'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

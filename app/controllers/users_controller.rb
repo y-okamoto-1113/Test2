@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       @day = @user.day
       @type_career = @user.type_career
       @school_name = @user.school_name
-      render :new, alert: 'ユーザーを作成できませんでした'
+      render :new, alertt: 'ユーザーを作成できませんでした'
     end
   end
 
@@ -101,6 +101,7 @@ class UsersController < ApplicationController
 
 
   def destroy
+    # binding.pry
     if @user.destroy
       redirect_to root_path, notice:'削除に成功しました'
     else
