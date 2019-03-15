@@ -499,5 +499,8 @@ function enter(){
 
 
 const closeBtn = function(){
+    console.log('aaa');
     $(".notice").get(0).style.display = "none";
+    console.log('bbb');
+
 };

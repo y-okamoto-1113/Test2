@@ -1,23 +1,27 @@
-# 最初の「RSpec.」は書かんくても良い。
-# モンキーパッチというパッチがデフォルトで入ってて、これが最初の「RSpec.」を補完してくれてる。
-# 他にも色んなコードを補完してくれる便利な機能やけど、どこがどう変更されているかが分からない。
-# 一応このままにしとくけど、rails_helperに「config.expose_dsl_globally = false」と書けば、モンキーパッチをオフにできる。
-
 require 'rails_helper'
-{ "Host" => "localhost:3000" }
+# { "Host" => "localhost:3000" }
 # binding.pry
-RSpec.describe 'Pages', type: :request do 
+RSpec.describe 'Pages', type: :request do
   describe 'GET #index' do
+    let(:user) { create(:user) }
+    let(:header_hash) {{ "Host" => host_name }}
+    let(:host_name) { "localhost:3000" }
+    subject {{headers: header_hash }}
     context 'with authentication' do
       login
-      let(:user) { create(:user) }
+      # let(:user) { create(:user) }
+      # let(:header_hash) {{ "Host" => host_name }}
+      # let(:host_name) { "localhost:3000" }
+      # subject { headers: header_hash }
       # adminでログインしてから、indexアクションに入る。
       it 'return success status' do
         # binding.pry
 
         get '/'
         # binding.pry
-        get '/'
+        get '/users/3' 
+        get '/users/3/edit' 
+        get '/users/new' 
         # binding.pry
         expect(response).to have_http_status(:success)
         # binding.pry
