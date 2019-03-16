@@ -46,6 +46,7 @@ gem 'rails-controller-testing' # 今は非推奨
 gem "spring-commands-rspec" 
 gem "rspec-core"
 gem 'database_cleaner'
+gem 'font-awesome-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

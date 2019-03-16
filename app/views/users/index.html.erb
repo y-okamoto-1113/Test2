@@ -1,8 +1,6 @@
 <head>
-  <meta charset="utf-8">
   <%= javascript_include_tag 'jquery.quicksearch', 'data-turbolinks-track': 'reload' %>
   <!-- application.html.erbで読み込んでるのに、なぜか、ここで読み込まなエラーでる！ -->
-  <title>jQuery</title>
   </head>
 <script>
   $(document).on('turbolinks:load', function() {
@@ -20,51 +18,101 @@
 
 
 
+<div class='col-lg-12'>
+  <div class='ibox float-e-margins'>
+  <div class='ibox-title'>ユーザー一覧</div>
+  <div class="ibox-content">
+  
+  <div class='row'>
+  <div class='col-md-10'>
+    <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline"  do |f|  %>
+    <!--<form class="form-inline" action='/' accept-charaset='UTF-8' method='get' > -->
+    <input name='utf-8' type="hidden" value="✓">
+      <div class='form-group'>
+        <label> 名前<%= f.text_field :name, {class:"form-controll", name:"search_name"} %> </label>
+      </div>
+      <div class='form-group m-l-md'>
+        <label for="権限">権限</label>
+        <label class='checkbox-inline i-checks'>
+          <input type="hidden" name='admin' value='0'>
+          <div class="icheckbox_square-green checked" style="position: relative;">
+            <input type="checkbox" value="1" checked="checked" name="admin" style="position: absolute; opacity: 0;">
+            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+          </div>"管理者"
+        </label>
+        <label class="checkbox-inline i-checks">
+          <input name="general" type="hidden" value="0">
+          <div class="icheckbox_square-green checked" style="position: relative;">
+            <input type="checkbox" value="1" checked="checked" name="general" style="position: absolute; opacity: 0;">
+            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+          </div>"2一般"
+          </label>
 
-  <table>
+
+
+      </div>
+      <%# f.submit "検索", name:'button', class:'btn btn-sm btn-info m-l-md', fa_icon("search") %>
+      <button class＝'btn btn-sm btn-info m-l-md' name='button' type='submit' > <i class='fa fa-search'></i>検索 </button>
+
+
+    <%end%>
+  </div>
+
+
+  </div>
+
+  <table class='table table-stripped m-t-md table-hover' > <!-- 「rules='rows'」で罫線引いてくれる。 -->
     <thead>
       <tr>
         <th><%= sortable 'id', "ID","color:black" %></th>
         <th><%= sortable "name", "名前","color:black" %></th>
-        <th><%= sortable "furigana", "ふりがな","color:black" %></th>
+        <th><%= sortable "position", "役職","color:black" %></th>
         <th><%= sortable "tel", "電話番号","color:black" %></th>
         <th><%= sortable "mail", "メースアドレス","color:black" %></th>
-        <th><%= sortable "type_sex", "性別","color:black" %></th>
-        <th><%= sortable "year", "生年月日","color:black" %></th>
-        <th><%= sortable "type_career", "最終学歴","color:black" %></th>
-        <th><%= sortable "school_name", "学校名","color:black" %></th>
-        <th><%= sortable "familyRelation", "続柄","color:black" %></th>
-        <th><%= sortable "familyRelationName", "家族名","color:black" %></th>
-        <th><%= sortable "familyRelation2", "続柄2","color:black" %></th>
-        <th><%= sortable "familyRelationName2", "家族名2","color:black" %></th>
-        <th><%= sortable "familyRelation3", "続柄3","color:black" %></th>
-        <th><%= sortable "familyRelationName3", "家族名","color:black" %></th>
+        <th><%= sortable "joined", "入社日","color:black" %></th>
         <th><%= sortable "created_at", "登録日","color:black" %></th>
         <th><%= sortable "updated_at", "更新日","color:black" %></th>
+        <th>解約 </th>
       </tr>
     </thead>
     <!-- IMPORTANT, class="list" have to be at tbody -->
     <tbody class="list">
       <% @users.each do |user| %>
         <tr >
-          <td class="idid"> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </a> </td>
-          <td class="name"> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
-          <td class="furigana"> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
-          <td class="tel"> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
-          <td class="mail"> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
-          <td class="sex"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
-          <td class="birthday"> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %>/<%= user.month %>/<%= user.day %> </a> </td>
-          <td class="career"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
-          <td class="school"> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
-          <td class="familyRelation"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
-          <td class="familyRelationName"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
-          <td class="familyRelation2"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
-          <td class="familyRelationName2"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
-          <td class="familyRelation3"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
-          <td class="familyRelationName3"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
-          <td class="created_at"> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
-          <td class="updated_at"> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
+          <td> <%= user.id %> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
+          <td> <%= user.position %> </td>
+          <td> <%= user.tel %> </td>
+          <td> <%= user.mail %> </td>
+          <td> <%= user.joined %> </td> <!-- 「入社日」「joined」を作る -->
+          <td> <%= user.created_at.strftime('%Y年%m月%d日') %> </td>
+          <td> <%= user.updated_at.strftime('%Y年%m月%d日') %> </td>
+          <td> <%= link_to '削除', user_path(user.id), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %> </td>
+          <!--<%# link_to '削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %>
+-->
+          <!--
+          <td> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %>/<%= user.month %>/<%= user.day %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
+          -->
         </tr>
     <%end%>
     </tbody>
   </table>
+  </div>
+  </div>
+</div>
