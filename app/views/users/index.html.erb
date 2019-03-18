@@ -20,11 +20,7 @@
         <label class="mx-2">権限</label> : &nbsp;
 
         <label class='checkbox-inline i-checks'>
-          <input type="hidden" name='admin' value='0'>
-          <div class="icheckbox_square-green" style="position: relative;">
           <%= f.check_box :position, { name:"position", style:"position: absolute; opacity: 0;", value:"1" } %> 
-          <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-          </div>
           <span class="ml-2">管理者</span> <!-- 「管理者」ではなく、「営業」「マーケ」「開発」 -->
         </label>
         
