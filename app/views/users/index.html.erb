@@ -1,23 +1,7 @@
-<head>
-  <%= javascript_include_tag 'jquery.quicksearch', 'data-turbolinks-track': 'reload' %>
-  <!-- application.html.erbで読み込んでるのに、なぜか、ここで読み込まなエラーでる！ -->
-  </head>
-<script>
-  $(document).on('turbolinks:load', function() {
-    $('input#search').quicksearch('table tbody tr');
-  });
-
-  document.addEventListener("turbolinks:load", function(){
-    $('input#search').quicksearch('table tbody tr');
-  });
-</script>
-
-<form action="#">
-  <input type="text" name="search" placeholder="ユーザーを検索" id="search" />
-</form>
 
 
-
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
 <div class='col-lg-12'>
   <div class='ibox float-e-margins'>
   <div class='ibox-title'>ユーザー一覧</div>
@@ -25,42 +9,74 @@
   
   <div class='row'>
   <div class='col-md-10'>
-    <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline"  do |f|  %>
+    <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline", accept_charset:"UTF-8"  do |f|  %>
     <!--<form class="form-inline" action='/' accept-charaset='UTF-8' method='get' > -->
     <input name='utf-8' type="hidden" value="✓">
       <div class='form-group'>
-        <label> 名前<%= f.text_field :name, {class:"form-controll", name:"search_name"} %> </label>
+        <label> 名前 : &nbsp; <%= f.text_field :name, {class:"form-control", name:"search_name", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
       </div>
+
       <div class='form-group m-l-md'>
-        <label for="権限">権限</label>
+        <label class="mx-2">権限</label> : &nbsp;
+
         <label class='checkbox-inline i-checks'>
           <input type="hidden" name='admin' value='0'>
-          <div class="icheckbox_square-green checked" style="position: relative;">
-            <input type="checkbox" value="1" checked="checked" name="admin" style="position: absolute; opacity: 0;">
-            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-          </div>"管理者"
+          <div class="icheckbox_square-green" style="position: relative;">
+          <%= f.check_box :position, { name:"position", style:"position: absolute; opacity: 0;", value:"1" } %> 
+          <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+          </div>
+          <span class="ml-2">管理者</span> <!-- 「管理者」ではなく、「営業」「マーケ」「開発」 -->
         </label>
+        
         <label class="checkbox-inline i-checks">
           <input name="general" type="hidden" value="0">
           <div class="icheckbox_square-green checked" style="position: relative;">
             <input type="checkbox" value="1" checked="checked" name="general" style="position: absolute; opacity: 0;">
             <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-          </div>"2一般"
+          </div>
+          <span class="ml-2">一般</span>
           </label>
 
-
-
+          <label class="checkbox-inline i-checks" >
+            <input name="writer" type="hidden" value="0">
+            <div class="icheckbox_square-green" style="position: relative;">
+            <%= f.check_box :positions, { name:"position", checked:"checked", style:"position: absolute; opacity: 0;", value:"1" } %> 
+            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+            </div>
+            <span class="ml-2">ライター</span>
+          </label>
       </div>
+
       <%# f.submit "検索", name:'button', class:'btn btn-sm btn-info m-l-md', fa_icon("search") %>
       <button class＝'btn btn-sm btn-info m-l-md' name='button' type='submit' > <i class='fa fa-search'></i>検索 </button>
-
-
     <%end%>
   </div>
 
-
+<!-- 社員アカウント作成ボタン -->
+  <div class='col-md-2 text-right'>
+    <a href="/users/new">
+      <button class='btn btn-sm btn-primary'>
+        <i class'fa fa-search'></i>社員アカウント作成
+      </button>
+    </a>
+  </div>
   </div>
 
+<!-- pagination -->
+<div class="pager">
+    <ul>
+        <li><a href="#">prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li class="current"><span>3</span></li>
+        <li><a href="#">4</a></li>
+        <li><span>...</span></li>
+        <li><a href="#">123</a></li>
+        <li><a href="#">next</a></li>
+    </ul>
+</div>
+
+<!-- 一覧テーブル -->
   <table class='table table-stripped m-t-md table-hover' > <!-- 「rules='rows'」で罫線引いてくれる。 -->
     <thead>
       <tr>
@@ -84,31 +100,11 @@
           <td> <%= user.position %> </td>
           <td> <%= user.tel %> </td>
           <td> <%= user.mail %> </td>
-          <td> <%= user.joined %> </td> <!-- 「入社日」「joined」を作る -->
+          <td> <%= user.joined_year %>.<%= user.joined_month %>.<%= user.joined_day %> </td> 
           <td> <%= user.created_at.strftime('%Y年%m月%d日') %> </td>
           <td> <%= user.updated_at.strftime('%Y年%m月%d日') %> </td>
           <td> <%= link_to '削除', user_path(user.id), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %> </td>
-          <!--<%# link_to '削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %>
--->
-          <!--
-          <td> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %>/<%= user.month %>/<%= user.day %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
-          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
-          -->
+          
         </tr>
     <%end%>
     </tbody>
@@ -116,3 +112,7 @@
   </div>
   </div>
 </div>
+</div>
+</div>
+
+

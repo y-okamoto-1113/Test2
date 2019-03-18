@@ -21,7 +21,7 @@
 
 
 <%# <%= form_with model: @user,method: :post, url: '/users/create', local: true, class:"form-signin", name:"form_signin" do |f|  %> 
-<%= form_with model: @user,method: :patch, :action=>"update", :controller=>"users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
+<%= form_with model: @user,method: :post, :action=>"create", :controller=>"users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
 <div class="left-box" style="margin-bottom:100px">
     <h2>個人情報登録</h2>
     <p> <span style="color:red;">*</span>は必須項目です。</p>
@@ -71,8 +71,8 @@
         <tr>
           <th>生年月日</th>
           <td>
-          <% if @user.year %>
-            <%= f.select :year, [["#{@user.year}年", "#{@user.year}"]], {}, {id: "year", class: "w100", name:"year"} %>
+          <% if @year %>
+            <%= f.select :year, [["#{@year}年", "#{@year}"]], {}, {id: "year", class: "w100", name:"year"} %>
           <% else  %>
             <%= f.select :year, [["--西暦--", "0"]], {}, {id: "year", class: "w100", name:"year"} %>
           <% end  %>
@@ -90,8 +90,8 @@
                                    ["11月",11],
                                    ["12月",12]], {}, {id: "month", class: "w80", name:"month"} %>
 
-          <% if @user.day %>
-            <%= f.select :day, [["#{@user.day}日", "#{@user.day}"]], {}, {id: "day", class: "w80", name:"day"} %>
+          <% if @day %>
+            <%= f.select :day, [["#{@day}日", "#{@day}"]], {}, {id: "day", class: "w80", name:"day"} %>
           <% else  %>
             <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %>
           <% end  %>
@@ -108,8 +108,8 @@
             <br>
 
             学校名：
-            <% if @user.school_name %>
-              <%= f.select :school_name, [["#{@user.school_name}", "#{@user.school_name}"]], {}, {id: "school", class: "w250", name:"school_name"}  %>
+            <% if @school_name %>
+              <%= f.select :school_name, [["#{@school_name}", "#{@school_name}"]], {}, {id: "school", class: "w250", name:"school_name"}  %>
             <% else %>
               <%= f.select :school_name, [["-選択-", "0"]], {}, {id: "school", class: "w250", name:"school_name"} %>
             <% end %>
@@ -128,6 +128,7 @@
         </th>
 
         <td class="bbb">
+        <br>
           <div>
             続柄：<%= f.text_field :familyRelation, {id:"family_relation", placeholder:"例）父", class:"family zokugara input", name:"familyRelation"} %>
             <br class="kai">
@@ -152,9 +153,10 @@
       </tr>
     </table>
 
-    <button type="button" id="finalCheck" value="更新" >  <font size="3" color="black">更新</font></button>
+    <button type="button" id="finalCheck" value="登録" >  <font size="3" color="black">登録</font>
     <br>
   </div>
+
 
 
 

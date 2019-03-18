@@ -1,3 +1,4 @@
+<% if admin_signed_in? %>
 <div class="row border-bottom" data-turbolinks="false">
     <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
 
@@ -14,22 +15,22 @@
             <a class="navbar-brand" href="/"><%= current_admin.name %>でログイン中</a>
           <%end%>
           -->
-          <a href="/"> <img src="/panopticon.png" alt="panopticon" style='width:80%; height:80%;'> </a>
+          <% if admin_signed_in? %>
+            <!-- <a href="/"> <img src="/panopticon.png" alt="panopticon" style='width:80%; height:80%;'> </a> -->
+            <a href="/" class="navbar-brand" style="color:black;"> <b>Panopticon</b> </a>
+          <%end%>
         </div>
         
 
 
         <ul class="nav navbar-top-links navbar-right">
               <% if admin_signed_in? %>
-                <li> <%= link_to '新規作成', new_user_path , style:'margin-right:10px'%> </li>
                 <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"fas fa-sign-out-alt" %> </li>
               <%else%>
                 <li> <%= link_to '管理者登録', new_admin_registration_path %> </li>
                 <li> <%= link_to 'ログイン', new_admin_session_path %> </li>
-
-
             <%end%>
-
         </ul>
     </nav>
 </div>
+<%end%>

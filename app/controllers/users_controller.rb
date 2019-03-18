@@ -29,7 +29,12 @@ class UsersController < ApplicationController
                      school_name: params[:school_name],
 
                      familyRelation: params[:familyRelation],
-                     familyRelationName: params[:familyRelationName]
+                     familyRelationName: params[:familyRelationName],
+                     position: params[:position],
+                     remarks: params[:remarks],
+                     joined_year: params[:joined_year],
+                     joined_month: params[:joined_month],
+                     joined_day: params[:joined_day]
 
                      )
 
@@ -53,7 +58,7 @@ class UsersController < ApplicationController
     @tel.delete!('-')
 
     if @user.save
-      redirect_to @user, notice:'ユーザーを作成できました'
+      redirect_to root_path, notice:'ユーザーを作成できました'
     else
 
       @year = @user.year
@@ -61,7 +66,10 @@ class UsersController < ApplicationController
       @day = @user.day
       @type_career = @user.type_career
       @school_name = @user.school_name
-      render :new, alertt: 'ユーザーを作成できませんでした'
+      @joined_year = @user.joined_year
+      @joined_month = @user.joined_month
+      @joined_day = @user.joined_day
+      render :new, alert: 'ユーザーを作成できませんでした'
     end
   end
 
@@ -85,15 +93,23 @@ class UsersController < ApplicationController
                   familyRelation2: params[:familyRelation2],
                   familyRelationName2: params[:familyRelationName2],
                   familyRelation3: params[:familyRelation3],
-                  familyRelationName3: params[:familyRelationName3]
+                  familyRelationName3: params[:familyRelationName3],
+                  position: params[:position],
+                  remarks: params[:remarks], 
+                  joined_year: params[:joined_year],
+                  joined_month: params[:joined_month],
+                  joined_day: params[:joined_day]
       )
-      redirect_to @user, notice:'更新しました'
+      redirect_to root_path, notice:'更新しました'
     else
       @year = @user.year
       @month = @user.month
       @day = @user.day
       @type_career = @user.type_career
       @school_name = @user.school_name
+      @joined_year = @user.joined_year
+      @joined_month = @user.joined_month
+      @joined_day = @user.joined_day
       render :edit, alert:'更新できませんでした'
     end
   end

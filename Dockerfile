@@ -21,7 +21,7 @@ RUN gem install bundler -v 2.0.1
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
-# ADD Gemfile.lock Gemfile.lock
+ADD Gemfile.lock Gemfile.lock
 
 # RUN bundle config build.nokogiri --use-system-libraries \
 # RUN bundle install --jobs 5 && \

@@ -9,6 +9,10 @@ class User < ApplicationRecord
   validates :school_name, presence: true
   validates :familyRelation, {presence: true}
   validates :familyRelationName, {presence: true}
+  validates :position, presence: true
+  validates :joined_year, presence: true
+  validates :joined_month, presence: true
+  validates :joined_day, presence: true
   # year, month, day も選択式やから大丈夫やけど、コンソールからやと格納できるデータは自由やから制限かけたい
 
 end

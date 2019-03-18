@@ -38,6 +38,9 @@ gem "pry-rails",'0.3.9'
 gem "pry-nav"
 gem "pry", '>= 0.10.4'
 gem "devise"
+gem 'devise-bootstrap-views'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem "method_source",'~> 0.8.1'
 gem 'rspec-rails'
 gem 'factory_bot_rails'
