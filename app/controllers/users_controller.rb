@@ -3,9 +3,18 @@ class UsersController < ApplicationController
   before_action :authenticate_admin!
   before_action :find_user, only:[:show, :edit, :update, :destroy]
   # before_action :validate_user, only:[:show, :edit, :update, :destroy]  今回は使わん
+  PER=30
 
   def index
-    @users = User.all.order(sort_column + ' ' + sort_direction)
+    # binding.pry
+    if params[:search]
+      # @users = User.where(name: params[:search] )  こっちは全文字一致しか出力せーへんからアカン。
+      @users = User.where(['name LIKE ?', "%#{params[:search]}%"])
+    else
+      # @users = User.page(params[:page]).per(PER)
+      # @users = User.all.order(created_at: :desc)
+      @users = User.paginate(page: params[:page], per_page: 30) #1ページ30個表示。30個行かんかったら、ページネーションが表示されへん！！！！
+    end
   end
 
   def show

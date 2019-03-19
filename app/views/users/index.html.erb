@@ -11,40 +11,16 @@
   <div class='col-md-10'>
     <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline", accept_charset:"UTF-8"  do |f|  %>
     <!--<form class="form-inline" action='/' accept-charaset='UTF-8' method='get' > -->
-    <input name='utf-8' type="hidden" value="✓">
-      <div class='form-group'>
-        <label> 名前 : &nbsp; <%= f.text_field :name, {class:"form-control", name:"search_name", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
-      </div>
-
+    <label> 名前 : &nbsp; <%= text_field_tag :search, '', {class:"form-control", name:"search", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
+    <button class＝'btn btn-info' type='submit' > <i class='fa fa-search'></i>検索 </button>
       <div class='form-group m-l-md'>
-        <label class="mx-2">権限</label> : &nbsp;
-
-        <label class='checkbox-inline i-checks'>
-          <%= f.check_box :position, { name:"position", style:"position: absolute; opacity: 0;", value:"1" } %> 
-          <span class="ml-2">管理者</span> <!-- 「管理者」ではなく、「営業」「マーケ」「開発」 -->
-        </label>
-        
-        <label class="checkbox-inline i-checks">
-          <input name="general" type="hidden" value="0">
-          <div class="icheckbox_square-green checked" style="position: relative;">
-            <input type="checkbox" value="1" checked="checked" name="general" style="position: absolute; opacity: 0;">
-            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-          </div>
-          <span class="ml-2">一般</span>
-          </label>
-
-          <label class="checkbox-inline i-checks" >
-            <input name="writer" type="hidden" value="0">
-            <div class="icheckbox_square-green" style="position: relative;">
-            <%= f.check_box :positions, { name:"position", checked:"checked", style:"position: absolute; opacity: 0;", value:"1" } %> 
-            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-            </div>
-            <span class="ml-2">ライター</span>
-          </label>
+        <label class="mx-2">絞り込み</label> : &nbsp;
+          <label> <%= f.check_box :position, { name:"position", class:"position1" } %> 営業 </label>
+          &nbsp; &nbsp;
+          <label> <%= f.check_box :position, { name:"position", class:"position2" } %> マーケティング</label> 
+          &nbsp; &nbsp;
+          <label> <%= f.check_box :position, { name:"position", class:"position3" } %> 開発 </label>  
       </div>
-
-      <%# f.submit "検索", name:'button', class:'btn btn-sm btn-info m-l-md', fa_icon("search") %>
-      <button class＝'btn btn-sm btn-info m-l-md' name='button' type='submit' > <i class='fa fa-search'></i>検索 </button>
     <%end%>
   </div>
 
@@ -58,19 +34,21 @@
   </div>
   </div>
 
-<!-- pagination -->
-<div class="pager">
-    <ul>
-        <li><a href="#">prev</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li class="current"><span>3</span></li>
-        <li><a href="#">4</a></li>
-        <li><span>...</span></li>
-        <li><a href="#">123</a></li>
-        <li><a href="#">next</a></li>
-    </ul>
+<!-- pagination 
+<div class="center">
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#">1</a>
+  <a class="active" href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
 </div>
+</div>
+-->
+<%= will_paginate @users %>
 
 <!-- 一覧テーブル -->
   <table class='table table-stripped m-t-md table-hover' > <!-- 「rules='rows'」で罫線引いてくれる。 -->
@@ -105,6 +83,9 @@
     <%end%>
     </tbody>
   </table>
+<%= will_paginate @users %>
+
+
   </div>
   </div>
 </div>

@@ -50,6 +50,9 @@ gem "spring-commands-rspec"
 gem "rspec-core"
 gem 'database_cleaner'
 gem 'font-awesome-rails'
+gem 'kaminari'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
