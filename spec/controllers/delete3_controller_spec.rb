@@ -59,14 +59,12 @@ RSpec.describe UsersController , type: :controller do
       expect(response).to have_http_status(:success)
     end
     example 'delete' do
-      # delete user_path(user.id)
-      binding.pry
-      # users.count
+      # binding.pry
       # aaa = User.count #削除される前のユーザーの総数
       delete :destroy, params: {id: user.id}
       expect(response).to have_http_status(302)
       # bbb = User.count #削除された後のユーザー総数
-      binding.pry
+      # binding.pry
       # これ動かん。 ユーザー削除できててnilになってるけど、何故かカウント数は減ってない。
       # expect(aaa-1).to eq(bbb) # ちゃんと1個削除されているかを確かめてる 「eq(bbb)」の「bbb」は「User.count」と書ける。
 
