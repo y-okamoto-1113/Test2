@@ -165,12 +165,12 @@ document.addEventListener("turbolinks:load", function(){
 
 
 // 入力フォームで、Enterキー押されたら、勝手に送信されるから。Enterキー無効化
-document.onkeypress = enter;
-function enter(){
-  if( window.event.keyCode == 13 ){
-    return false;
-  }
-}
+// document.onkeypress = enter;
+// function enter(){
+//   if( window.event.keyCode == 13 ){
+//     return false;
+//   }
+// }
 
 
 
