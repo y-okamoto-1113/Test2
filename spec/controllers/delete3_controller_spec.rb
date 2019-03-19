@@ -67,7 +67,7 @@ RSpec.describe UsersController , type: :controller do
       expect(response).to have_http_status(302)
       # bbb = User.count #削除された後のユーザー総数
       binding.pry
-      # これ動かん。 ユーザー削除できてるのに何故かカウント数
+      # これ動かん。 ユーザー削除できててnilになってるけど、何故かカウント数は減ってない。
       # expect(aaa-1).to eq(bbb) # ちゃんと1個削除されているかを確かめてる 「eq(bbb)」の「bbb」は「User.count」と書ける。
 
       expect( User.find_by(id: user.id) ).to eq(nil) #削除されたユーザーがちゃんとnilになってるか
