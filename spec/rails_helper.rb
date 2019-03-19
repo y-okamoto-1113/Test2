@@ -89,7 +89,4 @@ RSpec.configure do |config|
   # extendすることで、このファイル内で定義したメソッドを使える。
   # config.include Devise::TestHelpers, type: :controller
 
-  config.before(:each, :type => :controller) do
-    host! ENV["RAILS_HOST"]
-  end
 end

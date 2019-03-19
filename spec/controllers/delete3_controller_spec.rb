@@ -40,4 +40,22 @@ RSpec.describe UsersController , type: :controller do
     end
   end
 
+  describe 'なぜかPOST系は失敗する' do
+    let(:user) { create(:user) }
+    example 'create' do
+      post user_path(user)
+      expect(response).to have_http_status(:success)
+    end
+    example 'update' do
+      patch user_path(user.id)
+      expect(response).to have_http_status(:success)
+    end
+    example 'delete' do
+      delete user_path(user.id)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+
+
 end
