@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     end
 
     @tel = @user.tel
-    @tel.delete!('-')
+    # @tel.delete!('-')
 
     if @user.save
       redirect_to @user, notice:'ユーザーを作成できました'
