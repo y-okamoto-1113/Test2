@@ -6,7 +6,7 @@
   float:right;
   padding:19px 29px 29px;
   max-width:450px;           /* max-widthにしたらブラウザの大きさに合わせてサイズ変わってくれる。widthやと画面小さいと画面ハミ出てしかもみれへん */
-  background-color:white;
+  background-color:#179e83;
   margin:0px 50px 20px 0px;  /* margin-bottomを20pxぐらい開けとかなアカン。じゃないと一番下がboxのbottomになってスクロールした時に気持ち悪い */
   border:1px solid #e5e5e5;
 

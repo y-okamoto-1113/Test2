@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     else
       # @users = User.page(params[:page]).per(PER)
       # @users = User.all.order(created_at: :desc)
-      @users = User.paginate(page: params[:page], per_page: 30) #1ページ30個表示。30個行かんかったら、ページネーションが表示されへん！！！！
+      @users = User.paginate(page: params[:page], per_page: 10) #1ページ30個表示。30個行かんかったら、ページネーションが表示されへん！！！！
     end
   end
 

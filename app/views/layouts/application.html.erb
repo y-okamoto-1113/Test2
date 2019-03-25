@@ -34,20 +34,20 @@
       <!-- Wrapper-->
       <div id="wrapper">
 
-          <!-- Navigation -->
-          <% if admin_signed_in?%>
-            <%= render 'layouts/navigation' %>
-          <% end %>
-          
+          <!-- Navigation 
+          <%# if admin_signed_in?%>
+            <%# render 'layouts/navigation' %>
+          <%# end %>
+          -->
 
           <!-- Page wraper -->
-          <!-- ログインしてへんかったら左のバー消す -->
-          <% if admin_signed_in? %>
+          <!-- ログインしてへんかったら左のバー消す 
+          <%# if admin_signed_in? %>
             <div id="page-wrapper" class="gray-bg">
-          <% else %>
+          <%# else %>
             <div id="page-wrapper" class="gray-bg" style="margin:0!important;">
-          <% end %>
-          
+          <%# end %>
+          -->
 
               <!-- Page wrapper -->
               <%= render 'layouts/topnavbar' %>
@@ -71,13 +71,28 @@
               <%= yield %>
 
               <!-- Footer -->
-              <%= render 'layouts/footer' %>
+
 
           </div>
           <!-- End page wrapper-->
 
       </div>
       <!-- End wrapper-->
+
+
+
+
+
+
+    <footer style="background-color:white;padding:10px;">
+      <div class="pull-right">
+        <a href="/" style="color:#179e83; margin-right:10px"> <b>Panopticon</b> </a>
+      </div>
+      <div style="text-align:center;color">
+          <strong>Copyright</strong> &nbsp; Jeremy Bentham  &copy; 2019
+      </div>
+    </footer>
+
 
   </body>
   </html>
