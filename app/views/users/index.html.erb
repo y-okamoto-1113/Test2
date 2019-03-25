@@ -15,7 +15,15 @@
     <button class＝'btn btn-info' type='submit' > <i class='fa fa-search'></i>検索 </button>
       <div class='form-group m-l-md'>
         <label class="mx-2">絞り込み</label> : &nbsp;
-          <label> <%= f.check_box :position, { name:"position", class:"position1" } %> 営業 </label>
+
+
+          <!--icheck test-->
+          <input type="checkbox" >01
+          <input type="checkbox" checked>02
+          <input type="radio" name="iCheck">03
+          <input type="radio" name="iCheck" checked>04
+
+          <label> <%= f.check_box :position, { name:"position", class:"position1"} %> 営業 </label>
           &nbsp; &nbsp;
           <label> <%= f.check_box :position, { name:"position", class:"position2" } %> マーケティング</label> 
           &nbsp; &nbsp;

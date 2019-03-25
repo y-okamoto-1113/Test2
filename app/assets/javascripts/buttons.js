@@ -244,3 +244,26 @@ document.addEventListener("turbolinks:load", function(){
     }
 });
 
+
+
+
+
+
+// iCheck,
+$(document).on('turbolinks:load', function() {
+// document.addEventListener("turbolinks:load", function(){
+    $('input').iCheck({
+    checkboxClass: 'icheckbox_square',
+    radioClass: 'iradio_square',
+    increaseArea: '20%' // optional
+    });
+});
+
+$(document).on('turbolinks:load', function() {
+// document.addEventListener("turbolinks:load", function(){
+    $('input').iCheck({
+    checkboxClass: 'icheckbox_square-green',
+    radioClass: 'iradio_square-green',
+    increaseArea: '20%' // optional
+    });
+});

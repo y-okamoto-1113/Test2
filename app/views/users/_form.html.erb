@@ -12,7 +12,7 @@
       </div>
 
       <div class="ibox-content">
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_name">名前</label>
@@ -26,7 +26,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_furigana">ふりがな</label>
@@ -39,7 +39,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_tel">電話番号</label>
@@ -54,7 +54,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="mail">メールアドレス</label>
@@ -69,7 +69,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_type_sex">性別</label>
@@ -83,7 +83,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_birthday">生年月日</label>
@@ -118,7 +118,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_type_career">学歴</label>
@@ -140,7 +140,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_familyRelation">家族構成</label>
@@ -175,7 +175,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_joined">入社日</label>
@@ -211,7 +211,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_position">役職</label>
@@ -225,7 +225,7 @@
         </div>
         <div class="hr-line-dashed my-4"></div>
 
-        <div class=row>
+        <div class="row">
           <div class='form-group'>
             <div class="col-sm-2 control-label">
               <label for="user_account_remarks">備考</label>
@@ -236,6 +236,72 @@
             </div>
           </div>
         </div>
+
+
+
+
+
+        <div class="hr-line-dashed my-4"></div>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              テスト<span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <%= f.select :joined_year, [["--西暦--", "0"]], {}, {id: "joined_year", class: "w100 cp_ipselect cp_sl04", name:"joined_year", style:"background-color:#abe7db;color:white;"} %>
+              <%= f.select :joined_month, [["-月-",0],
+                                   ["1月",1],
+                                   ["2月",2],
+                                   ["3月",3],
+                                   ["4月",4],
+                                   ["5月",5],
+                                   ["6月",6],
+                                   ["7月",7],
+                                   ["8月",8],
+                                   ["9月",9],
+                                   ["10月",10],
+                                   ["11月",11],
+                                   ["12月",12]], {}, {id: "joined_month", class: "w80 cp_ipselect cp_sl04", name:"joined_month", style:"background-color:#1ab394;color:white;"} %>
+              <%= f.select :joined_day, [["-日-", "0"]], {}, {id: "joined_day", class: "w80 cp_ipselect cp_sl04", name:"joined_day", style:"background-color:#1ab394;color:white;"} %>
+              <br><span id="joinedError">＊入社日を入力してください</span>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="hr-line-dashed my-4"></div>
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="text-center" style="margin-top:3rem;"> <!-- bootstrapの「mt-5」クラスが効かへんかったから直接書いた -->
           <button type="submit" class="btn btn-primary" id="finalCheck" >  <font>社員アカウントを作成</font> </button>

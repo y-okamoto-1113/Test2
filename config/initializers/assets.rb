@@ -28,3 +28,8 @@ Rails.application.config.assets.precompile += %w( school.json )
 # Rails.application.config.assets.precompile += %w( inspinia/bootstrap.min.js )
 # Rails.application.config.assets.precompile += %w( login.css )
 # Rails.application.config.assets.precompile += %w( login01.css )
+# icheck
+Rails.application.config.assets.precompile += %w( ui/icheck-1.0.2/skins/square/green.css )
+Rails.application.config.assets.precompile += %w( ui/icheck-1.0.2/icheck.min.js )
+Rails.application.config.assets.precompile += %w( icheck.min.js )
+
