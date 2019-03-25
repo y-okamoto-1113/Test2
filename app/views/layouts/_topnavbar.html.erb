@@ -28,7 +28,7 @@ aaaaaaaaaaaaaaa
         
 
 
-        <ul class="nav navbar-top-links navbar-right">
+        <ul class="nav navbar-top-links navbar-right" style="padding-right:10px;">
               <% if admin_signed_in? %>
                 <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"fas fa-sign-out-alt" %> </li>
               <%else%>

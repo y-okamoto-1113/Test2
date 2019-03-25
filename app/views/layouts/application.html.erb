@@ -83,15 +83,25 @@
 
 
 
-
-    <footer style="background-color:white;padding:10px;">
-      <div class="pull-right">
-        <a href="/" style="color:#179e83; margin-right:10px"> <b>Panopticon</b> </a>
-      </div>
-      <div style="text-align:center;color">
+<%if admin_signed_in?%>
+      <footer style="background-color:white; padding:10px;">
+        <div class="pull-right">
+          <a href="/" style="color:#179e83; margin-right:10px"> <b>Panopticon</b> </a>
+        </div>
+        <div style="text-align:center;color">
+            <strong>Copyright</strong> &nbsp; Jeremy Bentham  &copy; 2019
+        </div>
+      </footer>
+<%else%>
+      <footer style="background-color:white; padding:10px; position:absolute; width:100%; bottom:0;">
+        <div class="pull-right">
+          <a href="/" style="color:#179e83; margin-right:10px"> <b>Panopticon</b> </a>
+        </div>
+        <div style="text-align:center;color">
           <strong>Copyright</strong> &nbsp; Jeremy Bentham  &copy; 2019
-      </div>
-    </footer>
+        </div>
+      </footer>
+<%end%>
 
 
   </body>
