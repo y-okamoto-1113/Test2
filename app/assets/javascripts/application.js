@@ -16,6 +16,7 @@
 //= require activestorage
 //= require turbolinks
 //= require 'jquery.turbolinks'
+//= require icheck.min
 
 
 // require_tree .

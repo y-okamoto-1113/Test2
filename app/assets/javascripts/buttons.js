@@ -250,20 +250,42 @@ document.addEventListener("turbolinks:load", function(){
 
 
 // iCheck,
-$(document).on('turbolinks:load', function() {
-// document.addEventListener("turbolinks:load", function(){
+// $(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", function(){
+    console.log("aaa");
     $('input').iCheck({
+    // console.log("bbb")
     checkboxClass: 'icheckbox_square',
     radioClass: 'iradio_square',
     increaseArea: '20%' // optional
     });
 });
-
-$(document).on('turbolinks:load', function() {
-// document.addEventListener("turbolinks:load", function(){
+// $(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", function(){
+    console.log("ccc");
     $('input').iCheck({
+    // console.log("ddd");
     checkboxClass: 'icheckbox_square-green',
     radioClass: 'iradio_square-green',
     increaseArea: '20%' // optional
     });
 });
+
+
+
+
+
+
+// // ハンバーガーメニュー
+// $(document).on('turbolinks:load', function() {
+// 	$('.zdo_drawer_button').click(function () {
+// 		$(this).toggleClass('active');
+// 		$('.zdo_drawer_bg').fadeToggle();
+// 		$('nav').toggleClass('open');
+// 	});
+// 	$('.zdo_drawer_bg').click(function () {
+// 		$(this).fadeOut();
+// 		$('.zdo_drawer_button').removeClass('active');
+// 		$('nav').removeClass('open');
+// 	});
+// });

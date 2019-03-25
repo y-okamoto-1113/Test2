@@ -30,6 +30,58 @@ aaaaaaaaaaaaaaa
 
         <ul class="nav navbar-top-links navbar-right" style="padding-right:10px;">
               <% if admin_signed_in? %>
+
+
+
+
+
+<!--
+<div class="zdo_drawer_bg"></div>
+		<button type="button" class="zdo_drawer_button">
+			<span class="zdo_drawer_bar zdo_drawer_bar1"></span>
+			<span class="zdo_drawer_bar zdo_drawer_bar2"></span>
+			<span class="zdo_drawer_bar zdo_drawer_bar3"></span>
+			<span class="zdo_drawer_menu_text zdo_drawer_text">MENU</span>
+			<span class="zdo_drawer_close zdo_drawer_text">CLOSE</span>
+		</button>
+		<nav class="zdo_drawer_nav_wrapper">
+			<ul class="zdo_drawer_nav">
+				<li>
+					<a href="#">
+						メニュー1
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー2
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー3
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー4
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー5
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー6
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+-->
+
+              
                 <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"fas fa-sign-out-alt" %> </li>
               <%else%>
                 <li> <%= link_to '管理者登録', new_admin_registration_path %> </li>
