@@ -288,12 +288,12 @@ width:160px;
 }
 
 .zdo_drawer_menu .zdo_drawer_button.active .zdo_drawer_bar {
-  width: 36px;
+  width: 37px;
 }
 
 /* 1個目の線を何度傾けるか */
 .zdo_drawer_menu .zdo_drawer_button.active .zdo_drawer_bar1 {
-  transform: rotate(24deg);
+  transform: rotate(20deg);
 }
 /* ２本目の線は見えへんようにする */
 .zdo_drawer_menu .zdo_drawer_button.active .zdo_drawer_bar2 {
@@ -301,7 +301,7 @@ width:160px;
 }
 
 .zdo_drawer_menu .zdo_drawer_button.active .zdo_drawer_bar3 {
-  transform: rotate(-24deg);
+  transform: rotate(-20deg);
 }
 
 .zdo_drawer_menu .zdo_drawer_button.active .zdo_drawer_menu_text {

@@ -11,14 +11,14 @@
   <div class='col-md-10'>
     <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline", accept_charset:"UTF-8"  do |f|  %>
     <!--<form class="form-inline" action='/' accept-charaset='UTF-8' method='get' > -->
-    <label> 名前 : &nbsp; <%= text_field_tag :search, '', {class:"form-control", name:"search", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
+    <label> 名前 : &nbsp; <%= f.text_field :search,  {class:"form-control", name:"search", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
       <div class='form-group m-l-md'>
         <label class="mx-2">絞り込み</label> : &nbsp;
-          <label> <%= f.check_box :position, { name:"position", class:"position1"} %> 営業 </label>
+          <label> <%= f.check_box :position1, { name:"positions1", class:"position1"}, "営業", nil %> 営業 </label>
           &nbsp; &nbsp;
-          <label> <%= f.check_box :position, { name:"position", class:"position2" } %> マーケティング</label> 
+          <label> <%= f.check_box :position2, { name:"positions2", class:"position2" }, "マーケティング", nil %> マーケティング</label> 
           &nbsp; &nbsp;
-          <label> <%= f.check_box :position, { name:"position", class:"position3" } %> 開発 </label>  
+          <label> <%= f.check_box :position3, { name:"positions3", class:"position3" }, "開発", nil  %> 開発 </label>  
       </div>
       &nbsp; &nbsp;
       <button class＝'btn btn-lg-info' type='submit' style="background-color:#1ab394;color:white; padding:4px 4px;" > <i class='fa fa-search'></i>検索 </button>

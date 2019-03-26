@@ -59,7 +59,7 @@
               <!-- Main view  -->
               <!-- 部分レイアウト（パーシャル）を表示！ layoutフォルダ内に「_header.html.erb」を置く！ -->
 
-            <div data-turbolinks="false">
+          <div data-turbolinks="false">
             <%# binding.pry %>
             <% if notice %>
               <div class="notice notice-info">
@@ -70,9 +70,11 @@
               <div class="notice notice-danger">
                 <p><%= alert %><button type="button" class="close" data-dismiss="notice" onclick='closeBtn()'>&times;</button></p>
               </div>
-            <% end %>
-            </div>
-              <%= yield %>
+
+            <%end%>
+          </div>
+            
+            <%= yield %>
 
               <!-- Footer -->
 

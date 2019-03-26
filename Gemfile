@@ -53,6 +53,7 @@ gem 'font-awesome-rails'
 gem 'kaminari'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem "activerecord-like", "~> 2.1"
 # gem "icheck-rails"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

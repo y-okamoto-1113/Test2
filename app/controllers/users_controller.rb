@@ -7,13 +7,44 @@ class UsersController < ApplicationController
 
   def index
     # binding.pry
-    if params[:search]
+    # if params[:searcha] || params[:position]
+
+    
+    positions_array = []
+    positions_array << "%#{params[:positions1]}%" if params[:positions1]
+    positions_array << "%#{params[:positions2]}%" if params[:positions2]
+    positions_array << "%#{params[:positions3]}%" if params[:positions3]
+
+    if params[:positions1] || params[:positions2] || params[:positions3]
       # @users = User.where(name: params[:search] )  こっちは全文字一致しか出力せーへんからアカン。
       # 「will_paginate」で@usersの値を取ってるが、@users自体のデータがwill_paginateに対応してないから、「.paginate」で読めるように整形する
-      @users = User.where(['name LIKE ?', "%#{params[:search]}%"]).paginate(page: params[:page], per_page: 10)
+      # binding.pry  # チェックボックスに入ってる値が、ちゃんと取れてるかチェック。
+      @users = User.where.like(name: "%#{params[:search]}%", position: positions_array).paginate(page: params[:page], per_page: 10)
+
+###################################### 以下の内容を配列を使えば、上の数行で済む ################################################################
+      # if params[:positions1] && params[:positions2] && params[:positions3] # all
+      #   # @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).or(User.where(['position LIKE ?', "%#{params[:positions2]}%"])).or(User.where(["position LIKE ?", "%#{params[:positions3]}%"])).paginate(page: params[:page], per_page: 10)    
+      # elsif params[:positions1] && params[:positions2]                      # 2個
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).or(User.where(['name LIKE ?', "%#{params[:search]}%"]).where(['position LIKE ?', "%#{params[:positions2]}%"])).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions1] && params[:positions3]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).or(User.where(['name LIKE ?', "%#{params[:search]}%"]).where(["position LIKE ?", "%#{params[:positions3]}%"])).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions2] && params[:positions3]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions2]}%"]).or(User.where(['name LIKE ?', "%#{params[:search]}%"]).where(["position LIKE ?", "%#{params[:positions3]}%"])).paginate(page: params[:page], per_page: 10)  
+      # elsif params[:positions1]                                              # 1個、それにマッチしたやつだけ
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions2]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions2]}%"]).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions3]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions3]}%"]).paginate(page: params[:page], per_page: 10)
+      # else
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).paginate(page: params[:page], per_page: 10)
+      # end
+
+      # @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).paginate(page: params[:page], per_page: 10)
+      # @users = User.where(['name LIKE ? and position LIKE ?', "%#{params[:search]}%" , "%#{params[:position]}%" ]).paginate(page: params[:page], per_page: 10)
+    elsif params[:search].present?
+      @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).paginate(page: params[:page], per_page: 10)
     else
-      # @users = User.page(params[:page]).per(PER)
-      # @users = User.all.order(created_at: :desc)
       @users = User.paginate(page: params[:page], per_page: 10) #1ページ30個表示。30個行かんかったら、ページネーションが表示されへん！！！！
     end
   end
