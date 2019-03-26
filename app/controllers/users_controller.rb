@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     # binding.pry
     if params[:search]
       # @users = User.where(name: params[:search] )  こっちは全文字一致しか出力せーへんからアカン。
-      @users = User.where(['name LIKE ?', "%#{params[:search]}%"])
+      # 「will_paginate」で@usersの値を取ってるが、@users自体のデータがwill_paginateに対応してないから、「.paginate」で読めるように整形する
+      @users = User.where(['name LIKE ?', "%#{params[:search]}%"]).paginate(page: params[:page], per_page: 10)
     else
       # @users = User.page(params[:page]).per(PER)
       # @users = User.all.order(created_at: :desc)
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    # binding.pry
     @user = User.new(name: params[:name],
                      furigana: params[:furigana],
                      tel: params[:tel],
@@ -43,8 +45,7 @@ class UsersController < ApplicationController
                      remarks: params[:remarks],
                      joined_year: params[:joined_year],
                      joined_month: params[:joined_month],
-                     joined_day: params[:joined_day]
-
+                     joined_day: params[:joined_day],
                      )
 
     if !( params[:year]=="0" || params[:month]=="0" || params[:day]=="0" )
@@ -65,7 +66,7 @@ class UsersController < ApplicationController
 
     @tel = @user.tel
     @tel.delete!('-')
-
+    # binding.pry
     if @user.save
       redirect_to root_path, notice:'ユーザーを作成できました'
     else
@@ -78,7 +79,9 @@ class UsersController < ApplicationController
       @joined_year = @user.joined_year
       @joined_month = @user.joined_month
       @joined_day = @user.joined_day
+      # binding.pry
       render :new, alert: 'ユーザーを作成できませんでした'
+      # binding.pry
     end
   end
 

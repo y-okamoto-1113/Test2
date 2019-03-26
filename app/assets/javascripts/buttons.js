@@ -176,9 +176,9 @@ document.addEventListener("turbolinks:load", function(){
 
 // flashボタン消す
 const closeBtn = function(){
-    console.log('aaa');
+    // console.log('aaa');
     $(".notice").get(0).style.display = "none";
-    console.log('bbb');
+    // console.log('bbb');
 };
 
 
@@ -252,7 +252,7 @@ document.addEventListener("turbolinks:load", function(){
 // iCheck,
 // $(document).on('turbolinks:load', function() {
 document.addEventListener("turbolinks:load", function(){
-    console.log("aaa");
+    // console.log("aaa");
     $('input').iCheck({
     // console.log("bbb")
     checkboxClass: 'icheckbox_square',
@@ -262,7 +262,7 @@ document.addEventListener("turbolinks:load", function(){
 });
 // $(document).on('turbolinks:load', function() {
 document.addEventListener("turbolinks:load", function(){
-    console.log("ccc");
+    // console.log("ccc");
     $('input').iCheck({
     // console.log("ddd");
     checkboxClass: 'icheckbox_square-green',
@@ -276,16 +276,28 @@ document.addEventListener("turbolinks:load", function(){
 
 
 
+
+
+
+
+
+
 // // ハンバーガーメニュー
 // $(document).on('turbolinks:load', function() {
-// 	$('.zdo_drawer_button').click(function () {
-// 		$(this).toggleClass('active');
-// 		$('.zdo_drawer_bg').fadeToggle();
-// 		$('nav').toggleClass('open');
-// 	});
-// 	$('.zdo_drawer_bg').click(function () {
-// 		$(this).fadeOut();
-// 		$('.zdo_drawer_button').removeClass('active');
-// 		$('nav').removeClass('open');
-// 	});
-// });
+document.addEventListener("turbolinks:load", function(){
+    // console.log("aaa")
+	$('.zdo_drawer_button').click(function () {
+        // console.log("bbb")
+        // $(".zdo_drawer_menu .zdo_drawer_button").css("z-index","2000");
+		$(this).toggleClass('active');
+		$('.zdo_drawer_bg').fadeToggle();
+		$('nav').toggleClass('open');
+    });
+    // console.log("ccc")
+	$('.zdo_drawer_bg').click(function () {
+        // console.log("ddd")
+		$(this).fadeOut();
+		$('.zdo_drawer_button').removeClass('active');
+		$('nav').removeClass('open');
+	});
+});

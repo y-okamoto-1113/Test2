@@ -2,7 +2,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
 <div class="row">
-<div class='col-lg-10' style="margin-left:100px">
+<div class='col-lg-10 col-lg-offset-1' > <!-- 「col-lg-offset-数字」で左に何個空白置くか決める。「col-lg-10」では左詰めでテーブルが載せられる為、すでに右に2個空白ができてるからoffsetで指定する空白は一個で良い -->
   <div class='ibox float-e-margins '>
   <div class='ibox-title'>ユーザー一覧</div>
   <div class="ibox-content">
@@ -12,31 +12,24 @@
     <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline", accept_charset:"UTF-8"  do |f|  %>
     <!--<form class="form-inline" action='/' accept-charaset='UTF-8' method='get' > -->
     <label> 名前 : &nbsp; <%= text_field_tag :search, '', {class:"form-control", name:"search", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
-    <button class＝'btn btn-info' type='submit' > <i class='fa fa-search'></i>検索 </button>
       <div class='form-group m-l-md'>
         <label class="mx-2">絞り込み</label> : &nbsp;
-
-
-          <!--icheck test-->
-          <input type="checkbox" >01
-          <input type="checkbox" checked>02
-          <input type="radio" name="iCheck">03
-          <input type="radio" name="iCheck" checked>04
-
           <label> <%= f.check_box :position, { name:"position", class:"position1"} %> 営業 </label>
           &nbsp; &nbsp;
           <label> <%= f.check_box :position, { name:"position", class:"position2" } %> マーケティング</label> 
           &nbsp; &nbsp;
           <label> <%= f.check_box :position, { name:"position", class:"position3" } %> 開発 </label>  
       </div>
+      &nbsp; &nbsp;
+      <button class＝'btn btn-lg-info' type='submit' style="background-color:#1ab394;color:white; padding:4px 4px;" > <i class='fa fa-search'></i>検索 </button>
     <%end%>
   </div>
 
 <!-- 社員アカウント作成ボタン -->
   <div class='col-md-2 text-right'>
     <a href="/users/new">
-      <button class='btn btn-sm btn-primary'>
-        <i class'fa fa-search'></i>社員アカウント作成
+      <button class='btn btn-sm btn-primary fa fa-plus-circle'>
+        社員を追加
       </button>
     </a>
   </div>
@@ -62,11 +55,11 @@
   <table class='table table-stripped m-t-md table-hover' > <!-- 「rules='rows'」で罫線引いてくれる。 -->
     <thead>
       <tr>
-        <th><%= sortable 'id', "ID","color:black" %></th>
+        <th style="width:3%;" ><%= sortable 'id', "ID","color:black" %></th>
         <th><%= sortable "name", "名前","color:black" %></th>
         <th><%= sortable "position", "役職","color:black" %></th>
         <th><%= sortable "tel", "電話番号","color:black" %></th>
-        <th><%= sortable "mail", "メースアドレス","color:black" %></th>
+        <th style="width:30%;" ><%= sortable "mail", "メースアドレス","color:black" %></th>
         <th><%= sortable "joined", "入社日","color:black" %></th>
         <!-- <th><%# sortable "created_at", "登録日","color:black" %></th>
              <th><%# sortable "updated_at", "更新日","color:black" %></th> -->
@@ -85,7 +78,7 @@
           <td> <%= user.joined_year %>.<%= user.joined_month %>.<%= user.joined_day %> </td> 
           <!-- <td> <%# user.created_at.strftime('%Y年%m月%d日') %> </td>
                <td> <%# user.updated_at.strftime('%Y年%m月%d日') %> </td> -->
-          <td> <%= link_to '削除', user_path(user.id), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %> </td>
+          <td>  <%= link_to ' 削除', user_path(user.id), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position fas fa-trash-alt' %> </td>
           
         </tr>
     <%end%>

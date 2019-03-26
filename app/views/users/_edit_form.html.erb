@@ -146,7 +146,7 @@
               <label for="user_account_familyRelation">家族構成</label>
               <span class="label m-l-sm label-warning">1人以上</span>
               <br>
-              <button type="button" id="addFamilyRelation"  ><font color='black'>+</font></button>
+              <button type="button" id="addFamilyRelation" style="background-color:green;" ><font color='white'><b>+</b></font></button>
             </div>
             <div class="col-sm-8">
               <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
@@ -238,9 +238,9 @@
         </div>
 
         <div class="text-center" style="margin-top:3rem;"> <!-- bootstrapの「mt-5」クラスが効かへんかったから直接書いた -->
-          <button type="submit" class="btn btn-primary" >  <font>更新</font> </button>
+          <button type="submit" class="btn btn-primary fas fa-edit" style="padding-top:7px;padding-bottom:7px;" >  <font>更新</font> </button>
           &nbsp;
-          <%= link_to '削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position' %>
+          <%= link_to ' 削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position fas fa-trash-alt', style:"padding-top:7px;padding-bottom:7px;" %>
         </div>
       </div>
     </div>

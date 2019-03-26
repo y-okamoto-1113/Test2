@@ -7,7 +7,7 @@
     <div class="ibox float-e-margins" style="font-size:13px;color:#676a6c!important;">
       <div class="ibox-title">
         <div class="col-sm-10">
-          <h5>社員アカウント作成</h5>
+          <h5>社員を追加</h5>
         </div>
       </div>
 
@@ -146,7 +146,7 @@
               <label for="user_account_familyRelation">家族構成</label>
               <span class="label m-l-sm label-warning">1人以上</span>
               <br>
-              <button type="button" id="addFamilyRelation"  ><font color='black'>+</font></button>
+              <button type="button" id="addFamilyRelation" style="background-color:green;" ><font color='white'><b>+</b></font></button>
             </div>
             <div class="col-sm-8">
               <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
@@ -304,7 +304,7 @@
 
 
         <div class="text-center" style="margin-top:3rem;"> <!-- bootstrapの「mt-5」クラスが効かへんかったから直接書いた -->
-          <button type="submit" class="btn btn-primary" id="finalCheck" >  <font>社員アカウントを作成</font> </button>
+          <button  class="btn btn-primary fas fa-plus-circle" id="finalCheck" >  <font>社員を追加</font> </button>
         </div>
       </div>
     </div>
