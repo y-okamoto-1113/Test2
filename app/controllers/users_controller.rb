@@ -79,6 +79,7 @@ class UsersController < ApplicationController
                      joined_day: params[:joined_day],
                      )
 
+
     if !( params[:year]=="0" || params[:month]=="0" || params[:day]=="0" )
      @user.year = params[:year]
      @user.month = params[:month]
@@ -99,7 +100,7 @@ class UsersController < ApplicationController
     @tel.delete!('-')
     # binding.pry
     if @user.save
-      redirect_to root_path, notice:'ユーザーを作成できました'
+      redirect_to root_path, notice:'社員情報を追加しました'
     else
 
       @year = @user.year
@@ -111,7 +112,7 @@ class UsersController < ApplicationController
       @joined_month = @user.joined_month
       @joined_day = @user.joined_day
       # binding.pry
-      render :new, alert: 'ユーザーを作成できませんでした'
+      render :new, alert: '社員情報を追加できませんでした'
       # binding.pry
     end
   end

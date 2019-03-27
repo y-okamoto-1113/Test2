@@ -65,12 +65,11 @@
               <div class="notice notice-info">
                 <p><%= notice %><button type="button" class="close" data-dismiss="alert" onclick='closeBtn()'>&times;</button></p>
               </div>
-            <% elsif alert %>
+            <% elsif @user&.errors %> <!-- @userがnilでもそうでなくてもerrorsを呼べる。 indexアクションでは、@user"s"しかないからエラーでる。それを防ぐ -->
             <%# binding.pry %>
               <div class="notice notice-danger">
                 <p><%= alert %><button type="button" class="close" data-dismiss="notice" onclick='closeBtn()'>&times;</button></p>
               </div>
-
             <%end%>
           </div>
             

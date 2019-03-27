@@ -4,7 +4,7 @@
 <div class="row">
 <div class='col-lg-10 col-lg-offset-1' > <!-- 「col-lg-offset-数字」で左に何個空白置くか決める。「col-lg-10」では左詰めでテーブルが載せられる為、すでに右に2個空白ができてるからoffsetで指定する空白は一個で良い -->
   <div class='ibox float-e-margins '>
-  <div class='ibox-title'>ユーザー一覧</div>
+  <div class='ibox-title'>社員一覧</div>
   <div class="ibox-content">
   
   <div class='row'>
@@ -21,7 +21,7 @@
           <label> <%= f.check_box :position3, { name:"positions3", class:"position3" }, "開発", nil  %> 開発 </label>  
       </div>
       &nbsp; &nbsp;
-      <button class＝'btn btn-lg-info' type='submit' style="background-color:#1ab394;color:white; padding:4px 4px;" > <i class='fa fa-search'></i>検索 </button>
+      <button class＝'btn btn-lg-info' type='submit' style="background-color:#23c6c8;color:white; padding:4px 4px;" > <i class='fa fa-search'></i>検索 </button>
     <%end%>
   </div>
 
@@ -49,18 +49,18 @@
 </div>
 </div>
 -->
-<%= will_paginate @users %>
+<%= will_paginate @users, previous_label: '&#8592;', next_label: '&#8594;' %>
 
 <!-- 一覧テーブル -->
   <table class='table table-stripped m-t-md table-hover' > <!-- 「rules='rows'」で罫線引いてくれる。 -->
     <thead>
       <tr>
-        <th style="width:3%;" ><%= sortable 'id', "ID","color:black" %></th>
-        <th><%= sortable "name", "名前","color:black" %></th>
-        <th><%= sortable "position", "役職","color:black" %></th>
-        <th><%= sortable "tel", "電話番号","color:black" %></th>
-        <th style="width:30%;" ><%= sortable "mail", "メースアドレス","color:black" %></th>
-        <th><%= sortable "joined", "入社日","color:black" %></th>
+        <th style="width:3%;" ><%= sortable 'id', "ID","color:#676a6c" %></th>
+        <th><%= sortable "name", "名前","color:#676a6c" %></th>
+        <th><%= sortable "position", "役職","color:#676a6c" %></th>
+        <th><%= sortable "tel", "電話番号","color:#676a6c" %></th>
+        <th style="width:30%;" ><%= sortable "mail", "メールアドレス","color:#676a6c" %></th>
+        <th><%= sortable "joined", "入社日","color:#676a6c" %></th>
         <!-- <th><%# sortable "created_at", "登録日","color:black" %></th>
              <th><%# sortable "updated_at", "更新日","color:black" %></th> -->
         <th>解約 </th>
@@ -84,7 +84,7 @@
     <%end%>
     </tbody>
   </table>
-<%= will_paginate @users %>
+<%= will_paginate @users, previous_label: '&#8592;', next_label: '&#8594;' %>
 
 
   </div>

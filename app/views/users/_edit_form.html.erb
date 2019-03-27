@@ -48,7 +48,10 @@
             <div class="col-sm-8">
               <!-- railsのformヘルパーやと、既存おデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
               <%= f.telephone_field :tel, {id:"tel", placeholder:"例）09012345678", class:"form-control", name:"tel" ,required:'required'} %>
-              <span id="telError">＊電話番号の形式が不正です</span>
+              <span id="telError">＊電話番号の形式が不正です</span><br>
+              <% if @user.errors.messages[:tel].present? %>
+              <span style="color:red;">＊既に使われている電話番号です</span>
+              <% end %>
             </div>
           </div>
         </div>
@@ -63,7 +66,10 @@
             <div class="col-sm-8">
               <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
               <%= f.email_field :mail, {id:"mail", placeholder:"例）info@datora.jp", class:"form-control", name:"mail", required:'required'} %>
-              <span id="mailError">＊メールアドレスの形式が不正です</span>
+              <span id="mailError">＊メールアドレスの形式が不正です</span><br>
+              <% if @user.errors.messages[:mail].present? %>
+              <span style="color:red;">＊既に使われているメールアドレスです</span>
+              <% end %>
             </div>
           </div>
         </div>
@@ -93,9 +99,9 @@
               <% if @user.year %>
                 <%= f.select :year, [["#{@user.year}年", "#{@user.year}"]], {}, {id: "year", class: "w100", name:"year"} %>
               <% else  %>
-                <%= f.select :year, [["--西暦--", "0"]], {}, {id: "year", class: "w100", name:"year"} %>
+                <%= f.select :year, [], {prompt:"--西暦--"}, {id: "year", class: "w100", name:"year"} %>
               <% end  %>
-              <%= f.select :month, [["-月-",0],
+              <%= f.select :month, [
                                    ["1月",1],
                                    ["2月",2],
                                    ["3月",3],
@@ -107,13 +113,17 @@
                                    ["9月",9],
                                    ["10月",10],
                                    ["11月",11],
-                                   ["12月",12]], {}, {id: "month", class: "w80", name:"month"} %>
+                                   ["12月",12]], {prompt:"-月-"}, {id: "month", class: "w80", name:"month"} %>
               <% if @user.day %>
                 <%= f.select :day, [["#{@user.day}日", "#{@user.day}"]], {}, {id: "day", class: "w80", name:"day"} %>
               <% else  %>
-                <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %>
+                <%= f.select :day, [], {prompt:"-日-"}, {id: "day", class: "w80", name:"day"} %>
               <% end  %>
             </div>
+
+            <% if @user.errors.messages[:joined_day].present? || @user.errors.messages[:joined_month].present? || @user.errors.messages[:joined_year].present? %>
+              <span style="color:red;">＊入社日を入力してください</span>
+            <% end %>
           </div>
         </div>
         <div class="hr-line-dashed my-4"></div>
@@ -185,9 +195,9 @@
               <% if @user.joined_year %>
                 <%= f.select :joined_year, [["#{@user.joined_year}年", "#{@user.joined_year}"]], {}, {id: "joined_year", class: "w100", name:"joined_year"} %>
               <% else  %>
-                <%= f.select :joined_year, [["--西暦--", "0"]], {}, {id: "joined_year", class: "w100", name:"joined_year"} %>
+                <%= f.select :joined_year, [[]], {}, {id: "joined_year", class: "w100", name:"joined_year", prompt:"--西暦--"} %>
               <% end  %>
-              <%= f.select :joined_month, [["-月-",0],
+              <%= f.select :joined_month, [
                                    ["1月",1],
                                    ["2月",2],
                                    ["3月",3],
@@ -199,11 +209,11 @@
                                    ["9月",9],
                                    ["10月",10],
                                    ["11月",11],
-                                   ["12月",12]], {}, {id: "joined_month", class: "w80", name:"joined_month"} %>
+                                   ["12月",12]], {}, {id: "joined_month", class: "w80", name:"joined_month", prompt:"-月-"} %>
               <% if @user.joined_day %>
                 <%= f.select :joined_day, [["#{@user.joined_day}日", "#{@user.joined_day}"]], {}, {id: "joined_day", class: "w80", name:"joined_day"} %>
               <% else %>
-                <%= f.select :joined_day, [["-日-", "0"]], {}, {id: "joined_day", class: "w80", name:"joined_day"} %>
+                <%= f.select :joined_day, [["-日-", "0"]], {}, {id: "joined_day", class: "w80", name:"joined_day", prompt:"-日-"} %>
               <% end  %>
               <br><span id="joinedError">＊入社日を入力してください</span>
             </div>
