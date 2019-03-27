@@ -1,4 +1,4 @@
-aaaaaaaaaaaaaaaaaaaaaaaaa
+
 // このコメントないと、「const」使う度にwarnning出してくる
 /*jshint esversion: 6 */
 
