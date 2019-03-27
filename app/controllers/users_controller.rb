@@ -97,7 +97,7 @@ class UsersController < ApplicationController
     end
 
     @tel = @user.tel
-    @tel.delete!('-')
+    @tel.delete!('-')  # rspecでテストする場合はここコメントアウト
     # binding.pry
     if @user.save
       redirect_to root_path, notice:'社員情報を追加しました'
