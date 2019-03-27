@@ -1,29 +1,89 @@
+<% if admin_signed_in? %>
 <div class="row border-bottom" data-turbolinks="false">
-    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0;">
 
 
-
+        <%# なんでこれあるか分からん %>
         <div class="navbar-header">
+        <!--
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          -->
+
+
+          <!--
           <% if admin_signed_in? %>
             <a class="navbar-brand" href="/"><%= current_admin.name %>でログイン中</a>
           <%end%>
+          -->
+          <% if admin_signed_in? %>
+            <!-- <a href="/"> <img src="/panopticon.png" alt="panopticon" style='width:80%; height:80%;'> </a> -->
+            <a href="/" class="navbar-brand" style="color:#179e83; padding-left:35px"> <b>Panopticon</b> </a>
+          <%end%>
         </div>
+        
 
 
-        <ul class="nav navbar-top-links navbar-right">
+        <ul class="nav navbar-top-links navbar-right" style="padding-right:10px;">
               <% if admin_signed_in? %>
-                <li> <%= link_to '新規作成', new_user_path , style:'margin-right:10px'%> </li>
-                <li> <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %> </li>
+
+
+
+
+<li>
+    <div class="zdo_drawer_menu">
+    <div class="zdo_drawer_bg"></div>
+		<button type="button" class="zdo_drawer_button">
+			<span class="zdo_drawer_bar zdo_drawer_bar1"></span>
+			<span style="height:2px;" class="zdo_drawer_bar zdo_drawer_bar2"></span>
+			<span class="zdo_drawer_bar zdo_drawer_bar3"></span>
+			<span class="zdo_drawer_menu_text zdo_drawer_text">MENU</span>
+			<span class="zdo_drawer_close zdo_drawer_text">CLOSE</span>
+		</button>
+		<nav class="zdo_drawer_nav_wrapper">
+			<ul class="zdo_drawer_nav">
+				<li>
+					<%= link_to root_path do %>
+            <span class="nav-label far fa-address-book" style="font-weight:900;">  社員一覧 </span>
+          <% end %>
+				</li>
+				<li>
+					<%= link_to ' ログアウト', destroy_admin_session_path, method: :delete, class:"fas fa-sign-out-alt" %>
+				</li>
+				<li>
+					<a href="#">
+						メニュー3
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー4
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー5
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						メニュー6
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+  </li>
+
+
               <%else%>
                 <li> <%= link_to '管理者登録', new_admin_registration_path %> </li>
                 <li> <%= link_to 'ログイン', new_admin_session_path %> </li>
             <%end%>
-
         </ul>
     </nav>
 </div>
+<%end%>

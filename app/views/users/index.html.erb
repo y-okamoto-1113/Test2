@@ -1,70 +1,96 @@
-<head>
-  <meta charset="utf-8">
-  <%= javascript_include_tag 'jquery.quicksearch', 'data-turbolinks-track': 'reload' %>
-  <!-- application.html.erbで読み込んでるのに、なぜか、ここで読み込まなエラーでる！ -->
-  <title>jQuery</title>
-  </head>
-<script>
-  $(document).on('turbolinks:load', function() {
-    $('input#search').quicksearch('table tbody tr');
-  });
-
-  document.addEventListener("turbolinks:load", function(){
-    $('input#search').quicksearch('table tbody tr');
-  });
-</script>
-
-<form action="#">
-  <input type="text" name="search" placeholder="ユーザーを検索" id="search" />
-</form>
 
 
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+<div class='col-lg-10 col-lg-offset-1' > <!-- 「col-lg-offset-数字」で左に何個空白置くか決める。「col-lg-10」では左詰めでテーブルが載せられる為、すでに右に2個空白ができてるからoffsetで指定する空白は一個で良い -->
+  <div class='ibox float-e-margins '>
+  <div class='ibox-title'>社員一覧</div>
+  <div class="ibox-content">
+  
+  <div class='row'>
+  <div class='col-md-10'>
+    <%= form_with method: :get, :action=>"/", :controller=>"users", local: true, class:"form-inline", accept_charset:"UTF-8"  do |f|  %>
+    <!--<form class="form-inline" action='/' accept-charaset='UTF-8' method='get' > -->
+    <label> 名前 : &nbsp; <%= f.text_field :search,  {class:"form-control", name:"search", placeholder:"名前で検索ができます", style:"font-weight:100"} %> </label>
+      <div class='form-group m-l-md'>
+        <label class="mx-2">絞り込み</label> : &nbsp;
+          <label> <%= f.check_box :position1, { name:"positions1", class:"position1"}, "営業", nil %> 営業 </label>
+          &nbsp; &nbsp;
+          <label> <%= f.check_box :position2, { name:"positions2", class:"position2" }, "マーケティング", nil %> マーケティング</label> 
+          &nbsp; &nbsp;
+          <label> <%= f.check_box :position3, { name:"positions3", class:"position3" }, "開発", nil  %> 開発 </label>  
+      </div>
+      &nbsp; &nbsp;
+      <button class＝'btn btn-lg-info' type='submit' style="background-color:#23c6c8;color:white; padding:4px 4px;" > <i class='fa fa-search'></i>検索 </button>
+    <%end%>
+  </div>
 
+<!-- 社員アカウント作成ボタン -->
+  <div class='col-md-2 text-right'>
+    <a href="/users/new">
+      <button class='btn btn-sm btn-primary fa fa-plus-circle'>
+        社員を追加
+      </button>
+    </a>
+  </div>
+  </div>
 
-  <table>
+<!-- pagination 
+<div class="center">
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#">1</a>
+  <a class="active" href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+</div>
+</div>
+-->
+<%= will_paginate @users, previous_label: '&#8592;', next_label: '&#8594;' %>
+
+<!-- 一覧テーブル -->
+  <table class='table table-stripped m-t-md table-hover' > <!-- 「rules='rows'」で罫線引いてくれる。 -->
     <thead>
       <tr>
-        <th><%= sortable 'id', "ID","color:black" %></th>
-        <th><%= sortable "name", "名前","color:black" %></th>
-        <th><%= sortable "furigana", "ふりがな","color:black" %></th>
-        <th><%= sortable "tel", "電話番号","color:black" %></th>
-        <th><%= sortable "mail", "メースアドレス","color:black" %></th>
-        <th><%= sortable "type_sex", "性別","color:black" %></th>
-        <th><%= sortable "year", "生年月日","color:black" %></th>
-        <th><%= sortable "type_career", "最終学歴","color:black" %></th>
-        <th><%= sortable "school_name", "学校名","color:black" %></th>
-        <th><%= sortable "familyRelation", "続柄","color:black" %></th>
-        <th><%= sortable "familyRelationName", "家族名","color:black" %></th>
-        <th><%= sortable "familyRelation2", "続柄2","color:black" %></th>
-        <th><%= sortable "familyRelationName2", "家族名2","color:black" %></th>
-        <th><%= sortable "familyRelation3", "続柄3","color:black" %></th>
-        <th><%= sortable "familyRelationName3", "家族名","color:black" %></th>
-        <th><%= sortable "created_at", "登録日","color:black" %></th>
-        <th><%= sortable "updated_at", "更新日","color:black" %></th>
+        <th style="width:3%;" ><%= sortable 'id', "ID","color:#676a6c" %></th>
+        <th><%= sortable "name", "名前","color:#676a6c" %></th>
+        <th><%= sortable "position", "役職","color:#676a6c" %></th>
+        <th><%= sortable "tel", "電話番号","color:#676a6c" %></th>
+        <th style="width:30%;" ><%= sortable "mail", "メールアドレス","color:#676a6c" %></th>
+        <th><%= sortable "joined", "入社日","color:#676a6c" %></th>
+        <!-- <th><%# sortable "created_at", "登録日","color:black" %></th>
+             <th><%# sortable "updated_at", "更新日","color:black" %></th> -->
+        <th>解約 </th>
       </tr>
     </thead>
     <!-- IMPORTANT, class="list" have to be at tbody -->
     <tbody class="list">
       <% @users.each do |user| %>
         <tr >
-          <td class="idid"> <a href="<%= "/users/#{user.id}" %>"><%= user.id %> </a> </td>
-          <td class="name"> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
-          <td class="furigana"> <a href="<%= "/users/#{user.id}" %>"> <%= user.furigana %></a> </td>
-          <td class="tel"> <a href="<%= "/users/#{user.id}" %>"> <%= user.tel %> </a> </td>
-          <td class="mail"> <a href="<%= "/users/#{user.id}" %>"> <%= user.mail %> </a> </td>
-          <td class="sex"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_sex %> </a> </td>
-          <td class="birthday"> <a href="<%= "/users/#{user.id}" %>"> <%= user.year %>/<%= user.month %>/<%= user.day %> </a> </td>
-          <td class="career"> <a href="<%= "/users/#{user.id}" %>"> <%= user.type_career%> </a> </td>
-          <td class="school"> <a href="<%= "/users/#{user.id}" %>"> <%= user.school_name %> </a> </td>
-          <td class="familyRelation"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation %> </a> </td>
-          <td class="familyRelationName"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName %> </a> </td>
-          <td class="familyRelation2"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation2 %> </a> </td>
-          <td class="familyRelationName2"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName2 %> </a> </td>
-          <td class="familyRelation3"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelation3 %> </a> </td>
-          <td class="familyRelationName3"> <a href="<%= "/users/#{user.id}" %>"> <%= user.familyRelationName3 %> </a> </td>
-          <td class="created_at"> <a href="<%= "/users/#{user.id}" %>"> <%= user.created_at.strftime('%Y年%m月%d日') %> </a> </td>
-          <td class="updated_at"> <a href="<%= "/users/#{user.id}" %>"> <%= user.updated_at.strftime('%Y年%m月%d日') %> </a> </td>
+          <td> <%= user.id %> </td>
+          <td> <a href="<%= "/users/#{user.id}" %>"> <%= user.name %></a> </td>
+          <td> <%= user.position %> </td>
+          <td> <%= user.tel %> </td>
+          <td> <%= user.mail %> </td>
+          <td> <%= user.joined_year %>.<%= user.joined_month %>.<%= user.joined_day %> </td> 
+          <!-- <td> <%# user.created_at.strftime('%Y年%m月%d日') %> </td>
+               <td> <%# user.updated_at.strftime('%Y年%m月%d日') %> </td> -->
+          <td>  <%= link_to ' 削除', user_path(user.id), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position fas fa-trash-alt' %> </td>
+          
         </tr>
     <%end%>
     </tbody>
   </table>
+<%= will_paginate @users, previous_label: '&#8592;', next_label: '&#8594;' %>
+
+
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+

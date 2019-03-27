@@ -1,0 +1,184 @@
+
+<div class="right-box">
+  <h2>仕様</h2>
+  <ul>
+  <li>1)名前、メアド、性別、最終学歴は必須</li>
+  <li>2)電話番号：000-0000-0000 or 00000000000の形式の場合、チェックOK</li>
+  <li>3)メアドは一般的なメアド形式のチェックを行う</li>
+  <li>4)生年月日は、「月」選択時に、「日」の項目を正しい日にちの書き換える。
+  <br/>　※３０日、うるう年を考慮</li>
+  <li>5)最終学歴は、選んだ学歴のプルダウンを表示。
+  <br/>　また、school.jsonからAJAXにて学歴のデータを取得し値を変更する。</li>
+  <li>6)エラーチェックはリアルタイムにて行う</li>
+  <li>7)項目の下にエラーメッセージを表示</li>
+  <li>8)登録ボタン押下時、エラーがなければ入力した値をモーダルウィンドゥにて表示</li>
+  <li>9)ソースは別ファイルにすること</li>
+  </ul>
+</div>
+
+
+
+
+
+<%# <%= form_with model: @user,method: :post, url: '/users/create', local: true, class:"form-signin", name:"form_signin" do |f|  %> 
+<%= form_with model: @user,method: :post, :action=>"create", :controller=>"users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
+<div class="left-box" style="margin-bottom:100px">
+    <h2>個人情報登録</h2>
+    <p> <span style="color:red;">*</span>は必須項目です。</p>
+    <table>
+        <tr>
+          <th>名前<span style="color:red;">*</span> </th>
+          <td>
+          <%= f.text_field :name, {id:"name", placeholder:"例）岡本　太郎", class:"input", name:"name"} %>
+          <br>
+          <span id="nameError" >＊名前を入力してください</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>ふりがな</th>
+          <td>
+          <%= f.text_field :furigana, {id:"furigana", placeholder:"例）おかもと　たろう", class:"input", name:"furigana"} %>
+          </td>
+        </tr>
+
+        <tr>
+          <th>電話番号<span style="color:red;">*</span> </th>
+          <td>
+          <%= f.telephone_field :tel, {id:"tel", placeholder:"例）090-1234-5678", class:"input", autocomplete: "tel", name:"tel"} %>
+          <br>
+          <span id="telError">＊正しい電話番号を入力してください。</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>メールアドレス<span style="color:red;">*</span></th>
+          <td>
+          <%= f.email_field :mail, {id:"mail", placeholder:"例）info@datora.jp", class:"input", autocomplete: "email", name:"mail"} %>
+          <span id="mailError">＊必須項目です</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>性別<span style="color:red;">*</span></th>
+          <td>
+          <label> <%= f.radio_button :type_sex, "男", {class:"sex", id:"man", name:"type_sex"} %>男性</label>
+          <label> <%= f.radio_button :type_sex, "女", {class:"sex", id:"woman", name:"type_sex"} %>女性</label>
+          <span id="sexError">＊必須項目です</span>
+          </td>
+        </tr>
+
+        <tr>
+          <th>生年月日</th>
+          <td>
+          <% if @year %>
+            <%= f.select :year, [["#{@year}年", "#{@year}"]], {}, {id: "year", class: "w100", name:"year"} %>
+          <% else  %>
+            <%= f.select :year, [["--西暦--", "0"]], {}, {id: "year", class: "w100", name:"year"} %>
+          <% end  %>
+            <%= f.select :month, [["-月-",0],
+                                   ["1月",1],
+                                   ["2月",2],
+                                   ["3月",3],
+                                   ["4月",4],
+                                   ["5月",5],
+                                   ["6月",6],
+                                   ["7月",7],
+                                   ["8月",8],
+                                   ["9月",9],
+                                   ["10月",10],
+                                   ["11月",11],
+                                   ["12月",12]], {}, {id: "month", class: "w80", name:"month"} %>
+
+          <% if @day %>
+            <%= f.select :day, [["#{@day}日", "#{@day}"]], {}, {id: "day", class: "w80", name:"day"} %>
+          <% else  %>
+            <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %>
+          <% end  %>
+          </td>
+        </tr>
+
+        <tr>
+          <th>最終学歴<span style="color:red;">*</span></th>
+          <td>
+            <label> <%= f.radio_button :type_career, "中卒", {class:"career", id:"junior", name:"type_career"} %>中学</label>
+            <label> <%= f.radio_button :type_career, "高卒", {class:"career", id:"high-school", name:"type_career"} %>高校</label>
+            <label> <%= f.radio_button :type_career, "大卒", {class:"career", id:"university", name:"type_career"} %>大学</label>
+            <label> <%= f.radio_button :type_career, "学歴無し", {class:"career", id:"no-career", name:"type_career"} %>行ってない</label>
+            <br>
+
+            学校名：
+            <% if @school_name %>
+              <%= f.select :school_name, [["#{@school_name}", "#{@school_name}"]], {}, {id: "school", class: "w250", name:"school_name"}  %>
+            <% else %>
+              <%= f.select :school_name, [["-選択-", "0"]], {}, {id: "school", class: "w250", name:"school_name"} %>
+            <% end %>
+            <br>
+            <span id="careerError">＊必須項目です</span>
+          </td>
+        </tr>
+
+      <tr class="aaa">
+        <th>家族構成<span style="color:red;" >*</span>
+          <br>
+          <button type="button" id="addFamilyRelation" >  <font size="5" color="black">+</font>
+          <br>
+          <br>
+          <nobr><span id="frError" style="font-size:11px;" >*1人以上記入してください。</span></nobr>
+        </th>
+
+        <td class="bbb">
+        <br>
+          <div>
+            続柄：<%= f.text_field :familyRelation, {id:"family_relation", placeholder:"例）父", class:"family zokugara input", name:"familyRelation"} %>
+            <br class="kai">
+            名前：<%= f.text_field :familyRelationName, {id:"family_name", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName"} %>
+            <br>
+          </div>
+
+          <div class="fr2" >
+            続柄：<%= f.text_field :familyRelation2, {id:"family_relation2", placeholder:"例）父", class:"family zokugara input", name:"familyRelation2"} %>
+            <br>
+            名前：<%= f.text_field :familyRelationName2, {id:"family_name2", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName2"} %>
+            <br>
+          </div>
+
+          <div class="fr3" >
+            続柄：<%= f.text_field :familyRelation3, {id:"family_relation3", placeholder:"例）父", class:"family zokugara input", name:"familyRelation3"} %>
+            <br>
+            名前：<%= f.text_field :familyRelationName3, {id:"family_name3", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelation3"} %>
+            <br>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <button type="button" id="finalCheck" value="登録" >  <font size="3" color="black">登録</font>
+    <br>
+  </div>
+
+
+
+
+<!-- 最終確認モーダル -->
+<div class="modal1BaseLayer" id="modal1BaseLayer" >
+  <div class="modal1" id="modal1" >
+    <h3>[登録情報]</h3>
+    <span id="check_name" ></span>
+    <span id="check_furigana" ></span>
+    <span id="check_tel" ></span>
+    <span id="check_mail"></span>
+    <span id="check_sex" ></span>
+    <span id="check_birthday"></span>
+    <span id="check_school" ></span>
+    <span id="check_fr" ></span>
+    <span id="check_fr2" ></span>
+    <span id="check_fr3" ></span>
+    <br>
+    以上の内容でよろしいですか？
+    <br>
+    <input type="submit" value="Yes" id="submitButton" >
+    <input type="button" value="No" id="closeModal1" >
+  </div>
+</div>
+<% end %>

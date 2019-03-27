@@ -18,6 +18,7 @@
 //= require 'jquery.turbolinks'
 
 
+
 // require_tree .
 // require jquery/jquery-3.1.1.min.js
 // require pace/pace.min.js

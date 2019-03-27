@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_105809) do
+ActiveRecord::Schema.define(version: 2019_03_18_022105) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 2019_03_08_105809) do
     t.string "familyRelationName3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "joined"
+    t.string "position"
+    t.string "joined_year"
+    t.string "joined_month"
+    t.string "joined_day"
+    t.text "remarks"
   end
 
 end

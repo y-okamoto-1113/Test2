@@ -80,11 +80,16 @@ RSpec.configure do |config|
   # user = create(:user)
 
 
-  config.include Devise::Test::IntegrationHelpers #integrationディレクトリはコントローラ同士のやりとりのテストを置く場所です
+  # config.include Devise::Test::IntegrationHelpers #integrationディレクトリはコントローラ同士のやりとりのテストを置く場所です
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  # config.include Devise::Test::ControllerHelpers, type: :view
+
   config.extend AuthenticationMacros
   # authentication_macros.rbファイルを読み込んでる
   # extendすることで、このファイル内で定義したメソッドを使える。
   # config.include Devise::TestHelpers, type: :controller
 
-
+  config.before(:each, :type => :controller) do
+    host! ENV["RAILS_HOST"]
+  end
 end

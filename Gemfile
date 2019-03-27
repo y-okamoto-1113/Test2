@@ -38,6 +38,9 @@ gem "pry-rails",'0.3.9'
 gem "pry-nav"
 gem "pry", '>= 0.10.4'
 gem "devise"
+gem 'devise-bootstrap-views'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem "method_source",'~> 0.8.1'
 gem 'rspec-rails'
 gem 'factory_bot_rails'
@@ -46,6 +49,13 @@ gem 'rails-controller-testing' # 今は非推奨
 gem "spring-commands-rspec" 
 gem "rspec-core"
 gem 'database_cleaner'
+gem 'font-awesome-rails'
+gem 'kaminari'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap'
+gem "activerecord-like", "~> 2.1"
+# gem "icheck-rails"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

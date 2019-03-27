@@ -1,82 +1,107 @@
-
-<div class="right-box">
-  <h2>仕様</h2>
-  <ul>
-  <li>1)名前、メアド、性別、最終学歴は必須</li>
-  <li>2)電話番号：000-0000-0000 or 00000000000の形式の場合、チェックOK</li>
-  <li>3)メアドは一般的なメアド形式のチェックを行う</li>
-  <li>4)生年月日は、「月」選択時に、「日」の項目を正しい日にちの書き換える。
-  <br/>　※３０日、うるう年を考慮</li>
-  <li>5)最終学歴は、選んだ学歴のプルダウンを表示。
-  <br/>　また、school.jsonからAJAXにて学歴のデータを取得し値を変更する。</li>
-  <li>6)エラーチェックはリアルタイムにて行う</li>
-  <li>7)項目の下にエラーメッセージを表示</li>
-  <li>8)登録ボタン押下時、エラーがなければ入力した値をモーダルウィンドゥにて表示</li>
-  <li>9)ソースは別ファイルにすること</li>
-  </ul>
-</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class='row'>
+    <div class="col-lg-12">
 
 
+    <%= form_with model: @user,method: :patch, :action=>"update", :controller=>"users", local: true, class:"form-signin", name:"form_signin"  do |f|  %>
+    <div class="ibox float-e-margins" style="font-size:13px;color:#676a6c!important;">
+      <div class="ibox-title">
+        <div class="col-sm-10">
+          <h5>社員情報詳細</h5>
+        </div>
+      </div>
 
+      <div class="ibox-content">
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_name">名前</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <%= f.text_field :name, {id:"name", placeholder:"例）岡本　太郎", class:"form-control", name:"name", required:'required'} %>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_furigana">ふりがな</label>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存おデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <%= f.text_field :furigana, {id:"furigana", placeholder:"例）おかもと　たろう", class:"form-control", name:"furigana"} %>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
-<%# <%= form_with model: @user,method: :post, url: '/users/create', local: true, class:"form-signin", name:"form_signin" do |f|  %> 
-<%= form_with model: @user,method: :patch, :action=>"update", :controller=>"users", local: true, class:"form-signin", name:"form_signin" do |f|  %>
-<div class="left-box" style="margin-bottom:100px">
-    <h2>個人情報登録</h2>
-    <p> <span style="color:red;">*</span>は必須項目です。</p>
-    <table>
-        <tr>
-          <th>名前<span style="color:red;">*</span> </th>
-          <td>
-          <%= f.text_field :name, {id:"name", placeholder:"例）岡本　太郎", class:"input", name:"name"} %>
-          <br>
-          <span id="nameError" >＊名前を入力してください</span>
-          </td>
-        </tr>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_tel">電話番号</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存おデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <%= f.telephone_field :tel, {id:"tel", placeholder:"例）09012345678", class:"form-control", name:"tel" ,required:'required'} %>
+              <span id="telError">＊電話番号の形式が不正です</span><br>
+              <% if @user.errors.messages[:tel].present? %>
+              <span style="color:red;">＊既に使われている電話番号です</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
-        <tr>
-          <th>ふりがな</th>
-          <td>
-          <%= f.text_field :furigana, {id:"furigana", placeholder:"例）おかもと　たろう", class:"input", name:"furigana"} %>
-          </td>
-        </tr>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="mail">メールアドレス</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <%= f.email_field :mail, {id:"mail", placeholder:"例）info@datora.jp", class:"form-control", name:"mail", required:'required'} %>
+              <span id="mailError">＊メールアドレスの形式が不正です</span><br>
+              <% if @user.errors.messages[:mail].present? %>
+              <span style="color:red;">＊既に使われているメールアドレスです</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
-        <tr>
-          <th>電話番号<span style="color:red;">*</span> </th>
-          <td>
-          <%= f.telephone_field :tel, {id:"tel", placeholder:"例）090-1234-5678", class:"input", autocomplete: "tel", name:"tel"} %>
-          <br>
-          <span id="telError">＊正しい電話番号を入力してください。</span>
-          </td>
-        </tr>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_type_sex">性別</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <label> <%= f.radio_button :type_sex, "男", {class:"sex", id:"man", name:"type_sex", required:""} %>男性</label>     <!-- ラジオボタンはどれか一個に「required:""」を入れたらOK -->
+              &nbsp; &nbsp; <label> <%= f.radio_button :type_sex, "女", {class:"sex", id:"woman", name:"type_sex"} %>女性</label>
+                </div>
+            </div>
+          </div>
+        <div class="hr-line-dashed my-4"></div>
 
-        <tr>
-          <th>メールアドレス<span style="color:red;">*</span></th>
-          <td>
-          <%= f.email_field :mail, {id:"mail", placeholder:"例）info@datora.jp", class:"input", autocomplete: "email", name:"mail"} %>
-          <span id="mailError">＊必須項目です</span>
-          </td>
-        </tr>
-
-        <tr>
-          <th>性別<span style="color:red;">*</span></th>
-          <td>
-          <label> <%= f.radio_button :type_sex, "男", {class:"sex", id:"man", name:"type_sex"} %>男性</label>
-          <label> <%= f.radio_button :type_sex, "女", {class:"sex", id:"woman", name:"type_sex"} %>女性</label>
-          <span id="sexError">＊必須項目です</span>
-          </td>
-        </tr>
-
-        <tr>
-          <th>生年月日</th>
-          <td>
-          <% if @user.year %>
-            <%= f.select :year, [["#{@user.year}年", "#{@user.year}"]], {}, {id: "year", class: "w100", name:"year"} %>
-          <% else  %>
-            <%= f.select :year, [["--西暦--", "0"]], {}, {id: "year", class: "w100", name:"year"} %>
-          <% end  %>
-            <%= f.select :month, [["-月-",0],
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_birthday">生年月日</label>
+            </div>
+            <div class="col-sm-8">
+            <!-- 「new」アクションやから、@user.yearとかないけど、renderで戻される時は入ってるから、これいる！！！！ -->
+              <% if @user.year %>
+                <%= f.select :year, [["#{@user.year}年", "#{@user.year}"]], {}, {id: "year", class: "w100", name:"year"} %>
+              <% else  %>
+                <%= f.select :year, [], {prompt:"--西暦--"}, {id: "year", class: "w100", name:"year"} %>
+              <% end  %>
+              <%= f.select :month, [
                                    ["1月",1],
                                    ["2月",2],
                                    ["3月",3],
@@ -88,96 +113,159 @@
                                    ["9月",9],
                                    ["10月",10],
                                    ["11月",11],
-                                   ["12月",12]], {}, {id: "month", class: "w80", name:"month"} %>
+                                   ["12月",12]], {prompt:"-月-"}, {id: "month", class: "w80", name:"month"} %>
+              <% if @user.day %>
+                <%= f.select :day, [["#{@user.day}日", "#{@user.day}"]], {}, {id: "day", class: "w80", name:"day"} %>
+              <% else  %>
+                <%= f.select :day, [], {prompt:"-日-"}, {id: "day", class: "w80", name:"day"} %>
+              <% end  %>
+            </div>
 
-          <% if @user.day %>
-            <%= f.select :day, [["#{@user.day}日", "#{@user.day}"]], {}, {id: "day", class: "w80", name:"day"} %>
-          <% else  %>
-            <%= f.select :day, [["-日-", "0"]], {}, {id: "day", class: "w80", name:"day"} %>
-          <% end  %>
-          </td>
-        </tr>
-
-        <tr>
-          <th>最終学歴<span style="color:red;">*</span></th>
-          <td>
-            <label> <%= f.radio_button :type_career, "中卒", {class:"career", id:"junior", name:"type_career"} %>中学</label>
-            <label> <%= f.radio_button :type_career, "高卒", {class:"career", id:"high-school", name:"type_career"} %>高校</label>
-            <label> <%= f.radio_button :type_career, "大卒", {class:"career", id:"university", name:"type_career"} %>大学</label>
-            <label> <%= f.radio_button :type_career, "学歴無し", {class:"career", id:"no-career", name:"type_career"} %>行ってない</label>
-            <br>
-
-            学校名：
-            <% if @user.school_name %>
-              <%= f.select :school_name, [["#{@user.school_name}", "#{@user.school_name}"]], {}, {id: "school", class: "w250", name:"school_name"}  %>
-            <% else %>
-              <%= f.select :school_name, [["-選択-", "0"]], {}, {id: "school", class: "w250", name:"school_name"} %>
+            <% if @user.errors.messages[:joined_day].present? || @user.errors.messages[:joined_month].present? || @user.errors.messages[:joined_year].present? %>
+              <span style="color:red;">＊入社日を入力してください</span>
             <% end %>
-            <br>
-            <span id="careerError">＊必須項目です</span>
-          </td>
-        </tr>
-
-      <tr class="aaa">
-        <th>家族構成<span style="color:red;" >*</span>
-          <br>
-          <button type="button" id="addFamilyRelation" >  <font size="5" color="black">+</font>
-          <br>
-          <br>
-          <nobr><span id="frError" style="font-size:11px;" >*1人以上記入してください。</span></nobr>
-        </th>
-
-        <td class="bbb">
-          <div>
-            続柄：<%= f.text_field :familyRelation, {id:"family_relation", placeholder:"例）父", class:"family zokugara input", name:"familyRelation"} %>
-            <br class="kai">
-            名前：<%= f.text_field :familyRelationName, {id:"family_name", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName"} %>
-            <br>
           </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
-          <div class="fr2" >
-            続柄：<%= f.text_field :familyRelation2, {id:"family_relation2", placeholder:"例）父", class:"family zokugara input", name:"familyRelation2"} %>
-            <br>
-            名前：<%= f.text_field :familyRelationName2, {id:"family_name2", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName2"} %>
-            <br>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_type_career">学歴</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <label> <%= f.radio_button :type_career, "中卒", {class:"career", id:"junior", name:"type_career", required:""} %>中学</label>
+              &nbsp; &nbsp;
+              <label> <%= f.radio_button :type_career, "高卒", {class:"career", id:"high-school", name:"type_career"} %>高校</label>
+              &nbsp; &nbsp;
+              <label> <%= f.radio_button :type_career, "大卒", {class:"career", id:"university", name:"type_career"} %>大学</label>
+              &nbsp; &nbsp;
+              <label> <%= f.radio_button :type_career, "学歴無し", {class:"career", id:"no-career", name:"type_career"} %>行ってない</label>
+              <br>
+              <%= f.text_field :school_name, {id:"school_name", placeholder:"学校名を入力してください", class:"form-control", name:"school_name", required:'required'} %>
+            </div>
           </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
-          <div class="fr3" >
-            続柄：<%= f.text_field :familyRelation3, {id:"family_relation3", placeholder:"例）父", class:"family zokugara input", name:"familyRelation3"} %>
-            <br>
-            名前：<%= f.text_field :familyRelationName3, {id:"family_name3", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelation3"} %>
-            <br>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_familyRelation">家族構成</label>
+              <span class="label m-l-sm label-warning">1人以上</span>
+              <br>
+              <button type="button" id="addFamilyRelation" style="background-color:green;" ><font color='white'><b>+</b></font></button>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <div>
+                続柄1：<%= f.text_field :familyRelation, {id:"family_relation", placeholder:"例）父", class:"family zokugara input", name:"familyRelation", required:"required"} %>
+                <br class="kai">
+                名前1：<%= f.text_field :familyRelationName, {id:"family_name", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName", required:"required"} %>
+                <br>
+              </div>
+              
+              <div class="fr2" >
+                続柄2：<%= f.text_field :familyRelation2, {id:"family_relation2", placeholder:"例）父", class:"family zokugara input", name:"familyRelation2"} %>
+                <br>
+                名前2：<%= f.text_field :familyRelationName2, {id:"family_name2", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelationName2"} %>
+                <br>
+              </div>
+
+              <div class="fr3" >
+                続柄3：<%= f.text_field :familyRelation3, {id:"family_relation3", placeholder:"例）父", class:"family zokugara input", name:"familyRelation3"} %>
+                <br>
+                名前3：<%= f.text_field :familyRelationName3, {id:"family_name3", placeholder:"例）岡本　太郎", class:"family name_zoku input", name:"familyRelation3"} %>
+                <br>
+              </div>
+            </div>
           </div>
-        </td>
-      </tr>
-    </table>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
-    <button type="button" id="finalCheck" value="更新" >  <font size="3" color="black">更新</font>
-    <br>
-  </div>
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_joined">入社日</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <% if @user.joined_year %>
+                <%= f.select :joined_year, [["#{@user.joined_year}年", "#{@user.joined_year}"]], {}, {id: "joined_year", class: "w100", name:"joined_year"} %>
+              <% else  %>
+                <%= f.select :joined_year, [[]], {}, {id: "joined_year", class: "w100", name:"joined_year", prompt:"--西暦--"} %>
+              <% end  %>
+              <%= f.select :joined_month, [
+                                   ["1月",1],
+                                   ["2月",2],
+                                   ["3月",3],
+                                   ["4月",4],
+                                   ["5月",5],
+                                   ["6月",6],
+                                   ["7月",7],
+                                   ["8月",8],
+                                   ["9月",9],
+                                   ["10月",10],
+                                   ["11月",11],
+                                   ["12月",12]], {}, {id: "joined_month", class: "w80", name:"joined_month", prompt:"-月-"} %>
+              <% if @user.joined_day %>
+                <%= f.select :joined_day, [["#{@user.joined_day}日", "#{@user.joined_day}"]], {}, {id: "joined_day", class: "w80", name:"joined_day"} %>
+              <% else %>
+                <%= f.select :joined_day, [["-日-", "0"]], {}, {id: "joined_day", class: "w80", name:"joined_day", prompt:"-日-"} %>
+              <% end  %>
+              <br><span id="joinedError">＊入社日を入力してください</span>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
+        <div class=row>
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_position">役職</label>
+              <span class="label m-l-sm label-warning">必須</span>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存のデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <%= f.text_field :position, {id:"position", placeholder:"例）開発, 営業, マーケティング等", class:"form-control", name:"position", required:'required'} %>
+            </div>
+          </div>
+        </div>
+        <div class="hr-line-dashed my-4"></div>
 
+        <div class="row">
+          <div class='form-group'>
+            <div class="col-sm-2 control-label">
+              <label for="user_account_remarks">備考</label>
+            </div>
+            <div class="col-sm-8">
+              <!-- railsのformヘルパーやと、既存おデータがある場合は、valueで設定しなくても、データベースのカラムを指定してたら勝手に入れてくれる。 -->
+              <%= f.text_area :remarks, {id:"remarks", class:"form-control", name:"remarks" , rows:'10'} %>
+            </div>
+          </div>
+        </div>
 
-
-<!-- 最終確認モーダル -->
-<div class="modal1BaseLayer" id="modal1BaseLayer" >
-  <div class="modal1" id="modal1" >
-    <h3>[登録情報]</h3>
-    <span id="check_name" ></span>
-    <span id="check_furigana" ></span>
-    <span id="check_tel" ></span>
-    <span id="check_mail"></span>
-    <span id="check_sex" ></span>
-    <span id="check_birthday"></span>
-    <span id="check_school" ></span>
-    <span id="check_fr" ></span>
-    <span id="check_fr2" ></span>
-    <span id="check_fr3" ></span>
-    <br>
-    以上の内容でよろしいですか？
-    <br>
-    <input type="submit" value="Yes" id="submitButton" >
-    <input type="button" value="No" id="closeModal1" >
+        <div class="text-center" style="margin-top:3rem;"> <!-- bootstrapの「mt-5」クラスが効かへんかったから直接書いた -->
+          <button type="submit" class="btn btn-primary fas fa-edit" style="padding-top:7px;padding-bottom:7px;" >  <font>更新</font> </button>
+          &nbsp;
+          <%= link_to ' 削除', user_path(@user), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class:'btn btn-danger edit-btn-position fas fa-trash-alt', style:"padding-top:7px;padding-bottom:7px;" %>
+        </div>
+      </div>
+    </div>
+    <%end%>
+    </div>
   </div>
 </div>
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
