@@ -3,9 +3,50 @@ class UsersController < ApplicationController
   before_action :authenticate_admin!
   before_action :find_user, only:[:show, :edit, :update, :destroy]
   # before_action :validate_user, only:[:show, :edit, :update, :destroy]  今回は使わん
+  PER=30
 
   def index
-    @users = User.all.order(sort_column + ' ' + sort_direction)
+    # binding.pry
+    # if params[:searcha] || params[:position]
+
+    
+    positions_array = []
+    positions_array << "%#{params[:positions1]}%" if params[:positions1]
+    positions_array << "%#{params[:positions2]}%" if params[:positions2]
+    positions_array << "%#{params[:positions3]}%" if params[:positions3]
+
+    if params[:positions1] || params[:positions2] || params[:positions3]
+      # @users = User.where(name: params[:search] )  こっちは全文字一致しか出力せーへんからアカン。
+      # 「will_paginate」で@usersの値を取ってるが、@users自体のデータがwill_paginateに対応してないから、「.paginate」で読めるように整形する
+      # binding.pry  # チェックボックスに入ってる値が、ちゃんと取れてるかチェック。
+      @users = User.where.like(name: "%#{params[:search]}%", position: positions_array).paginate(page: params[:page], per_page: 10)
+
+###################################### 以下の内容を配列を使えば、上の数行で済む ################################################################
+      # if params[:positions1] && params[:positions2] && params[:positions3] # all
+      #   # @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).or(User.where(['position LIKE ?', "%#{params[:positions2]}%"])).or(User.where(["position LIKE ?", "%#{params[:positions3]}%"])).paginate(page: params[:page], per_page: 10)    
+      # elsif params[:positions1] && params[:positions2]                      # 2個
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).or(User.where(['name LIKE ?', "%#{params[:search]}%"]).where(['position LIKE ?', "%#{params[:positions2]}%"])).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions1] && params[:positions3]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).or(User.where(['name LIKE ?', "%#{params[:search]}%"]).where(["position LIKE ?", "%#{params[:positions3]}%"])).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions2] && params[:positions3]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions2]}%"]).or(User.where(['name LIKE ?', "%#{params[:search]}%"]).where(["position LIKE ?", "%#{params[:positions3]}%"])).paginate(page: params[:page], per_page: 10)  
+      # elsif params[:positions1]                                              # 1個、それにマッチしたやつだけ
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions1]}%"]).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions2]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions2]}%"]).paginate(page: params[:page], per_page: 10)
+      # elsif params[:positions3]
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).where(['position LIKE ?', "%#{params[:positions3]}%"]).paginate(page: params[:page], per_page: 10)
+      # else
+      #   @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).paginate(page: params[:page], per_page: 10)
+      # end
+
+      # @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).paginate(page: params[:page], per_page: 10)
+      # @users = User.where(['name LIKE ? and position LIKE ?', "%#{params[:search]}%" , "%#{params[:position]}%" ]).paginate(page: params[:page], per_page: 10)
+    elsif params[:search].present?
+      @users = User.where(['name LIKE ?', "%#{params[:search]}%" ]).paginate(page: params[:page], per_page: 10)
+    else
+      @users = User.paginate(page: params[:page], per_page: 10) #1ページ30個表示。30個行かんかったら、ページネーションが表示されへん！！！！
+    end
   end
 
   def show
@@ -20,6 +61,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    # binding.pry
     @user = User.new(name: params[:name],
                      furigana: params[:furigana],
                      tel: params[:tel],
@@ -29,9 +71,14 @@ class UsersController < ApplicationController
                      school_name: params[:school_name],
 
                      familyRelation: params[:familyRelation],
-                     familyRelationName: params[:familyRelationName]
-
+                     familyRelationName: params[:familyRelationName],
+                     position: params[:position],
+                     remarks: params[:remarks],
+                     joined_year: params[:joined_year],
+                     joined_month: params[:joined_month],
+                     joined_day: params[:joined_day],
                      )
+
 
     if !( params[:year]=="0" || params[:month]=="0" || params[:day]=="0" )
      @user.year = params[:year]
@@ -50,10 +97,10 @@ class UsersController < ApplicationController
     end
 
     @tel = @user.tel
-    # @tel.delete!('-')
-
+    @tel.delete!('-')
+    # binding.pry
     if @user.save
-      redirect_to @user, notice:'ユーザーを作成できました'
+      redirect_to root_path, notice:'社員情報を追加しました'
     else
 
       @year = @user.year
@@ -61,7 +108,12 @@ class UsersController < ApplicationController
       @day = @user.day
       @type_career = @user.type_career
       @school_name = @user.school_name
-      render :new, alertt: 'ユーザーを作成できませんでした'
+      @joined_year = @user.joined_year
+      @joined_month = @user.joined_month
+      @joined_day = @user.joined_day
+      # binding.pry
+      render :new, alert: '社員情報を追加できませんでした'
+      # binding.pry
     end
   end
 
@@ -85,15 +137,23 @@ class UsersController < ApplicationController
                   familyRelation2: params[:familyRelation2],
                   familyRelationName2: params[:familyRelationName2],
                   familyRelation3: params[:familyRelation3],
-                  familyRelationName3: params[:familyRelationName3]
+                  familyRelationName3: params[:familyRelationName3],
+                  position: params[:position],
+                  remarks: params[:remarks], 
+                  joined_year: params[:joined_year],
+                  joined_month: params[:joined_month],
+                  joined_day: params[:joined_day]
       )
-      redirect_to @user, notice:'更新しました'
+      redirect_to root_path, notice:'更新しました'
     else
       @year = @user.year
       @month = @user.month
       @day = @user.day
       @type_career = @user.type_career
       @school_name = @user.school_name
+      @joined_year = @user.joined_year
+      @joined_month = @user.joined_month
+      @joined_day = @user.joined_day
       render :edit, alert:'更新できませんでした'
     end
   end

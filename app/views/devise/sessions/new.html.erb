@@ -1,15 +1,16 @@
 
 
-<div class="middle-box text-center loginscreen  animated fadeInDown">
+<div class="text-center loginscreen  animated fadeInDown">
 <div>
-<div> <h1 class="logo-name">IN+</h1> </div>
-<h3>Welcome to IN+</h3>
+<div> <h1 class="logo-name">Panopticon</h1> </div>
+<h3 style="margin-top:50px;">Welcome to Panopticon</h3>
 <p>
-    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+    As a work of architecture, the panopticon allows a watchman to observe occupants without the occupants knowing whether or not they are being watched. 
+    <br> As a metaphor, the panopticon was commandeered in the latter half of the 20th century as a way to trace the surveillance tendencies of disciplinarian societies. 
 </p>
 <p>Login in. To see it in action.</p>
 
-
+<div class="middle-box">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-group">
       <%= f.label :email, "メールアドレス" %><br />
@@ -32,7 +33,7 @@
       <%= f.submit "ログイン", class:'btn btn-success' %>
     </div>
   <% end %>
-
+</div>
   <%= render "devise/shared/links" %>
 
 

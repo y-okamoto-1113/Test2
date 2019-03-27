@@ -1,3 +1,4 @@
+# テスト用のユーザーデータを作成
 FactoryBot.define do
   factory :user do
     sequence(:name, 9) { |n| "USER_NAME#{n}"}
